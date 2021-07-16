@@ -1,0 +1,59 @@
+Create views needed for FDALabel.
+  NDC -> drug info
+
+Setup rxnorm-explorer project
+  Make Deno compatible version of sqljson-query.
+  Backend language/framework?
+    Maybe use Java but use Deno version of sqljson-query to generate sources?
+    Add nix-shell entry for Deno.
+  Write TS query to fetch MTHSPL product information.
+
+-- NOTE: Use rxnsab for lists of term types (ttyl) and attributes (atnl) by data source.
+
+atleast 7 SPLS have wrong setids
+lf69f100f-c766-490f-9143-5e8e0c8cb7c9,836358
+le72300d9-89b4-48c7-98a5-ea5d7772305e,209011
+le72300d9-89b4-48c7-98a5-ea5d7772305e,197433
+l95ac6875-6b14-4cde-8efb-80704e39b8d8,993755
+l51b031a0-bc40-4159-a434-d48c3eadd2ca,762672
+l51b031a0-bc40-4159-a434-d48c3eadd2ca,762674
+l32a4888a-b07d-4dcc-9c41-1fde50c50419,312504
+
+
+SCDC semantic clinical drug component, 316047,
+
+to improve FDA label, better aggregation functions i.e. JSON
+old agg, i.e. list_agg truncate columns. new agg will have more accurate columns
+
+Table Drug doesn't include brand name only drug, example rxcui 1550958 Aleve PM, tty BN
+Maybe new table?
+
+Look into MIN (multi ingredient)
+
+maybe ingredient set as drug idea?
+
+or using SCDG (very general name) then add strength to get drug or drug product
+
+The only relationships that use rxaui are RO:included_in/includes and SY:null,
+
+Basis of Strength Substance (BoSS)
+
+
+--TODO Maybe unify SCD and SBD into drug table, move/ignore packs.
+
+maybe rename table to SCD instead of clin_drug
+
+--todo in readme add note to run populate-derived-schema separately
+
+--drop non rxnorm table script
+select 'DROP TABLE IF EXISTS ' || table_name || ' CASCADE;'
+from information_schema.tables
+where table_schema = 'rxnorm'
+and table_name not like 'rxn%'
+and (table_name not like 'mthspl%' or table_name in ('mthspl_prod_scd' , 'mthspl_prod_sbd'))
+and table_name not like '%v'
+;
+
+--trust child table for precise ingredient, not atr field precise_ingr in scdc
+
+--In ingrset table, made choice to select PIN over IN when PIN is present in loading process
