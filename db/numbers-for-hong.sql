@@ -233,20 +233,57 @@ from mthspl_rxprod_setid_drug_v rsd
 ------END OF SET ID SECTION--------
 
 --ingredient level
-select * from ingrset where name like '%abacavir%';
-select * from ingrset where name like '%azithromycin%';
+select * from ingrset where name ilike '%abacavir%';
+select * from ingrset where name ilike '%azithromycin%';
 --component level
-select * from scdc where name like '%abacavir%';
-select * from scdc where name like '%azithromycin%';
+select * from scdc where name ilike '%abacavir%';
+select * from scdc where name ilike '%azithromycin%';
 --drug dose form level
-select * from scdf where name like '%abacavir%';
-select * from scdf where name like '%azithromycin%';
+select * from scdf where name ilike '%abacavir%';
+select * from scdf where name ilike '%azithromycin%';
 --drug dose form group level
-select * from scdg where name like '%abacavir%';
-select * from scdg where name like '%azithromycin%';
---drug level
+select * from scdg where name ilike '%abacavir%';
+select * from scdg where name ilike '%azithromycin%';
+--branded component
+select * from sbdc where name ilike '%abacavir%';
+select * from sbdc where name ilike '%azithromycin%';
+--branded drug dose form
+select * from sbdf where name ilike '%abacavir%';
+select * from sbdf where name ilike '%azithromycin%';
+--branded drug dose form group
+select * from sbdg where sbdg.name ilike '%Ziagen%' or sbdg.name ilike '%Trizivir%' or sbdg.name ilike '%Epzicom%' or sbdg.name ilike '%Triumeq%';
+select * from sbdg where name ilike '%Zithromax%' or name ilike '%ZPAK%' or name ilike '%Zmax%' or name ilike '%Azinthromycin%' or name ilike '%AzaSite%';
+--drug level (SCD)
 select * from scd_prod_v where rxnorm_drug_name ilike '%abacavir%';
-select * from scd_prod_v where rxnorm_drug_name like '%azithromycin%';
+select * from scd_prod_v where rxnorm_drug_name ilike '%azithromycin%';
+-- SBD
+select * from sbd where name ilike '%abacavir%';
+select * from sbd where name ilike '%azithromycin%';
+--BN
+select * from bn where name ilike '%Ziagen%' or name ilike '%Trizivir%' or name ilike '%Epzicom%' or name ilike '%Triumeq%';
+select * from bn where name ilike '%Zithromax%' or name ilike '%ZPAK%' or name ilike '%Zmax%' or name ilike '%Azinthromycin%' or name ilike '%AzaSite%';
+--BPCK
+select * from bpck where name ilike '%abacavir%';
+select * from bpck where name ilike '%azithromycin%';
+--GPCK
+select * from gpck where name ilike '%abacavir%';
+select * from gpck where name ilike '%azithromycin%';
+--prod
+select * from mthspl_prod_v where name ilike '%abacavir%';
+select * from mthspl_prod_v where name ilike '%azithromycin%';
+
+
+select count(*) from ingrset where tty in ('PIN', 'IN');
+select count(*) from ingrset where tty = 'MIN';
+
+select count(distinct scd_rxcui) from mthspl_prod_scd; --10068
+select count(distinct sbd_rxcui) from mthspl_prod_sbd; --8318
+
+select count(distinct spl_set_id) from mthspl_prod_setid;--138,586
+select count(distinct two_part_ndc) from mthspl_prod_ndc; -- 168,872
+select count(distinct code) from mthspl_prod_mktcat_code; --13,055
+select count(distinct unii) from mthspl_sub; --12,923
+select count(distinct sub_rxaui) from mthspl_prod_sub; --22,217
 
 select i.rxcui, i.name, scdc.*, scd_prod_v.*
 from ingr i

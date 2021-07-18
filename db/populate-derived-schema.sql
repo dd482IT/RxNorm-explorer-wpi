@@ -459,7 +459,7 @@ select
 from rxnconso c
 where
   c.sab='RXNORM' and
-  c.tty = 'GPCK'
+  c.tty = 'BPCK'
 ;
 
 insert into bn (rxcui, rxaui, name, rxn_cardinality, reformulated_to_rxcui)

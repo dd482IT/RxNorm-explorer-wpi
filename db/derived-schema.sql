@@ -741,6 +741,7 @@ select
   p.name,
   p.suppress,
   p.ambiguity_flag,
+   (select coalesce(jsonb_agg(distinct uniis_str(mp.rxaui)), '[]'::jsonb) from mthspl_prod mp where mp.rxaui = p.rxaui) prod_uniis,
   (select coalesce(jsonb_agg(distinct spl_set_id), '[]'::jsonb) from mthspl_prod_setid mps where mps.prod_rxaui = p.rxaui) set_ids,
   (select coalesce(jsonb_agg(distinct label_type), '[]'::jsonb) from mthspl_prod_labeltype where prod_rxaui = p.rxaui) label_types,
   (select coalesce(jsonb_agg(distinct labeler), '[]'::jsonb) from mthspl_prod_labeler where prod_rxaui = p.rxaui) labelers,

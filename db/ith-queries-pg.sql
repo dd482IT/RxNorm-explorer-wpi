@@ -9,6 +9,7 @@ and table_name not like '%v'
 */
 
 
+
 --TTYs in sab = RXNORM
 -- SBD --created table and added attributes
 -- SCD --created table and added attributes
@@ -819,7 +820,90 @@ group by r.rela
 --  If so, create artificial MIN associated with the just one ingredient
 
 -- TODO finish ingrset: done
+select i.*, p.*
+from
+(
+  select
+    scdc.ingr_rxcui,
+    scdc.pin_rxcui
+  from scdc_scd
+         join scd on scdc_scd.scd_rxcui = scd.rxcui
+         join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
+  where (scd.ingrset_rxcui <> scdc.ingr_rxcui and scd.ingrset_rxcui <> scdc.pin_rxcui)
+) min_ingrs
+left join ingr i on i.rxcui = min_ingrs.ingr_rxcui
+left join pin p on min_ingrs.pin_rxcui = p.rxcui
+;
 
-select * from temp_ingrset
+--6905
+select distinct iu.unii, i.name, array_agg(scd.rxcui)
+from ingr i
+join scdc on scdc.ingr_rxcui = i.rxcui
+join scdc_scd on scdc.rxcui = scdc_scd.scdc_rxcui
+join scd on scd.rxcui = scdc_scd.scd_rxcui
+left join ingr_unii iu on iu.ingr_rxcui = i.rxcui
+where exists(
+        select 1 from mthspl_rxprod_v rxp where rxp.rxcui = scd.rxcui
+)
+group by iu.unii, i.name
+;
 
+
+select
+  d.rxcui             rxnorm_concept_id,
+  d.name              rxnorm_drug_name,
+  d.prescribable_name as prescribable_name,
+  d.tty               rxnorm_term_type,
+  dgm.non_quantified_rxcui unquantified_rxcui,
+  (select d.name from drug_v d where d.rxcui = dgm.non_quantified_rxcui) unquantified_name,
+  d.ingrset_rxcui,
+  (
+    select coalesce(jsonb_agg(distinct suv.unii), '[]'::jsonb)
+    from scd_unii_v suv
+    where suv.scd_rxcui = d.rxcui
+  ) uniis,
+  (
+    select coalesce(jsonb_agg(distinct two_part_ndc order by two_part_ndc), '[]'::jsonb)
+    from mthspl_prod_ndc pnc
+    where pnc.prod_rxaui in (
+      select p.rxaui from mthspl_rxprod_v p where p.rxcui = d.rxcui
+    )
+  ) short_ndcs,
+  (
+    select coalesce(jsonb_agg(distinct uniis_str(pnc.prod_rxaui)), '[]'::jsonb)
+    from mthspl_prod_ndc pnc
+    where pnc.prod_rxaui in (
+      select p.rxaui from mthspl_rxprod_v p where p.rxcui = d.rxcui
+    )
+  ) short_ndc_uniis,
+  (
+    select coalesce(jsonb_agg(distinct code order by code), '[]'::jsonb)
+    from mthspl_prod_mktcat_code mkc
+    where mkc.prod_rxaui in (
+      select p.rxaui from mthspl_rxprod_v p where p.rxcui = d.rxcui
+    )
+    and (mkc.mkt_cat like 'ANDA%' or mkc.mkt_cat like 'NDA%')
+  ) application_codes,
+  (
+    select coalesce(jsonb_agg(distinct spl_set_id order by spl_set_id), '[]'::jsonb)
+    from mthspl_prod_setid psi
+    where psi.prod_rxaui in (
+      select p.rxaui from mthspl_rxprod_v p where p.rxcui = d.rxcui
+     )
+  ) set_ids,
+  (
+    select coalesce(jsonb_agg(distinct rxp.name order by rxp.name), '[]'::jsonb)
+    from mthspl_rxprod_v rxp
+    where rxp.rxcui = d.rxcui
+  ) product_names
+from scd d
+join drug_generalized_mv dgm on d.rxcui = dgm.rxcui
+where exists(
+        select 1 from mthspl_rxprod_v rxp where rxp.rxcui = d.rxcui
+      )
+and d.name ilike '%abacavir%'
+;
+
+--azithromycin
+--abacavir
 
