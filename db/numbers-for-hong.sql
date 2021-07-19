@@ -370,3 +370,85 @@ where exists(
 
 --azithromycin
 --abacavir
+create or replace view temp_mktcode_v as
+select
+  pmcc.code                                                     application_code,
+  pmcc.mkt_cat                                                  market_catergory,
+  coalesce(jsonb_agg(distinct p.name), '[]'::jsonb)             product_name,
+  coalesce(jsonb_agg(distinct p.code), '[]'::jsonb)             product_code,
+  (select coalesce(jsonb_agg(distinct pn.two_part_ndc), '[]'::jsonb)
+   from mthspl_prod_ndc pn
+   where pn.prod_rxaui in (
+     select pmc.prod_rxaui
+     from mthspl_prod_mktcat_code pmc
+     where pmc.code = pmcc.code
+   ))                                                           ndcs,
+  (select coalesce(jsonb_agg(distinct spl_set_id), '[]'::jsonb)
+   from mthspl_prod_setid ps
+   where ps.prod_rxaui in (
+     select pmc.prod_rxaui
+     from mthspl_prod_mktcat_code pmc
+     where pmc.code = pmcc.code
+   ))                                                           set_ids,
+  (select coalesce(jsonb_agg(distinct label_type), '[]'::jsonb)
+   from mthspl_prod_labeltype plt
+   where plt.prod_rxaui in (
+     select pmc.prod_rxaui
+     from mthspl_prod_mktcat_code pmc
+     where pmc.code = pmcc.code
+   ))                                                           label_types,
+  (select coalesce(jsonb_agg(distinct labeler), '[]'::jsonb)
+   from mthspl_prod_labeler pl
+   where pl.prod_rxaui in (
+     select pmc.prod_rxaui
+     from mthspl_prod_mktcat_code pmc
+     where pmc.code = pmcc.code
+   ))                                                           labelers,
+  coalesce(jsonb_agg(distinct uniis_str(pmcc.prod_rxaui)), '[]'::jsonb) prod_uniis,
+  (select coalesce(jsonb_agg(distinct unii), '[]'::jsonb)
+    from scd_unii_v suv
+    join mthspl_prod mp on mp.rxaui = pmcc.prod_rxaui
+    join mthspl_prod_scd ps on ps.prod_rxaui = mp.rxaui and ps.scd_rxcui = suv.scd_rxcui
+   )                  rxnorm_unii_codes,
+  (select coalesce(jsonb_agg(distinct jsonb_build_object(
+       'ingrType', s.ingr_type,
+       'rxaui', s.sub_rxaui,
+       'rxcui', s.sub_rxcui,
+       'unii', s.sub_unii,
+       'biologicCode', s.sub_biologic_code,
+       'name', s.sub_name,
+       'suppress', s.sub_suppress)), '[]'::jsonb)
+   from mthspl_prod_sub_v s
+   where s.prod_rxaui in (
+     select pmc.prod_rxaui
+     from mthspl_prod_mktcat_code pmc
+     where pmc.code = pmcc.code
+   ))                                                           product_substances,
+  coalesce(jsonb_agg(distinct d.rxcui)
+    filter (where d.rxcui is not null), '[]'::jsonb)                        rxnorm_cuis,
+  coalesce(jsonb_agg(distinct d.tty)
+    filter (where d.tty is not null), '[]'::jsonb)                          rxnorm_term_types,
+  coalesce(jsonb_agg(distinct d.name)
+    filter (where d.name is not null), '[]'::jsonb)                         rxnorm_drug_names,
+  coalesce(jsonb_agg(distinct d.prescribable_name)
+    filter (where d.prescribable_name is not null), '[]'::jsonb)             rxnorm_prescribable_names,
+  coalesce(jsonb_agg(distinct dgm.non_quantified_rxcui)
+    filter (where dgm.non_quantified_rxcui is not null), '[]'::jsonb)       rxnorm_unquantified_cuis,
+  coalesce(jsonb_agg(distinct drug_name(dgm.non_quantified_rxcui))
+    filter (where dgm.non_quantified_rxcui is not null), '[]'::jsonb)      unquantified_names
+from mthspl_prod_mktcat_code pmcc
+join mthspl_prod p on p.rxaui = pmcc.prod_rxaui
+left join scd d on d.rxcui = p.rxcui
+left join drug_generalized_mv dgm on d.rxcui = dgm.rxcui
+group by pmcc.code, pmcc.mkt_cat, pmcc.prod_rxaui
+;
+create or replace view temp_mktcode_unii as
+select application_code, market_catergory, product_name, rxnorm_drug_names, rxnorm_unii_codes, prod_uniis
+from temp_mktcode_v
+group by application_code, market_catergory, product_name, rxnorm_drug_names, rxnorm_unii_codes, prod_uniis
+having jsonb_array_length(prod_uniis) > 1;
+
+select short_ndc, product_name, prod_uniis, set_ids
+from mthspl_ndc_prod_drug_v
+group by short_ndc, product_name, prod_uniis, set_ids
+having jsonb_array_length(set_ids) > 1;
