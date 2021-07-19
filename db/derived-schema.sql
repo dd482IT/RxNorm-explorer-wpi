@@ -1330,3 +1330,13 @@ create or replace view scd_unii_v as --62,476
   join pin i on i.rxcui = scdc.pin_rxcui
   join pin_unii piu on piu.pin_rxcui = i.rxcui
 ;
+
+create materialized view ndc_scd_mv as
+select distinct pc.two_part_ndc, d.rxcui scd_rxcui
+from mthspl_prod_ndc pc
+join mthspl_prod p on p.rxaui = pc.prod_rxaui
+join scd d on d.rxcui = p.rxcui
+;
+create unique index ix_ndcscdmv_ndccui on ndc_scd_mv (two_part_ndc, scd_rxcui);
+create index ix_ndcscdmv_cui on ndc_scd_mv (scd_rxcui);
+
