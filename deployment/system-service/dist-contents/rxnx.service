@@ -1,0 +1,15 @@
+[Unit]
+Description=RxNorm Explorer Service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+PIDFile=/usr/local/rxnx/RUNNING_PID
+User=rxnx
+WorkingDirectory=/usr/local/rxnx/
+ExecStart=/usr/lib/jvm/jre-11/bin/java -Xms2g -Xmx2g -jar rxnx.jar
+
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
