@@ -2,7 +2,6 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 cd "$SCRIPT_DIR"/..
-ALTER ROLE
 
 # Create dummy tables so the table drop statements in RxNormDDL.sql (from RxNorm) won't generate errors.
 psql -U rxnorm <<EOF
