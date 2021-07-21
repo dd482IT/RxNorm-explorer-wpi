@@ -1,3 +1,12 @@
+create materialized view ndc_scd_mv as
+select distinct pc.two_part_ndc, d.rxcui scd_rxcui
+from mthspl_prod_ndc pc
+join mthspl_prod p on p.rxaui = pc.prod_rxaui
+join scd d on d.rxcui = p.rxcui
+;
+create unique index ix_ndcscdmv_ndccui on ndc_scd_mv (two_part_ndc, scd_rxcui);
+create index ix_ndcscdmv_cui on ndc_scd_mv (scd_rxcui);
+
 create view ent_scd_v as
 select
   scd.rxcui "rxcui",
@@ -9,8 +18,8 @@ select
   scd.avail_strengths "availableStrengths",
   scd.qual_distinct "qualDistinct",
   scd.quantity "quantity",
-  scd.human_drug = 1 "humanDrug",
-  scd.vet_drug = 1 "vetDrug",
+  scd.human_drug "humanDrug",
+  scd.vet_drug "vetDrug",
   scd.unquantified_form_rxcui "unquantifiedFormRxcui",
   scd.suppress "suppress"
 from scd

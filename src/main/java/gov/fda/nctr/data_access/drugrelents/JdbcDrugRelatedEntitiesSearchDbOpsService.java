@@ -33,7 +33,7 @@ public class JdbcDrugRelatedEntitiesSearchDbOpsService implements DrugRelatedEnt
     )
   {
     return jdbc.query(
-      "select row_to_json(r) from ndc_relents_mv r where r.ndc in (:ndcs)",
+      "select row_to_json(r) from relents_ndc_mv r where r.ndc in (:ndcs)",
       params("ndcs", ndcs),
       jsonObjectRowMapper(NdcRelatedEntities.class, jsonMapper)
     );

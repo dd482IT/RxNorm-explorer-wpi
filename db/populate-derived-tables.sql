@@ -819,8 +819,3 @@ select s.rxaui, i.rxcui
 from mthspl_sub s
 join pin i on i.rxcui = s.rxcui
 ;
-
--- materialized views
-refresh materialized view drug_generalized_mv;
-refresh materialized view ndc_scd_mv;
-

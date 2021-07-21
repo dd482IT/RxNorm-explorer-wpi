@@ -19,5 +19,4 @@ EOF
 psql -U rxnorm -f rxnorm-orig/RxNormDDL.sql
 psql -U rxnorm -f rxnorm-orig/rxn_index.sql
 psql -U rxnorm -f rxn_index_extra.sql
-
-psql -U rxnorm -f derived-schema.sql
+psql -U rxnorm -f derived-tables.sql
