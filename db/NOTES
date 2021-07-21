@@ -57,3 +57,10 @@ and table_name not like '%v'
 --trust child table for precise ingredient, not atr field precise_ingr in scdc
 
 --In ingrset table, made choice to select PIN over IN when PIN is present in loading process
+
+--TODO place function back in derived-schema
+create or replace function sub_name(p_prod_rxaui varchar) returns varchar as $$
+  select string_agg(distinct psv.sub_name, ' / ' order by psv.sub_name)
+  from mthspl_prod_sub_v psv where psv.prod_rxaui = p_prod_rxaui
+  and psv.ingr_type <> 'I'
+$$ language sql;

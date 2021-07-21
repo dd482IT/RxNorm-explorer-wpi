@@ -370,7 +370,29 @@ where exists(
 
 --azithromycin
 --abacavir
-create or replace view temp_mktcode_v as
+
+select *
+from temp_mkstat_v
+where jsonb_array_length(prod_uniis) > 1 and market_catergory ilike '%NDA%'
+and rxnorm_cuis <> '[]'::jsonb
+order by market_catergory desc
+;
+--["HYDROCHLOROTHIAZIDE / LOSARTAN / LOSARTAN POTASSIUM", "TOPIRAMATE"]
+--ANDA078235,ANDA,"[""HYDROCHLOROTHIAZIDE 25 mg / LOSARTAN POTASSIUM 100 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 100 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 200 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 25 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 50 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 50 mg ORAL TABLET, FILM COATED [Topamax]""]"
+
+--multiple setid per ndc
+select short_ndc, product_name, prod_uniis, set_ids, rxnorm_drug_names
+from mthspl_ndc_prod_drug_v
+group by short_ndc, product_name, prod_uniis, set_ids, rxnorm_drug_names
+having jsonb_array_length(set_ids) > 1;
+
+--multiple appl code per ndc
+select short_ndc, product_name, prod_uniis, application_codes, rxnorm_drug_names
+from mthspl_ndc_prod_drug_v
+group by short_ndc, product_name, prod_uniis, application_codes, rxnorm_drug_names
+having jsonb_array_length(application_codes) > 1;
+
+create or replace view temp_mkstat_v as
 select
   pmcc.code                                                     application_code,
   pmcc.mkt_cat                                                  market_catergory,
@@ -405,11 +427,6 @@ select
      where pmc.code = pmcc.code
    ))                                                           labelers,
   coalesce(jsonb_agg(distinct uniis_str(pmcc.prod_rxaui)), '[]'::jsonb) prod_uniis,
-  (select coalesce(jsonb_agg(distinct unii), '[]'::jsonb)
-    from scd_unii_v suv
-    join mthspl_prod mp on mp.rxaui = pmcc.prod_rxaui
-    join mthspl_prod_scd ps on ps.prod_rxaui = mp.rxaui and ps.scd_rxcui = suv.scd_rxcui
-   )                  rxnorm_unii_codes,
   (select coalesce(jsonb_agg(distinct jsonb_build_object(
        'ingrType', s.ingr_type,
        'rxaui', s.sub_rxaui,
@@ -424,6 +441,9 @@ select
      from mthspl_prod_mktcat_code pmc
      where pmc.code = pmcc.code
    ))                                                           product_substances,
+   coalesce(jsonb_agg(distinct sub_name(pmcc.prod_rxaui)), '[]'::jsonb) sub_name,
+   coalesce(jsonb_agg(distinct i.name)
+    filter (where i.name is not null), '[]'::jsonb)                ingrset_name,
   coalesce(jsonb_agg(distinct d.rxcui)
     filter (where d.rxcui is not null), '[]'::jsonb)                        rxnorm_cuis,
   coalesce(jsonb_agg(distinct d.tty)
@@ -435,20 +455,24 @@ select
   coalesce(jsonb_agg(distinct dgm.non_quantified_rxcui)
     filter (where dgm.non_quantified_rxcui is not null), '[]'::jsonb)       rxnorm_unquantified_cuis,
   coalesce(jsonb_agg(distinct drug_name(dgm.non_quantified_rxcui))
-    filter (where dgm.non_quantified_rxcui is not null), '[]'::jsonb)      unquantified_names
+    filter (where dgm.non_quantified_rxcui is not null), '[]'::jsonb)      unquantified_names,
+  coalesce(jsonb_agg(distinct dgm.generic_rxcui)
+    filter (where dgm.generic_rxcui is not null), '[]'::jsonb)              rxnorm_generic_cuis,
+  coalesce(jsonb_agg(distinct drug_name(dgm.generic_rxcui))
+    filter (where dgm.generic_rxcui is not null), '[]'::jsonb)      generic_names,
+  coalesce(jsonb_agg(distinct dgm.generic_unquantified_rxcui)
+    filter (where dgm.generic_unquantified_rxcui is not null), '[]'::jsonb) rxnorm_unquantified_generic_cuis,
+  coalesce(jsonb_agg(distinct drug_name(dgm.generic_unquantified_rxcui))
+    filter (where dgm.generic_unquantified_rxcui is not null), '[]'::jsonb) generic_unqualified_names
 from mthspl_prod_mktcat_code pmcc
 join mthspl_prod p on p.rxaui = pmcc.prod_rxaui
 left join scd d on d.rxcui = p.rxcui
+left join ingrset i on i.rxcui = d.ingrset_rxcui
 left join drug_generalized_mv dgm on d.rxcui = dgm.rxcui
-group by pmcc.code, pmcc.mkt_cat, pmcc.prod_rxaui
+where p.rxaui in (
+    select mpl.prod_rxaui
+    from mthspl_prod_labeltype mpl
+    where mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
+)
+group by pmcc.code, pmcc.mkt_cat
 ;
-create or replace view temp_mktcode_unii as
-select application_code, market_catergory, product_name, rxnorm_drug_names, rxnorm_unii_codes, prod_uniis
-from temp_mktcode_v
-group by application_code, market_catergory, product_name, rxnorm_drug_names, rxnorm_unii_codes, prod_uniis
-having jsonb_array_length(prod_uniis) > 1;
-
-select short_ndc, product_name, prod_uniis, set_ids
-from mthspl_ndc_prod_drug_v
-group by short_ndc, product_name, prod_uniis, set_ids
-having jsonb_array_length(set_ids) > 1;
