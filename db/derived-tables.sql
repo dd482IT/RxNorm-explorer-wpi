@@ -1,158 +1,3 @@
-create table mthspl_sub (
-  rxaui varchar(12) not null primary key,
-  rxcui varchar(12) not null,
-  unii varchar(10),
-  biologic_code varchar(18),
-  name varchar(2000) not null,
-  suppress varchar(1) not null,
-  constraint mthspl_sub_notuniiandbiocode_ck check (unii is null or biologic_code is null)
-);
-create index ix_mthsplsub_cui on mthspl_sub(rxcui);
-create index ix_mthsplsub_unii on mthspl_sub(unii);
-create index ix_mthsplsub_code on mthspl_sub(biologic_code);
-
-create table mthspl_prod (
-  rxaui varchar(12) not null primary key,
-  rxcui varchar(12) not null,
-  code varchar(13), -- Most of these are NDCs without packaging (3rd part), some are not NDCs at all.
-  rxnorm_created boolean not null,
-  name varchar(4000) not null,
-  suppress varchar(1) not null,
-  ambiguity_flag varchar(9)
-);
-create index ix_mthsplprod_cui on mthspl_prod(rxcui);
-create index ix_mthsplprod_code on mthspl_prod(code);
-
-create table mthspl_sub_setid (
-  sub_rxaui varchar(12) not null references mthspl_sub,
-  set_id varchar(46) not null,
-  suppress varchar(1) not null,
-  primary key (sub_rxaui, set_id)
-);
-create index ix_mthsplsubsetid_setid on mthspl_sub_setid(set_id);
-
-create table mthspl_ingr_type (
-  ingr_type varchar(1) not null primary key,
-  description varchar(1000) not null
-);
-
-create table mthspl_prod_sub (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  ingr_type varchar(1) not null references mthspl_ingr_type,
-  sub_rxaui varchar(12) not null references mthspl_sub,
-  primary key (prod_rxaui, ingr_type, sub_rxaui)
-);
-create index ix_mthsplprodsub_ingrtype on mthspl_prod_sub(ingr_type);
-create index ix_mthsplprodsub_subaui on mthspl_prod_sub(sub_rxaui);
-
-create table mthspl_prod_dmspl (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  dm_spl_id varchar(46) not null,
-  primary key (prod_rxaui, dm_spl_id)
-);
-create index ix_mthspl_proddmspl_dmsplid on mthspl_prod_dmspl(dm_spl_id);
-
-create table mthspl_prod_setid (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  spl_set_id varchar(46) not null,
-  primary key (prod_rxaui, spl_set_id)
-);
-create index ix_mthsplprodsetid_setid on mthspl_prod_setid(spl_set_id);
-
-create table mthspl_prod_ndc (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  full_ndc varchar(12) not null,
-  two_part_ndc varchar(12) not null,
-  primary key (prod_rxaui, full_ndc)
-);
-create index ix_mthsplprodndc_fullndc on mthspl_prod_ndc(full_ndc);
-create index ix_mthsplprodndc_twopartndc on mthspl_prod_ndc(two_part_ndc);
-
-create table mthspl_prod_labeler (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  labeler varchar(2000) not null,
-  primary key (prod_rxaui, labeler)
-);
-
-create table mthspl_prod_labeltype (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  label_type varchar(500) not null,
-  primary key (prod_rxaui, label_type)
-);
-create index ix_mthsplprodlblt_lblt on mthspl_prod_labeltype(label_type);
-
-create table mthspl_prod_mktstat (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  mkt_stat varchar(500) not null,
-  primary key (prod_rxaui, mkt_stat)
-);
-create index ix_mthsplprodmktstat_mktstat on mthspl_prod_mktstat(mkt_stat);
-
-create table mthspl_prod_mkteffth (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  mkt_eff_time_high varchar(8) not null,
-  primary key (prod_rxaui, mkt_eff_time_high)
-);
-create index ix_mthsplprodmkteffth_mkteffth on mthspl_prod_mkteffth(mkt_eff_time_high);
-
-create table mthspl_prod_mktefftl (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  mkt_eff_time_low varchar(8) not null,
-  primary key (prod_rxaui, mkt_eff_time_low)
-);
-create index ix_mthsplprodmktefftl_mktetl on mthspl_prod_mktefftl(mkt_eff_time_low);
-
-create table mthspl_mktcat (
-  name varchar(500) primary key
-);
-
-create table mthspl_prod_mktcat (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  mkt_cat varchar(500) not null references mthspl_mktcat,
-  primary key (prod_rxaui, mkt_cat)
-);
-create index ix_mthsplprodmktcat_mktcat on mthspl_prod_mktcat(mkt_cat);
-
-create table mthspl_prod_mktcat_code (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  mkt_cat varchar(500) not null references mthspl_mktcat,
-  code varchar(20) not null,
-  num varchar(9) not null,
-  primary key (prod_rxaui, mkt_cat, code)
-);
-create index ix_mthsplprodmktcatcode_mktcat on mthspl_prod_mktcat_code(mkt_cat);
-create index ix_mthsplprodmktcatcode_code on mthspl_prod_mktcat_code(code);
-create index ix_mthsplprodmktcatcode_num on mthspl_prod_mktcat_code(num);
-
-create table mthspl_pillattr (
-  attr varchar(500) primary key
-);
-
-create table mthspl_prod_pillattr (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  attr varchar(500) not null references mthspl_pillattr,
-  attr_val varchar(1000) not null,
-  primary key (prod_rxaui, attr, attr_val)
-);
-create index ix_mthsplprodpillattr_attr on mthspl_prod_pillattr(attr);
-create index ix_mthsplprodpillattr_attrval on mthspl_prod_pillattr(attr_val);
-
-create table mthspl_prod_dcsa (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  dcsa varchar(4) not null,
-  primary key (prod_rxaui, dcsa)
-);
-create index ix_mthsplproddcsa_dcsa on mthspl_prod_dcsa(dcsa);
-
-create table mthspl_prod_nhric (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  nhric varchar(13) not null,
-  primary key (prod_rxaui, nhric)
-);
-create index ix_mthsplproddcsa_nhric on mthspl_prod_nhric(nhric);
-
--- sab = RXNORM
-
 create table "in" (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
@@ -196,17 +41,6 @@ create table ingrset (
   suppress varchar(1) not null,
   tty varchar(100) not null
 );
-
-create table temp_scd_ingrset (
-  drug_rxcui varchar(12) not null,
-  ingrset_rxcui varchar(12) not null,
-  ingrset_rxaui varchar(12) not null,
-  ingrset_name varchar(2000) not null,
-  ingrset_suppress varchar(1) not null,
-  ingrset_tty varchar(100) not null,
-  constraint pk_tmpscdingrset primary key (drug_rxcui, ingrset_rxcui)
-);
-create index ix_tempsingletoningrset on temp_scd_ingrset(ingrset_rxcui);
 
 create table df (
   rxcui varchar(12) primary key,
@@ -380,27 +214,6 @@ create table sbd_sy (
   constraint pk_sbdsy_cuisy primary key (sbd_rxcui, synonym)
 );
 
-create table mthspl_prod_scd (
-  prod_rxaui varchar(12) not null primary key references mthspl_prod,
-  scd_rxcui varchar(12) not null references scd
-);
-
-create table mthspl_prod_sbd (
-  prod_rxaui varchar(12) not null primary key references mthspl_prod,
-  sbd_rxcui varchar(12) not null references sbd
-);
-
-create table mthspl_sub_in (
-  sub_rxaui varchar(12) not null primary key references mthspl_sub,
-  in_rxcui varchar(12) not null references "in"
-);
-
-create table mthspl_sub_pin (
-  sub_rxaui varchar(12) not null primary key references mthspl_sub,
-  pin_rxcui varchar(12) not null references pin
-);
-
-
 create table sbd_scd (
   sbd_rxcui varchar(12) not null references sbd,
   scd_rxcui varchar(12) not null references scd,
@@ -556,3 +369,168 @@ create table atc_drug_class (
   drug_class_level varchar(2) not null,
   constraint pk_atcdrugcls_auiclass primary key (rxaui, drug_class)
 );
+
+create table mthspl_sub (
+  rxaui varchar(12) not null primary key,
+  rxcui varchar(12) not null,
+  unii varchar(10),
+  biologic_code varchar(18),
+  name varchar(2000) not null,
+  in_rxcui varchar(12) references "in",
+  pin_rxcui varchar(12) references pin,
+  suppress varchar(1) not null,
+  constraint ck_mthspl_sub_notuniiandbiocode check (unii is null or biologic_code is null)
+);
+create index ix_mthsplsub_cui on mthspl_sub(rxcui);
+create index ix_mthsplsub_unii on mthspl_sub(unii);
+create index ix_mthsplsub_code on mthspl_sub(biologic_code);
+
+create table mthspl_prod (
+  rxaui varchar(12) not null primary key,
+  rxcui varchar(12) not null,
+  code varchar(13), -- Most of these are NDCs without packaging (3rd part), some are not NDCs at all.
+  rxnorm_created boolean not null,
+  name varchar(4000) not null,
+  scd_rxcui varchar(12) references scd,   -- | mutually exclusive
+  sbd_rxcui varchar(12) references sbd,   -- |
+  gpck_rxcui varchar(12) references gpck, -- |
+  bpck_rxcui varchar(12) references bpck, -- |
+  suppress varchar(1) not null,
+  ambiguity_flag varchar(9),
+  constraint ck_mthsplprod_xor_drug_refs check (
+    case when scd_rxcui is null then 0 else 1 end +
+    case when sbd_rxcui is null then 0 else 1 end +
+    case when gpck_rxcui is null then 0 else 1 end +
+    case when bpck_rxcui  is null then 0 else 1 end <= 1
+  )
+);
+create index ix_mthsplprod_cui on mthspl_prod(rxcui);
+create index ix_mthsplprod_code on mthspl_prod(code);
+
+create table mthspl_sub_setid (
+  sub_rxaui varchar(12) not null references mthspl_sub,
+  set_id varchar(46) not null,
+  suppress varchar(1) not null,
+  primary key (sub_rxaui, set_id)
+);
+create index ix_mthsplsubsetid_setid on mthspl_sub_setid(set_id);
+
+create table mthspl_ingr_type (
+  ingr_type varchar(1) not null primary key,
+  description varchar(1000) not null
+);
+
+create table mthspl_prod_sub (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  ingr_type varchar(1) not null references mthspl_ingr_type,
+  sub_rxaui varchar(12) not null references mthspl_sub,
+  primary key (prod_rxaui, ingr_type, sub_rxaui)
+);
+create index ix_mthsplprodsub_ingrtype on mthspl_prod_sub(ingr_type);
+create index ix_mthsplprodsub_subaui on mthspl_prod_sub(sub_rxaui);
+
+create table mthspl_prod_dmspl (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  dm_spl_id varchar(46) not null,
+  primary key (prod_rxaui, dm_spl_id)
+);
+create index ix_mthspl_proddmspl_dmsplid on mthspl_prod_dmspl(dm_spl_id);
+
+create table mthspl_prod_setid (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  spl_set_id varchar(46) not null,
+  primary key (prod_rxaui, spl_set_id)
+);
+create index ix_mthsplprodsetid_setid on mthspl_prod_setid(spl_set_id);
+
+create table mthspl_prod_ndc (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  full_ndc varchar(12) not null,
+  two_part_ndc varchar(12) not null,
+  primary key (prod_rxaui, full_ndc)
+);
+create index ix_mthsplprodndc_fullndc on mthspl_prod_ndc(full_ndc);
+create index ix_mthsplprodndc_twopartndc on mthspl_prod_ndc(two_part_ndc);
+
+create table mthspl_prod_labeler (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  labeler varchar(2000) not null,
+  primary key (prod_rxaui, labeler)
+);
+
+create table mthspl_prod_labeltype (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  label_type varchar(500) not null,
+  primary key (prod_rxaui, label_type)
+);
+create index ix_mthsplprodlblt_lblt on mthspl_prod_labeltype(label_type);
+
+create table mthspl_prod_mktstat (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  mkt_stat varchar(500) not null,
+  primary key (prod_rxaui, mkt_stat)
+);
+create index ix_mthsplprodmktstat_mktstat on mthspl_prod_mktstat(mkt_stat);
+
+create table mthspl_prod_mkteffth (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  mkt_eff_time_high varchar(8) not null,
+  primary key (prod_rxaui, mkt_eff_time_high)
+);
+create index ix_mthsplprodmkteffth_mkteffth on mthspl_prod_mkteffth(mkt_eff_time_high);
+
+create table mthspl_prod_mktefftl (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  mkt_eff_time_low varchar(8) not null,
+  primary key (prod_rxaui, mkt_eff_time_low)
+);
+create index ix_mthsplprodmktefftl_mktetl on mthspl_prod_mktefftl(mkt_eff_time_low);
+
+create table mthspl_mktcat (
+  name varchar(500) primary key
+);
+
+create table mthspl_prod_mktcat (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  mkt_cat varchar(500) not null references mthspl_mktcat,
+  primary key (prod_rxaui, mkt_cat)
+);
+create index ix_mthsplprodmktcat_mktcat on mthspl_prod_mktcat(mkt_cat);
+
+create table mthspl_prod_mktcat_code (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  mkt_cat varchar(500) not null references mthspl_mktcat,
+  code varchar(20) not null,
+  num varchar(9) not null,
+  primary key (prod_rxaui, mkt_cat, code)
+);
+create index ix_mthsplprodmktcatcode_mktcat on mthspl_prod_mktcat_code(mkt_cat);
+create index ix_mthsplprodmktcatcode_code on mthspl_prod_mktcat_code(code);
+create index ix_mthsplprodmktcatcode_num on mthspl_prod_mktcat_code(num);
+
+create table mthspl_pillattr (
+  attr varchar(500) primary key
+);
+
+create table mthspl_prod_pillattr (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  attr varchar(500) not null references mthspl_pillattr,
+  attr_val varchar(1000) not null,
+  primary key (prod_rxaui, attr, attr_val)
+);
+create index ix_mthsplprodpillattr_attr on mthspl_prod_pillattr(attr);
+create index ix_mthsplprodpillattr_attrval on mthspl_prod_pillattr(attr_val);
+
+create table mthspl_prod_dcsa (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  dcsa varchar(4) not null,
+  primary key (prod_rxaui, dcsa)
+);
+create index ix_mthsplproddcsa_dcsa on mthspl_prod_dcsa(dcsa);
+
+create table mthspl_prod_nhric (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  nhric varchar(13) not null,
+  primary key (prod_rxaui, nhric)
+);
+create index ix_mthsplproddcsa_nhric on mthspl_prod_nhric(nhric);
