@@ -381,16 +381,14 @@ order by market_catergory desc
 --ANDA078235,ANDA,"[""HYDROCHLOROTHIAZIDE 25 mg / LOSARTAN POTASSIUM 100 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 100 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 200 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 25 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 50 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 50 mg ORAL TABLET, FILM COATED [Topamax]""]"
 
 --multiple setid per ndc
-select short_ndc, product_name, prod_uniis, set_ids, rxnorm_drug_names
-from mthspl_ndc_prod_drug_v
-group by short_ndc, product_name, prod_uniis, set_ids, rxnorm_drug_names
-having jsonb_array_length(set_ids) > 1;
+select *
+from mthspl_ndc_rxprod_drug_v
+where jsonb_array_length(set_ids) > 1;
 
 --multiple appl code per ndc
-select short_ndc, product_name, prod_uniis, application_codes, rxnorm_drug_names
-from mthspl_ndc_prod_drug_v
-group by short_ndc, product_name, prod_uniis, application_codes, rxnorm_drug_names
-having jsonb_array_length(application_codes) > 1;
+select *
+from mthspl_ndc_rxprod_drug_v
+where jsonb_array_length(application_codes) > 1;
 
 create or replace view temp_mkstat_v as
 select
