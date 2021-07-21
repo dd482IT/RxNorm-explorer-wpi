@@ -1,4 +1,3 @@
-----------sab = mthspl-----------
 create table mthspl_sub (
   rxaui varchar(12) not null primary key,
   rxcui varchar(12) not null,
@@ -8,21 +7,21 @@ create table mthspl_sub (
   suppress varchar(1) not null,
   constraint mthspl_sub_notuniiandbiocode_ck check (unii is null or biologic_code is null)
 );
-create index mthspl_sub_cui on mthspl_sub(rxcui);
-create index mthspl_sub_unii on mthspl_sub(unii);
-create index mthspl_sub_code on mthspl_sub(biologic_code);
+create index ix_mthsplsub_cui on mthspl_sub(rxcui);
+create index ix_mthsplsub_unii on mthspl_sub(unii);
+create index ix_mthsplsub_code on mthspl_sub(biologic_code);
 
 create table mthspl_prod (
   rxaui varchar(12) not null primary key,
   rxcui varchar(12) not null,
   code varchar(13), -- Most of these are NDCs without packaging (3rd part), some are not NDCs at all.
-  rxnorm_created int not null check (rxnorm_created in (0,1)),
+  rxnorm_created boolean not null,
   name varchar(4000) not null,
   suppress varchar(1) not null,
   ambiguity_flag varchar(9)
 );
-create index mthspl_prod_cui on mthspl_prod(rxcui);
-create index mthspl_prod_code on mthspl_prod(code);
+create index ix_mthsplprod_cui on mthspl_prod(rxcui);
+create index ix_mthsplprod_code on mthspl_prod(code);
 
 create table mthspl_sub_setid (
   sub_rxaui varchar(12) not null references mthspl_sub,
@@ -30,34 +29,35 @@ create table mthspl_sub_setid (
   suppress varchar(1) not null,
   primary key (sub_rxaui, set_id)
 );
-create index mthspl_subsetid_setid_x on mthspl_sub_setid(set_id);
+create index ix_mthsplsubsetid_setid on mthspl_sub_setid(set_id);
 
-create table mthspl_ingrtype (
+create table mthspl_ingr_type (
   ingr_type varchar(1) not null primary key,
   description varchar(1000) not null
 );
 
 create table mthspl_prod_sub (
   prod_rxaui varchar(12) not null references mthspl_prod,
-  ingr_type varchar(1) not null references mthspl_ingrtype,
+  ingr_type varchar(1) not null references mthspl_ingr_type,
   sub_rxaui varchar(12) not null references mthspl_sub,
   primary key (prod_rxaui, ingr_type, sub_rxaui)
 );
-create index mthspl_prodsub_subaui_ix on mthspl_prod_sub(sub_rxaui);
+create index ix_mthsplprodsub_ingrtype on mthspl_prod_sub(ingr_type);
+create index ix_mthsplprodsub_subaui on mthspl_prod_sub(sub_rxaui);
 
 create table mthspl_prod_dmspl (
   prod_rxaui varchar(12) not null references mthspl_prod,
   dm_spl_id varchar(46) not null,
   primary key (prod_rxaui, dm_spl_id)
 );
-create index mthspl_proddmspl_dmsplid_ix on mthspl_prod_dmspl(dm_spl_id);
+create index ix_mthspl_proddmspl_dmsplid on mthspl_prod_dmspl(dm_spl_id);
 
 create table mthspl_prod_setid (
   prod_rxaui varchar(12) not null references mthspl_prod,
   spl_set_id varchar(46) not null,
   primary key (prod_rxaui, spl_set_id)
 );
-create index mthsplprodsetid_setid_ix on mthspl_prod_setid(spl_set_id);
+create index ix_mthsplprodsetid_setid on mthspl_prod_setid(spl_set_id);
 
 create table mthspl_prod_ndc (
   prod_rxaui varchar(12) not null references mthspl_prod,
@@ -65,8 +65,8 @@ create table mthspl_prod_ndc (
   two_part_ndc varchar(12) not null,
   primary key (prod_rxaui, full_ndc)
 );
-create index mthsplprodndc_fullndc_ix on mthspl_prod_ndc(full_ndc);
-create index mthsplprodndc_twopartndc_ix on mthspl_prod_ndc(two_part_ndc);
+create index ix_mthsplprodndc_fullndc on mthspl_prod_ndc(full_ndc);
+create index ix_mthsplprodndc_twopartndc on mthspl_prod_ndc(two_part_ndc);
 
 create table mthspl_prod_labeler (
   prod_rxaui varchar(12) not null references mthspl_prod,
@@ -79,48 +79,50 @@ create table mthspl_prod_labeltype (
   label_type varchar(500) not null,
   primary key (prod_rxaui, label_type)
 );
-create index mthsplprodlblt_lblt_ix on mthspl_prod_labeltype(label_type);
+create index ix_mthsplprodlblt_lblt on mthspl_prod_labeltype(label_type);
 
 create table mthspl_prod_mktstat (
   prod_rxaui varchar(12) not null references mthspl_prod,
   mkt_stat varchar(500) not null,
   primary key (prod_rxaui, mkt_stat)
 );
-create index mthsplprodmktstat_mktstat_ix on mthspl_prod_mktstat(mkt_stat);
+create index ix_mthsplprodmktstat_mktstat on mthspl_prod_mktstat(mkt_stat);
 
 create table mthspl_prod_mkteffth (
   prod_rxaui varchar(12) not null references mthspl_prod,
   mkt_eff_time_high varchar(8) not null,
   primary key (prod_rxaui, mkt_eff_time_high)
 );
-create index mthsplprodmkteffth_mkteffth_ix on mthspl_prod_mkteffth(mkt_eff_time_high);
+create index ix_mthsplprodmkteffth_mkteffth on mthspl_prod_mkteffth(mkt_eff_time_high);
 
 create table mthspl_prod_mktefftl (
   prod_rxaui varchar(12) not null references mthspl_prod,
   mkt_eff_time_low varchar(8) not null,
   primary key (prod_rxaui, mkt_eff_time_low)
 );
-create index mthsplprodmktefftl_mktetl_ix on mthspl_prod_mktefftl(mkt_eff_time_low);
-
-create table mthspl_prod_mktcat (
-  prod_rxaui varchar(12) not null references mthspl_prod,
-  mkt_cat varchar(500) not null,
-  primary key (prod_rxaui, mkt_cat)
-);
-create index mthsplprodmktcat_mktcat_ix on mthspl_prod_mktcat(mkt_cat);
+create index ix_mthsplprodmktefftl_mktetl on mthspl_prod_mktefftl(mkt_eff_time_low);
 
 create table mthspl_mktcat (
   name varchar(500) primary key
 );
 
+create table mthspl_prod_mktcat (
+  prod_rxaui varchar(12) not null references mthspl_prod,
+  mkt_cat varchar(500) not null references mthspl_mktcat,
+  primary key (prod_rxaui, mkt_cat)
+);
+create index ix_mthsplprodmktcat_mktcat on mthspl_prod_mktcat(mkt_cat);
+
 create table mthspl_prod_mktcat_code (
   prod_rxaui varchar(12) not null references mthspl_prod,
   mkt_cat varchar(500) not null references mthspl_mktcat,
   code varchar(20) not null,
+  num varchar(9) not null,
   primary key (prod_rxaui, mkt_cat, code)
 );
-create index mthsplprodmktcatcode_mktcat_ix on mthspl_prod_mktcat_code(mkt_cat);
-create index mthsplprodmktcatcode_code_ix on mthspl_prod_mktcat_code(code);
+create index ix_mthsplprodmktcatcode_mktcat on mthspl_prod_mktcat_code(mkt_cat);
+create index ix_mthsplprodmktcatcode_code on mthspl_prod_mktcat_code(code);
+create index ix_mthsplprodmktcatcode_num on mthspl_prod_mktcat_code(num);
 
 create table mthspl_pillattr (
   attr varchar(500) primary key
@@ -132,61 +134,53 @@ create table mthspl_prod_pillattr (
   attr_val varchar(1000) not null,
   primary key (prod_rxaui, attr, attr_val)
 );
-create index mthsplprodpillattr_attr_ix on mthspl_prod_pillattr(attr);
-create index mthsplprodpillattr_attrval_ix on mthspl_prod_pillattr(attr_val);
+create index ix_mthsplprodpillattr_attr on mthspl_prod_pillattr(attr);
+create index ix_mthsplprodpillattr_attrval on mthspl_prod_pillattr(attr_val);
 
 create table mthspl_prod_dcsa (
   prod_rxaui varchar(12) not null references mthspl_prod,
   dcsa varchar(4) not null,
   primary key (prod_rxaui, dcsa)
 );
-create index mthsplproddcsa_dcsa_ix on mthspl_prod_dcsa(dcsa);
+create index ix_mthsplproddcsa_dcsa on mthspl_prod_dcsa(dcsa);
 
 create table mthspl_prod_nhric (
   prod_rxaui varchar(12) not null references mthspl_prod,
   nhric varchar(13) not null,
   primary key (prod_rxaui, nhric)
 );
-create index mthsplproddcsa_nhric_ix on mthspl_prod_nhric(nhric);
+create index ix_mthsplproddcsa_nhric on mthspl_prod_nhric(nhric);
 
-----------------------------------------------sab = RXNORM-------------------------------------------
-create table ingr (
+-- sab = RXNORM
+
+create table "in" (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null unique,
   suppress varchar(1) not null
 );
 
-create table ingr_unii (
-  ingr_rxcui varchar(12) not null,
+create table in_unii (
+  in_rxcui varchar(12) not null references "in",
   unii varchar(10) not null,
-  constraint pk_ingrunii_cuiunii primary key (ingr_rxcui, unii),
-  constraint fk_ingrunii_ingr foreign key (ingr_rxcui) references ingr
+  constraint pk_inunii_cuiunii primary key (in_rxcui, unii)
 );
-create index ix_ingrunii_unii on ingr_unii(unii);
+create index ix_inunii_unii on in_unii(unii);
 
 create table pin (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null unique,
+  in_rxcui varchar(12) not null references "in",
   suppress varchar(1) not null
 );
 
 create table pin_unii (
-  pin_rxcui varchar(12) not null,
+  pin_rxcui varchar(12) not null references pin,
   unii varchar(10) not null,
-  constraint pk_pinunii_cuiunii primary key (pin_rxcui, unii),
-  constraint fk_pinunii_pin foreign key (pin_rxcui) references pin
+  constraint pk_pinunii_cuiunii primary key (pin_rxcui, unii)
 );
-create index ix_pinunii_rxcui on pin_unii(pin_rxcui);
-
-create table ingr_pin (
-  ingr_rxcui varchar(12) not null,
-  pin_rxcui varchar(12) not null,
-  constraint pk_ingrpin_cui primary key (ingr_rxcui, pin_rxcui),
-  constraint fk_ingrpin_ingr foreign key (ingr_rxcui) references ingr,
-  constraint fk_ingrpin_pin foreign key (pin_rxcui) references pin
-);
+create index ix_pinunii_unii on pin_unii(unii);
 
 create table min (
   rxcui varchar(12) primary key,
@@ -194,7 +188,6 @@ create table min (
   name varchar(2000) not null unique,
   suppress varchar(1) not null
 );
-
 
 create table ingrset (
   rxcui varchar(12) primary key,
@@ -204,17 +197,16 @@ create table ingrset (
   tty varchar(100) not null
 );
 
-drop table if exists temp_ingrset;
-create table temp_ingrset (
+create table temp_scd_ingrset (
   drug_rxcui varchar(12) not null,
-  ingr_rxcui varchar(12) not null,
-  ingr_rxaui varchar(12) not null,
-  ingr_name varchar(2000) not null,
-  ingr_suppress varchar(1) not null,
-  ingr_tty varchar(100) not null,
-  constraint pk_tingrset_cui primary key (drug_rxcui, ingr_rxcui)
+  ingrset_rxcui varchar(12) not null,
+  ingrset_rxaui varchar(12) not null,
+  ingrset_name varchar(2000) not null,
+  ingrset_suppress varchar(1) not null,
+  ingrset_tty varchar(100) not null,
+  constraint pk_tmpscdingrset primary key (drug_rxcui, ingrset_rxcui)
 );
-create index ixt_tempingrset on temp_ingrset(ingr_rxcui);
+create index ix_tempsingletoningrset on temp_scd_ingrset(ingrset_rxcui);
 
 create table df (
   rxcui varchar(12) primary key,
@@ -231,75 +223,65 @@ create table dfg (
 );
 
 create table df_dfg (
-  df_rxcui varchar(12) not null,
-  dfg_rxcui varchar(12) not null,
-  constraint pk_dfdfg_cui primary key (df_rxcui, dfg_rxcui),
-  constraint fk_dfdfg_df foreign key (df_rxcui) references df,
-  constraint fk_dfdfg_dfg foreign key (dfg_rxcui) references dfg
+  df_rxcui varchar(12) not null references df,
+  dfg_rxcui varchar(12) not null references dfg,
+  constraint pk_dfdfg_cui primary key (df_rxcui, dfg_rxcui)
 );
 
 create table scd (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null unique,
-  tty varchar(11) not null,
   name varchar(2000) not null,
   prescribable_name varchar(2000),
   rxterm_form varchar(100),
-  df_rxcui varchar(2000) not null,
-  ingrset_rxcui varchar(12) not null,
+  df_rxcui varchar(2000) not null references df,
+  ingrset_rxcui varchar(12) not null references ingrset,
   avail_strengths varchar(500),
   qual_distinct varchar(500),
   suppress varchar(1) not null,
   quantity varchar(100),
-  human_drug int2,
-  vet_drug int2,
-  unquantified_form_rxcui varchar(12),
-  constraint fk_scd_ingrset foreign key (ingrset_rxcui) references ingrset,
-  constraint fk_scd_df foreign key (df_rxcui) references df,
-  constraint fk_scd_qform_scd foreign key (unquantified_form_rxcui) references scd
+  human_drug boolean,
+  vet_drug boolean,
+  unquantified_form_rxcui varchar(12) references scd
 );
+create index ix_scd_df on scd (df_rxcui);
+create index ix_scd_ingrset on scd (ingrset_rxcui);
+create index ix_scd_uqform on scd (unquantified_form_rxcui);
 
 create table sbd (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null unique,
-  tty varchar(11) not null,
   name varchar(2000) not null,
   prescribable_name varchar(2000),
   rxterm_form varchar(100),
-  df_rxcui varchar(12) not null,
+  df_rxcui varchar(12) not null references df,
   avail_strengths varchar(500),
   qual_distinct varchar(500),
   suppress varchar(1) not null,
   quantity varchar(100),
-  human_drug int2,
-  vet_drug int2,
-  unquantified_form_rxcui varchar(12),
-  constraint fk_sbd_df foreign key (df_rxcui) references df,
-  constraint fk_sbd_qform_sbd foreign key (unquantified_form_rxcui) references sbd
+  human_drug boolean,
+  vet_drug boolean,
+  unquantified_form_rxcui varchar(12) references sbd
 );
 
 create table gpck (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null unique,
-  tty varchar(11) not null,
   name varchar(2000) not null,
   prescribable_name varchar(2000),
-  df_rxcui varchar(12) not null,
+  df_rxcui varchar(12) not null references df,
   suppress varchar(1) not null,
-  human_drug int2,
-  constraint fk_gpck_df foreign key (df_rxcui) references df
+  human_drug boolean
 );
 
 create table bpck (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null unique,
-  tty varchar(11) not null,
   name varchar(2000) not null,
   prescribable_name varchar(2000),
-  df_rxcui varchar(12) not null,
+  df_rxcui varchar(12) not null references df,
   suppress varchar(1) not null,
-  human_drug int2,
-  constraint fk_bpck_df foreign key (df_rxcui) references df
+  human_drug boolean
 );
 
 
@@ -308,8 +290,7 @@ create table bn (
   rxaui varchar(12) not null,
   name varchar(2000) not null unique,
   rxn_cardinality varchar(6),
-  reformulated_to_rxcui varchar(12),
-  constraint fk_bn_bn foreign key (reformulated_to_rxcui) references bn
+  reformulated_to_rxcui varchar(12) references bn
 );
 comment on table bn is 'brand name';
 
@@ -317,6 +298,8 @@ create table scdc (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null unique,
+  in_rxcui varchar(12) not null references "in",
+  pin_rxcui varchar(12) references pin,
   boss_active_ingr_name varchar(2000),
   boss_active_moi_name varchar(2000),
   boss_source varchar(10),
@@ -325,34 +308,27 @@ create table scdc (
   boss_str_num_unit varchar(100),
   boss_str_num_val varchar(100),
   boss_str_denom_unit varchar(100),
-  boss_str_denom_val varchar(100),
-  ingr_rxcui varchar(12),
-  pin_rxcui varchar(12),
-  constraint fk_scdc_ingr foreign key (ingr_rxcui) references ingr,
-  constraint fk_scdc_pin foreign key (pin_rxcui) references pin
+  boss_str_denom_val varchar(100)
 );
 
 create table scdf (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null unique,
-  df_rxcui varchar(12) not null,
-  constraint fk_scdf_df foreign key (df_rxcui) references df
+  df_rxcui varchar(12) not null references df
 );
 
 create table scdg (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null unique,
-  dfg_rxcui varchar(12) not null,
-  constraint fk_scdg_dfg foreign key (dfg_rxcui) references dfg
+  dfg_rxcui varchar(12) not null references dfg
 );
 
 create table scdg_astr (
-  scdg_rxcui varchar(12) not null,
+  scdg_rxcui varchar(12) not null references scdg,
   rxn_available_strength varchar(2000) not null,
-  constraint pk_scdgstr_cuistr primary key (scdg_rxcui, rxn_available_strength),
-  constraint fk_scdgstr_scdg foreign key (scdg_rxcui) references scdg
+  constraint pk_scdgstr_cuistr primary key (scdg_rxcui, rxn_available_strength)
 );
 
 create table sbdc (
@@ -365,300 +341,213 @@ create table sbdf (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null,
-  df_rxcui varchar(12) not null,
-  constraint fk_sbdf_df foreign key (df_rxcui) references df
+  df_rxcui varchar(12) not null references df
 );
 
 create table sbdg (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
   name varchar(2000) not null,
-  dfg_rxcui varchar(12) not null,
-  constraint fk_sbdg_dfg foreign key (dfg_rxcui) references dfg
+  dfg_rxcui varchar(12) not null references dfg,
+  bn_rxcui varchar(12) references bn
 );
 
 create table sbdg_astr (
-  sbdg_rxcui varchar(12) not null,
+  sbdg_rxcui varchar(12) not null references sbdg,
   RXN_AVAILABLE_STRENGTH varchar(2000) not null,
-  constraint pk_sbdgstr_cuistr primary key (sbdg_rxcui, RXN_AVAILABLE_STRENGTH),
-  constraint fk_sbdgstr_sbdg foreign key (sbdg_rxcui) references sbdg
+  constraint pk_sbdgstr_cuistr primary key (sbdg_rxcui, RXN_AVAILABLE_STRENGTH)
 );
 
 create table et (
   rxcui varchar(12) not null,
   rxaui varchar(12) not null,
-  name varchar(2000) not null,
+  name varchar(2000) not null unique,
   constraint pk_doseentrtrm_cuiname primary key (rxcui, name)
 );
 
 create table scd_sy (
-  drug_rxcui varchar(12) not null,
-  drug_rxaui varchar(12) not null,
+  scd_rxcui varchar(12) not null references scd,
   synonym varchar(2000) not null,
   sy_rxaui varchar(12) not null,
-  constraint pk_scdsy_cuisy primary key (drug_rxcui, synonym),
-  constraint fk_scdsy_scd foreign key (drug_rxcui) references scd
+  constraint pk_scdsy_cuisy primary key (scd_rxcui, synonym)
 );
 create index ix_scdsy_sy on scd_sy(synonym);
 
 create table sbd_sy (
-  drug_rxcui varchar(12) not null,
-  drug_rxaui varchar(12) not null,
+  sbd_rxcui varchar(12) not null references sbd,
   synonym varchar(2000) not null,
   sy_rxaui varchar(12) not null,
-  constraint pk_sbdsy_cuisy primary key (drug_rxcui, synonym),
-  constraint fk_sbdsy_sbd foreign key (drug_rxcui) references sbd
+  constraint pk_sbdsy_cuisy primary key (sbd_rxcui, synonym)
 );
 
 create table mthspl_prod_scd (
-  prod_rxaui varchar(12) not null,
-  scd_rxcui varchar(12) not null,
-  constraint pk_mthsplprodscd_aui primary key (prod_rxaui),
-  constraint fk_mthsplprodscd_cui foreign key (scd_rxcui) references scd,
-  constraint fk_mthsplprodscd_prod foreign key (prod_rxaui) references mthspl_prod
+  prod_rxaui varchar(12) not null primary key references mthspl_prod,
+  scd_rxcui varchar(12) not null references scd
 );
 
 create table mthspl_prod_sbd (
-  prod_rxaui varchar(12) not null,
-  sbd_rxcui varchar(12) not null,
-  constraint pk_mthsplprodsbd_aui primary key (prod_rxaui),
-  constraint fk_mthsplprodsbd_sbd foreign key (sbd_rxcui) references sbd,
-  constraint fk_mthsplprodsbd_prod foreign key (prod_rxaui) references mthspl_prod
+  prod_rxaui varchar(12) not null primary key references mthspl_prod,
+  sbd_rxcui varchar(12) not null references sbd
 );
 
+create table mthspl_sub_in (
+  sub_rxaui varchar(12) not null primary key references mthspl_sub,
+  in_rxcui varchar(12) not null references "in"
+);
+
+create table mthspl_sub_pin (
+  sub_rxaui varchar(12) not null primary key references mthspl_sub,
+  pin_rxcui varchar(12) not null references pin
+);
+
+
 create table sbd_scd (
-  rxcui1 varchar(12) not null,
-  rxcui2 varchar(12) not null,
-  constraint pk_brndrgscd_cui12 primary key (rxcui1, rxcui2),
-  constraint fk_sbdscd_sbd foreign key (rxcui1) references sbd,
-  constraint fk_sbdscd_scd foreign key (rxcui2) references scd
+  sbd_rxcui varchar(12) not null references sbd,
+  scd_rxcui varchar(12) not null references scd,
+  constraint pk_brndrgscd_cui12 primary key (sbd_rxcui, scd_rxcui)
 )
 ;
+create index ix_sbdscd_scd on sbd_scd(scd_rxcui);
 
 create table scdc_sbd (
-  scdc_rxcui varchar(12) not null,
-  sbd_rxcui varchar(12) not null,
-  constraint pk_scdcsbd_cui primary key (scdc_rxcui, sbd_rxcui),
-  constraint fk_scdcsbd_scdc foreign key (scdc_rxcui) references scdc,
-  constraint fk_scdcsbd_sbd foreign key (sbd_rxcui) references sbd
+  scdc_rxcui varchar(12) not null references scdc,
+  sbd_rxcui varchar(12) not null references sbd,
+  constraint pk_scdcsbd_cui primary key (scdc_rxcui, sbd_rxcui)
 );
 
 create table scdc_scd (
-  scdc_rxcui varchar(12) not null,
-  scd_rxcui varchar(12) not null,
-  constraint pk_scdcscd_cui primary key (scdc_rxcui, scd_rxcui),
-  constraint fk_scdcscd_scdc foreign key (scdc_rxcui) references scdc,
-  constraint fk_scdcscd_scd foreign key (scd_rxcui) references scd
+  scdc_rxcui varchar(12) not null references scdc,
+  scd_rxcui varchar(12) not null references scd,
+  constraint pk_scdcscd_cui primary key (scdc_rxcui, scd_rxcui)
 );
+create index ix_scdcscd_scd on scdc_scd(scd_rxcui);
 
 create table scdc_sbdc (
-  scdc_rxcui varchar(12) not null,
-  sbdc_rxcui varchar(12) not null,
-  constraint pk_scdcsbdc_cui primary key (scdc_rxcui, sbdc_rxcui),
-  constraint fk_scdcsbdc_scdc foreign key (scdc_rxcui) references scdc,
-  constraint fk_scdcsbdc_sbdc foreign key (sbdc_rxcui) references sbdc
+  scdc_rxcui varchar(12) not null references scdc,
+  sbdc_rxcui varchar(12) not null references sbdc,
+  constraint pk_scdcsbdc_cui primary key (scdc_rxcui, sbdc_rxcui)
 );
 
-create table scdf_ingr (
-  scdf_rxcui varchar(12) not null,
-  ingr_rxcui varchar(12) not null,
-  constraint pk_scdfingr_cui primary key (scdf_rxcui, ingr_rxcui),
-  constraint fk_scdfingr_scdf foreign key (scdf_rxcui) references scdf,
-  constraint fk_scdfingr_ingr foreign key (ingr_rxcui) references ingr
-);
-
-create table scdf_df (
-  scdf_rxcui varchar(12) primary key,
-  df_rxcui varchar(12) not null,
-  constraint fk_scdfdf_df foreign key (df_rxcui) references df,
-  constraint fk_scdfdf_scdf foreign key (scdf_rxcui) references scdf
+create table scdf_in (
+  scdf_rxcui varchar(12) not null references scdf,
+  in_rxcui varchar(12) not null references "in",
+  constraint pk_scdfin_cui primary key (scdf_rxcui, in_rxcui)
 );
 
 create table scdf_scd (
-  scdf_rxcui varchar(12) not null,
-  scd_rxcui varchar(12) not null,
-  constraint pk_scdfscd_cui primary key (scdf_rxcui, scd_rxcui),
-  constraint fk_scdfscd_scdf foreign key (scdf_rxcui) references scdf,
-  constraint fk_scdfscd_scd foreign key (scd_rxcui) references scd
+  scdf_rxcui varchar(12) not null references scdf,
+  scd_rxcui varchar(12) not null references scd,
+  constraint pk_scdfscd_cui primary key (scdf_rxcui, scd_rxcui)
 );
 
 create table scdf_scdg (
-  scdf_rxcui varchar(12) not null,
-  scdg_rxcui varchar(12) not null,
-  constraint pk_scdfscdg_cui primary key (scdf_rxcui, scdg_rxcui),
-  constraint fk_scdfscdg_scdf foreign key (scdf_rxcui) references scdf,
-  constraint fk_scdfscdg_scdg foreign key (scdg_rxcui) references scdg
+  scdf_rxcui varchar(12) not null references scdf,
+  scdg_rxcui varchar(12) not null references scdg,
+  constraint pk_scdfscdg_cui primary key (scdf_rxcui, scdg_rxcui)
 );
 
 create table scdf_sbdf (
-  scdf_rxcui varchar(12) not null,
-  sbdf_rxcui varchar(12) not null,
-  constraint pk_scdfsbdf_cui primary key (scdf_rxcui, sbdf_rxcui),
-  constraint fk_scdfsbdf_scdf foreign key (scdf_rxcui) references scdf,
-  constraint fk_scdfsbdf_sbdf foreign key (sbdf_rxcui) references sbdf
+  scdf_rxcui varchar(12) not null references scdf,
+  sbdf_rxcui varchar(12) not null references sbdf,
+  constraint pk_scdfsbdf_cui primary key (scdf_rxcui, sbdf_rxcui)
 );
 
-create table scdg_ingr (
-  scdg_rxcui varchar(12) not null,
-  ingr_rxcui varchar(12) not null,
-  constraint pk_scdgingr_cui primary key (scdg_rxcui, ingr_rxcui),
-  constraint fk_scdgingr_scdg foreign key (scdg_rxcui) references scdg,
-  constraint fk_scdgingr_ingr foreign key (ingr_rxcui) references ingr
-);
-
-create table scdg_dfg (
-  scdg_rxcui varchar(12) primary key,
-  dfg_rxcui varchar(12) not null,
-  constraint fk_scdgdfg_scdg foreign key (scdg_rxcui) references scdg,
-  constraint fk_scdgdfg_dfg foreign key (dfg_rxcui) references dfg
+create table scdg_in (
+  scdg_rxcui varchar(12) not null references scdg,
+  in_rxcui varchar(12) not null references "in",
+  constraint pk_scdgin_cui primary key (scdg_rxcui, in_rxcui)
 );
 
 create table scdg_scd (
-  scdg_rxcui varchar(12) not null,
-  scd_rxcui varchar(12) not null,
-  constraint pk_scdgscd_cui primary key (scdg_rxcui, scd_rxcui),
-  constraint fk_scdgscd_scdg foreign key (scdg_rxcui) references scdg,
-  constraint fk_scdgscd_scd foreign key (scd_rxcui) references scd
+  scdg_rxcui varchar(12) not null references scdg,
+  scd_rxcui varchar(12) not null references scd,
+  constraint pk_scdgscd_cui primary key (scdg_rxcui, scd_rxcui)
 );
 
 create table scdg_sbdg (
-  scdg_rxcui varchar(12) not null,
-  sbdg_rxcui varchar(12) not null,
-  constraint pk_scdgsbdg_cui primary key (scdg_rxcui, sbdg_rxcui),
-  constraint fk_scdgsbdg_scdg foreign key (scdg_rxcui) references scdg,
-  constraint fk_scdgsbdg_scd foreign key (sbdg_rxcui) references sbdg
+  scdg_rxcui varchar(12) not null references scdg,
+  sbdg_rxcui varchar(12) not null references sbdg,
+  constraint pk_scdgsbdg_cui primary key (scdg_rxcui, sbdg_rxcui)
 );
-
-/* not needed currently, kept to look for anomalies
-create table ingrset_ingr (
-  ingrset_rxcui varchar(12) not null,
-  ingr_rxcui varchar(12) not null,
-  constraint pk_ingrsetingr_cui primary key (ingrset_rxcui, ingr_rxcui),
-  constraint fk_ingrsetingr_ingrset foreign key (ingrset_rxcui) references ingrset,
-  constraint fk_ingrsetingr_ingr foreign key (ingr_rxcui) references ingr
-);
-
-create table ingrset_pin (
-  ingrset_rxcui varchar(12) not null,
-  pin_rxcui varchar(12) not null,
-  constraint pk_ingrsetpin_cui primary key (ingrset_rxcui, pin_rxcui),
-  constraint fk_ingrsetpin_ingrset foreign key (ingrset_rxcui) references ingrset,
-  constraint fk_ingrsetpin_pin foreign key (pin_rxcui) references pin
-);
-*/
 
 create table gpck_bpck (
-  gpck_rxcui varchar(12) not null,
-  bpck_rxcui varchar(12) not null,
-  constraint pk_gpckbpck_cui primary key (gpck_rxcui, bpck_rxcui),
-  constraint fk_gpckbpck_gpck foreign key (gpck_rxcui) references gpck,
-  constraint fk_gpckbpck_bpck foreign key (bpck_rxcui) references bpck
+  gpck_rxcui varchar(12) not null references gpck,
+  bpck_rxcui varchar(12) not null references bpck,
+  constraint pk_gpckbpck_cui primary key (gpck_rxcui, bpck_rxcui)
 );
 
 create table gpck_scd (
-  gpck_rxcui varchar(12) not null,
-  scd_rxcui varchar(12) not null,
-  constraint pk_gpckscd_cui primary key (gpck_rxcui, scd_rxcui),
-  constraint fk_gpckscd_gpck foreign key (gpck_rxcui) references gpck,
-  constraint fk_gpckscd_scd foreign key (scd_rxcui) references scd
+  gpck_rxcui varchar(12) not null references gpck,
+  scd_rxcui varchar(12) not null references scd,
+  constraint pk_gpckscd_cui primary key (gpck_rxcui, scd_rxcui)
 );
 
 create table bpck_scd (
-  bpck_rxcui varchar(12) not null,
-  scd_rxcui varchar(12) not null,
-  constraint pk_bpckscd_cui primary key (bpck_rxcui, scd_rxcui),
-  constraint fk_bpckscd_bpck foreign key (bpck_rxcui) references bpck,
-  constraint fk_bpckscd_scd foreign key (scd_rxcui) references scd
+  bpck_rxcui varchar(12) not null references bpck,
+  scd_rxcui varchar(12) not null references scd,
+  constraint pk_bpckscd_cui primary key (bpck_rxcui, scd_rxcui)
 );
 
 create table bpck_sbd (
-  bpck_rxcui varchar(12) not null,
-  sbd_rxcui varchar(12) not null,
-  constraint pk_bpcksbd_cui primary key (bpck_rxcui, sbd_rxcui),
-  constraint fk_bpcksbd_bpck foreign key (bpck_rxcui) references bpck,
-  constraint fk_bpcksbd_sbd foreign key (sbd_rxcui) references sbd
+  bpck_rxcui varchar(12) not null references bpck,
+  sbd_rxcui varchar(12) not null references sbd,
+  constraint pk_bpcksbd_cui primary key (bpck_rxcui, sbd_rxcui)
 );
 
 create table sbd_bn (
-  sbd_rxcui varchar(12) not null,
-  brand_rxcui varchar(12) not null,
-  constraint pk_sbdbn_cui primary key (sbd_rxcui, brand_rxcui),
-  constraint fk_sbdbn_sbd foreign key (sbd_rxcui) references sbd,
-  constraint fk_sbdbn_bn foreign key (brand_rxcui) references bn
+  sbd_rxcui varchar(12) not null references sbd,
+  bn_rxcui varchar(12) not null references bn,
+  constraint pk_sbdbn_cui primary key (sbd_rxcui, bn_rxcui)
 );
 
 create table sbdc_sbd (
-  sbdc_rxcui varchar(12) not null,
-  sbd_rxcui varchar(12) not null,
-  constraint pk_sbdcsbc_cui primary key (sbdc_rxcui, sbd_rxcui),
-  constraint fk_sbdcsbd_sbdc foreign key (sbdc_rxcui) references sbdc,
-  constraint fk_sbdcsbd_sbd foreign key (sbd_rxcui) references sbd
+  sbdc_rxcui varchar(12) not null references sbdc,
+  sbd_rxcui varchar(12) not null references sbd,
+  constraint pk_sbdcsbc_cui primary key (sbdc_rxcui, sbd_rxcui)
 );
 
 create table sbdc_bn (
-  sbdc_rxcui varchar(12) not null,
-  brand_rxcui varchar(12) not null,
-  constraint pk_sbdcbn_cui primary key (sbdc_rxcui, brand_rxcui),
-  constraint fk_sbdcbn_sbdc foreign key (sbdc_rxcui) references sbdc,
-  constraint fk_sbdcbn_bn foreign key (brand_rxcui) references bn
+  sbdc_rxcui varchar(12) not null references sbdc,
+  bn_rxcui varchar(12) not null references bn,
+  constraint pk_sbdcbn_cui primary key (sbdc_rxcui, bn_rxcui)
 );
 
 create table sbdf_sbdg (
-  sbdf_rxcui varchar(12) not null,
-  sbdg_rxcui varchar(12) not null,
-  constraint pk_sbdfsbdg_cui primary key (sbdf_rxcui, sbdg_rxcui),
-  constraint fk_sbdfsbdg_sbdf foreign key (sbdf_rxcui) references sbdf,
-  constraint fk_sbdfsbdg_sbdg foreign key (sbdg_rxcui) references sbdg
+  sbdf_rxcui varchar(12) not null references sbdf,
+  sbdg_rxcui varchar(12) not null references sbdg,
+  constraint pk_sbdfsbdg_cui primary key (sbdf_rxcui, sbdg_rxcui)
 );
 
 create table sbdf_bn (
-  sbdf_rxcui varchar(12) not null,
-  brand_rxcui varchar(12) not null,
-  constraint pk_sbdfbn_cui primary key (sbdf_rxcui, brand_rxcui),
-  constraint fk_sbdfbn_sbdf foreign key (sbdf_rxcui) references sbdf,
-  constraint fk_sbdfbn_bn foreign key (brand_rxcui) references bn
+  sbdf_rxcui varchar(12) not null references sbdf,
+  bn_rxcui varchar(12) not null references bn,
+  constraint pk_sbdfbn_cui primary key (sbdf_rxcui, bn_rxcui)
 );
 
 create table sbdf_sbd (
-  sbdf_rxcui varchar(12) not null,
-  sbd_rxcui varchar(12) not null,
-  constraint pk_sbdfsbd_cui primary key (sbdf_rxcui, sbd_rxcui),
-  constraint fk_sbdfsbd_sbdf foreign key (sbdf_rxcui) references sbdf,
-  constraint fk_sbdfsbd_sbd foreign key (sbd_rxcui) references sbd
-);
-
-create table sbdg_bn (
-  sbdg_rxcui varchar(12) primary key,
-  brand_rxcui varchar(12) not null,
-  constraint fk_sbdgbn_sbdg foreign key (sbdg_rxcui) references sbdg,
-  constraint fk_sbdgbn_bn foreign key (brand_rxcui) references bn
+  sbdf_rxcui varchar(12) not null references sbdf,
+  sbd_rxcui varchar(12) not null references sbd,
+  constraint pk_sbdfsbd_cui primary key (sbdf_rxcui, sbd_rxcui)
 );
 
 create table sbdg_sbd (
-  sbdg_rxcui varchar(12) not null,
-  sbd_rxcui varchar(12) not null,
-  constraint pk_sbdgsbd_cui primary key (sbdg_rxcui, sbd_rxcui),
-  constraint fk_sbdgsbd_sbdg foreign key (sbdg_rxcui) references sbdg,
-  constraint fk_sbdgsbd_sbd foreign key (sbd_rxcui) references sbd
+  sbdg_rxcui varchar(12) not null references sbdg,
+  sbd_rxcui varchar(12) not null references sbd,
+  constraint pk_sbdgsbd_cui primary key (sbdg_rxcui, sbd_rxcui)
 );
 
-create table bn_ingr (
-  brand_rxcui varchar(12) not null,
-  ingr_rxcui varchar(12) not null,
-  constraint pk_bningr_cui primary key (brand_rxcui, ingr_rxcui),
-  constraint fk_bningr_bn foreign key (brand_rxcui) references bn,
-  constraint fk_bringr_ingr foreign key (ingr_rxcui) references ingr
+create table bn_in (
+  bn_rxcui varchar(12) not null references bn,
+  in_rxcui varchar(12) not null references "in",
+  constraint pk_bnin_cui primary key (bn_rxcui, in_rxcui)
 );
 
 create table bn_pin (
-  brand_rxcui varchar(12) not null,
-  pin_rxcui varchar(12) not null,
-  constraint pk_bnpin_cui primary key (brand_rxcui, pin_rxcui),
-  constraint fk_bnpin_bn foreign key (brand_rxcui) references bn,
-  constraint fk_brpin_pin foreign key (pin_rxcui) references pin
+  bn_rxcui varchar(12) not null references bn,
+  pin_rxcui varchar(12) not null references pin,
+  constraint pk_bnpin_cui primary key (bn_rxcui, pin_rxcui)
 );
 
-------------------------------------ATC SECTION----------------------------------
 create table atc_drug_class (
   rxcui varchar(12) not null,
   rxaui varchar(12) not null,
@@ -667,7 +556,9 @@ create table atc_drug_class (
   drug_class_level varchar(2) not null,
   constraint pk_atcdrugcls_auiclass primary key (rxaui, drug_class)
 );
-----------------------------------------------VIEWS--------------------------------------------
+
+-- VIEWS
+
 create or replace view drug_v as
 select
   d.rxcui,
@@ -701,7 +592,7 @@ where sab='RXNORM' and tty in ('PIN','IN','MIN')
 
 create or replace view mthspl_prod_sub_v as
 select
-  mp.rxaui          prod_rxaui,
+  ps.prod_rxaui,
   mp.rxcui          prod_rxcui,
   mp.code           prod_code,
   mp.rxnorm_created prod_rxnorm_created,
@@ -709,7 +600,7 @@ select
   mp.suppress       prod_suppress,
   mp.ambiguity_flag prod_ambiguity_flag,
   ps.ingr_type,
-  ps.sub_rxaui      sub_rxaui,
+  ps.sub_rxaui,
   ms.rxcui          sub_rxcui,
   ms.unii           sub_unii,
   ms.biologic_code  sub_biologic_code,
@@ -720,17 +611,11 @@ join mthspl_prod mp on ps.prod_rxaui = mp.rxaui
 join mthspl_sub ms on ms.rxaui = ps.sub_rxaui
 ;
 
---------------------------------FUNCTIONS---------------------------------
-create or replace function drug_name(p_rxcui varchar) returns varchar as $$
-    select d.name from drug_v d where d.rxcui = p_rxcui;
-$$ language sql;
-
 create or replace function uniis_str(p_prod_rxaui varchar) returns varchar as $$
-  select string_agg(distinct psv.sub_unii, '|' order by psv.sub_unii)
-  from mthspl_prod_sub_v psv where psv.prod_rxaui = p_prod_rxaui
-  and psv.ingr_type <> 'I'
+select string_agg(distinct psv.sub_unii, '|' order by psv.sub_unii)
+from mthspl_prod_sub_v psv
+where psv.prod_rxaui = p_prod_rxaui and psv.ingr_type <> 'I'
 $$ language sql;
-------------------------------------------------------------------
 
 create or replace view mthspl_prod_v as
 select
@@ -741,7 +626,7 @@ select
   p.name,
   p.suppress,
   p.ambiguity_flag,
-   (select coalesce(jsonb_agg(distinct uniis_str(mp.rxaui)), '[]'::jsonb) from mthspl_prod mp where mp.rxaui = p.rxaui) prod_uniis,
+  (select coalesce(jsonb_agg(distinct uniis_str(mp.rxaui)), '[]'::jsonb) from mthspl_prod mp where mp.rxaui = p.rxaui) prod_uniis,
   (select coalesce(jsonb_agg(distinct spl_set_id), '[]'::jsonb) from mthspl_prod_setid mps where mps.prod_rxaui = p.rxaui) set_ids,
   (select coalesce(jsonb_agg(distinct label_type), '[]'::jsonb) from mthspl_prod_labeltype where prod_rxaui = p.rxaui) label_types,
   (select coalesce(jsonb_agg(distinct labeler), '[]'::jsonb) from mthspl_prod_labeler where prod_rxaui = p.rxaui) labelers,
@@ -773,10 +658,9 @@ where p.rxaui in (
 )
 ;
 
---view that generalizes rxcuis from drug
 create or replace view drug_generalized_v as
 select
-  d.rxcui rxcui,
+  d.rxcui,
   (
     select rxcui1
     from rxnrel rel
@@ -786,9 +670,9 @@ select
   case when d.tty = 'SCD'
     then d.rxcui
     else (
-      select dtd.rxcui2
+      select dtd.scd_rxcui
       from sbd_scd dtd
-      where dtd.rxcui1 = d.rxcui
+      where dtd.sbd_rxcui = d.rxcui
     )
   end generic_rxcui,
   case when d.tty = 'SCD'
@@ -803,20 +687,26 @@ select
         from rxnrel rel
         where rel.rela = 'quantified_form_of'
         and rel.rxcui2 in (
-          select dtd.rxcui2
-         from sbd_scd dtd
-         where dtd.rxcui1 = d.rxcui
+          select dtd.scd_rxcui
+          from sbd_scd dtd
+          where dtd.sbd_rxcui = d.rxcui
        )
     )
   end generic_unquantified_rxcui
 from drug_v d
 ;
+comment on view drug_generalized_v is 'drugs with non-quantified, generic, and non-quantified generic variants';
 
 create materialized view drug_generalized_mv as
-  select * from drug_generalized_v;
-
+select * from drug_generalized_v
+with no data
+;
 create unique index ix_druggeneral_rxcui on drug_generalized_mv(rxcui);
 
+
+create or replace function drug_name(p_rxcui varchar) returns varchar as $$
+select d.name from drug_v d where d.rxcui = p_rxcui;
+$$ language sql;
 
 create or replace view mthspl_mktcode_prod_drug_v as
 select
@@ -1135,14 +1025,13 @@ join mthspl_prod p on p.rxaui = ps.prod_rxaui
 left join drug_v d on d.rxcui = p.rxcui
 left join drug_generalized_mv dgm on d.rxcui = dgm.rxcui
 where p.rxaui in (
-    select mpl.prod_rxaui
-    from mthspl_prod_labeltype mpl
-    where mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
+  select mpl.prod_rxaui
+  from mthspl_prod_labeltype mpl
+  where mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
 )
 group by ps.spl_set_id
 ;
 
---created view that joins ndc to prod, and takes information from drug, 168,872
 create or replace view mthspl_ndc_prod_drug_v as
 select
   pn.two_part_ndc                                               short_ndc,
@@ -1226,7 +1115,6 @@ left join drug_generalized_mv dgm on d.rxcui = dgm.rxcui
 group by pn.two_part_ndc
 ;
 
---66,816 distinct rx short ndc
 create or replace view mthspl_ndc_rxprod_drug_v as
 select
   pn.two_part_ndc                                               short_ndc,
@@ -1308,35 +1196,37 @@ join mthspl_prod p on p.rxaui = pn.prod_rxaui
 left join drug_v d on d.rxcui = p.rxcui
 left join drug_generalized_mv dgm on d.rxcui = dgm.rxcui
 where p.rxaui in (
-    select mpl.prod_rxaui
-    from mthspl_prod_labeltype mpl
-    where mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
+  select mpl.prod_rxaui
+  from mthspl_prod_labeltype mpl
+  where mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or mpl.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
 )
 group by pn.two_part_ndc
 ;
 
-create or replace view scd_unii_v as --62,476
-  select scd.rxcui as scd_rxcui, iu.unii as unii
-  from scdc_scd
-  join scd on scdc_scd.scd_rxcui = scd.rxcui
-  join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
-  join ingr i on i.rxcui = scdc.ingr_rxcui
-  join ingr_unii iu on iu.ingr_rxcui = i.rxcui
-  union
-  select scd.rxcui as scd_rxcui, piu.unii as unii
-  from scdc_scd
-  join scd on scdc_scd.scd_rxcui = scd.rxcui
-  join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
-  join pin i on i.rxcui = scdc.pin_rxcui
-  join pin_unii piu on piu.pin_rxcui = i.rxcui
+create or replace view scd_unii_v as
+select scd.rxcui as scd_rxcui, iu.unii as unii
+from scdc_scd
+join scd on scdc_scd.scd_rxcui = scd.rxcui
+join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
+join "in" i on i.rxcui = scdc.in_rxcui
+join in_unii iu on iu.in_rxcui = i.rxcui
+union
+select scd.rxcui as scd_rxcui, piu.unii as unii
+from scdc_scd
+join scd on scdc_scd.scd_rxcui = scd.rxcui
+join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
+join pin i on i.rxcui = scdc.pin_rxcui
+join pin_unii piu on piu.pin_rxcui = i.rxcui
 ;
+
+-- MATERIALIZED VIEWS
 
 create materialized view ndc_scd_mv as
 select distinct pc.two_part_ndc, d.rxcui scd_rxcui
 from mthspl_prod_ndc pc
 join mthspl_prod p on p.rxaui = pc.prod_rxaui
 join scd d on d.rxcui = p.rxcui
+with no data
 ;
 create unique index ix_ndcscdmv_ndccui on ndc_scd_mv (two_part_ndc, scd_rxcui);
 create index ix_ndcscdmv_cui on ndc_scd_mv (scd_rxcui);
-

@@ -179,3 +179,22 @@ where not exists (
 )
 and scdc.pin_rxcui is null
 ;
+
+/* These tables are not needed currently, but are useful to look for anomalies.
+create table ingrset_ingr (
+  ingrset_rxcui varchar(12) not null,
+  ingr_rxcui varchar(12) not null,
+  constraint pk_ingrsetingr_cui primary key (ingrset_rxcui, ingr_rxcui),
+  constraint fk_ingrsetingr_ingrset foreign key (ingrset_rxcui) references ingrset,
+  constraint fk_ingrsetingr_ingr foreign key (ingr_rxcui) references ingr
+);
+
+create table ingrset_pin (
+  ingrset_rxcui varchar(12) not null,
+  pin_rxcui varchar(12) not null,
+  constraint pk_ingrsetpin_cui primary key (ingrset_rxcui, pin_rxcui),
+  constraint fk_ingrsetpin_ingrset foreign key (ingrset_rxcui) references ingrset,
+  constraint fk_ingrsetpin_pin foreign key (pin_rxcui) references pin
+);
+*/
+
