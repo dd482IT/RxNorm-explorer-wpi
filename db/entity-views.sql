@@ -19,7 +19,7 @@ join df on df.rxcui = scd.df_rxcui
 
 -- TODO: Define more drug related isolated entities above, then include in ndc_isoents_mv below.
 
-create materialized view ents_ndc_mv as
+create materialized view relents_ndc_mv as
 select
   pc.two_part_ndc ndc,
   (select coalesce(json_agg(d.*), '[]'::json) from ent_scd_v d where d.rxcui in (
@@ -29,4 +29,4 @@ from mthspl_prod_ndc pc
 join mthspl_prod p on p.rxaui = pc.prod_rxaui
 group by pc.two_part_ndc
 ;
-create unique index ix_ndcisoents_ndc on ents_ndc_mv (ndc);
+create unique index ix_relentsndc_ndc on relents_ndc_mv (ndc);

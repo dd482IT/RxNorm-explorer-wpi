@@ -15,7 +15,7 @@ select
   c.rxaui,
   c.rxcui,
   case when c.code <> 'NOCODE' then c.code end,
-  case when c.tty = 'MTH_RXN_DP' then 1 else 0 end,
+  c.tty = 'MTH_RXN_DP',
   c.str as name,
   c.suppress,
   (select a.atv from rxnsat a where a.rxaui = c.rxaui and a.atn = 'AMBIGUITY_FLAG') ambiguity_flag
@@ -29,9 +29,11 @@ from mthspl_sub s
 join rxnsat a on a.rxaui = s.rxaui and a.atn = 'SPL_SET_ID'
 ;
 
-insert into mthspl_ingrtype (ingr_type, description) values('I', 'inactive ingredient');
-insert into mthspl_ingrtype (ingr_type, description) values('A', 'active ingredient');
-insert into mthspl_ingrtype (ingr_type, description) values('M', 'active moiety');
+insert into mthspl_ingr_type (ingr_type, description) values
+  ('I', 'inactive ingredient'),
+  ('A', 'active ingredient'),
+  ('M', 'active moiety')
+;
 
 insert into mthspl_prod_sub (prod_rxaui, ingr_type, sub_rxaui)
 select
@@ -76,11 +78,28 @@ from mthspl_prod p
 join rxnsat a on a.rxaui = p.rxaui and a.atn = 'LABEL_TYPE'
 ;
 
-insert into mthspl_prod_mktcat
+insert into mthspl_mktcat (name)
+select distinct a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_CATEGORY'
+;
+
+insert into mthspl_prod_mktcat (prod_rxaui, mkt_cat)
 select p.rxaui, a.atv
 from mthspl_prod p
 join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_CATEGORY'
 ;
+
+insert into mthspl_prod_mktcat_code(prod_rxaui, mkt_cat, code, num)
+select pa.rxaui, mc.name, pa.atv, regexp_replace(pa.atv, '^[A-Za-z]+', '')
+from (
+  select p.rxaui, a.atn, a.atv
+  from mthspl_prod p
+  join rxnsat a on a.rxaui = p.rxaui
+) pa
+join mthspl_mktcat mc on mc.name = pa.atn
+;
+
 
 insert into mthspl_prod_mktstat
 select p.rxaui, a.atv
@@ -112,43 +131,17 @@ from mthspl_prod p
 join rxnsat a on a.rxaui = p.rxaui and a.atn = 'NHRIC'
 ;
 
-insert into mthspl_mktcat (name) values('NDA');
-insert into mthspl_mktcat (name) values('ANDA');
-insert into mthspl_mktcat (name) values('NADA');
-insert into mthspl_mktcat (name) values('CONDITIONAL_NADA');
-insert into mthspl_mktcat (name) values('NDA_AUTHORIZED_GENERIC');
-insert into mthspl_mktcat (name) values('ANADA');
-insert into mthspl_mktcat (name) values('BLA');
-insert into mthspl_mktcat (name) values('DIETARY_SUPPLEMENT');
-insert into mthspl_mktcat (name) values('EXEMPT_DEVICE');
-insert into mthspl_mktcat (name) values('OTC_MONOGRAPH_FINAL');
-insert into mthspl_mktcat (name) values('OTC_MONOGRAPH_NOT_FINAL');
-insert into mthspl_mktcat (name) values('LEGALLY_MARKETED_UNAPPROVED_NEW_ANIMAL_DRUGS_FOR_MINOR_SPECIES');
-insert into mthspl_mktcat (name) values('PREMARKET_APPLICATION');
-insert into mthspl_mktcat (name) values('PREMARKET_NOTIFICATION');
-insert into mthspl_mktcat (name) values('UNAPPROVED_DRUG_OTHER');
-insert into mthspl_mktcat (name) values('UNAPPROVED_HOMEOPATHIC');
-insert into mthspl_mktcat (name) values('UNAPPROVED_MEDICAL_GAS');
-
-insert into mthspl_prod_mktcat_code(prod_rxaui, mkt_cat, code)
-select pa.rxaui, mc.name, pa.atv
-from (
-  select p.rxaui, a.atn, a.atv
-  from mthspl_prod p
-  join rxnsat a on a.rxaui = p.rxaui
-) pa
-join mthspl_mktcat mc on mc.name = pa.atn
+insert into mthspl_pillattr (attr) values
+  ('IMPRINT_CODE'),
+  ('COATING'),
+  ('COLOR'),
+  ('COLORTEXT'),
+  ('SCORE'),
+  ('SHAPE'),
+  ('SHAPETEXT'),
+  ('SIZE'),
+  ('SYMBOL')
 ;
-
-insert into mthspl_pillattr (attr) values('IMPRINT_CODE');
-insert into mthspl_pillattr (attr) values('COATING');
-insert into mthspl_pillattr (attr) values('COLOR');
-insert into mthspl_pillattr (attr) values('COLORTEXT');
-insert into mthspl_pillattr (attr) values('SCORE');
-insert into mthspl_pillattr (attr) values('SHAPE');
-insert into mthspl_pillattr (attr) values('SHAPETEXT');
-insert into mthspl_pillattr (attr) values('SIZE');
-insert into mthspl_pillattr (attr) values('SYMBOL');
 
 insert into mthspl_prod_pillattr(prod_rxaui, attr, attr_val)
 select pa.rxaui, a.attr, pa.atv
@@ -159,19 +152,7 @@ from (
 ) pa
 join mthspl_pillattr a on a.attr = pa.atn
 ;
--------------------------------------------------------------------------------------------------------------------
 
---code snippet for quantified
-/*
-case when exists(
-    select 1 from rxnrel rel
-    where rel.rela = 'has_quantified_form' and rel.rxcui1 = c.rxcui
-    ) then 'Y'
-    when exists(select 1 from rxnrel rel
-    where rel.rela = 'quantified_form_of' and rel.rxcui1 = c.rxcui
-    ) then 'N'
-    end quantified,
-*/
 
 insert into df (rxcui, rxaui, name, origin, code)
 select
@@ -186,19 +167,14 @@ and c.tty = 'DF'
 ;
 
 insert into dfg (rxcui, rxaui, name)
-select
-  c.rxcui,
-  c.rxaui,
-  c.str
+select c.rxcui, c.rxaui, c.str
 from rxnconso c
 where c.sab = 'RXNORM'
 and c.tty = 'DFG'
 ;
 
 insert into df_dfg (df_rxcui, dfg_rxcui)
-select
-  df.rxcui,
-  dfg.rxcui
+select df.rxcui, dfg.rxcui
 from rxnrel r
 join df on df.rxcui = r.rxcui1
 join dfg on dfg.rxcui = r.rxcui2
@@ -207,47 +183,33 @@ and r.rela = 'inverse_isa'
 ;
 
 insert into et (rxcui, rxaui, name)
-select
-  c.rxcui,
-  c.rxaui,
-  c.str
+select c.rxcui, c.rxaui, c.str
 from rxnconso c
 where c.sab = 'RXNORM'
 and c.tty = 'ET'
 ;
 
-
-insert into ingr (rxcui, rxaui, name, suppress)
-select distinct
-  c.rxcui,
-  c.rxaui,
-  c.str as name,
-  c.suppress
+insert into "in" (rxcui, rxaui, name, suppress)
+select distinct c.rxcui, c.rxaui, c.str as name, c.suppress
 from rxnconso c
 where sab='RXNORM'
 and tty = 'IN'
 ;
 
-insert into pin (rxcui, rxaui, name, suppress)
+insert into pin (rxcui, rxaui, name, in_rxcui, suppress)
 select distinct
   c.rxcui,
   c.rxaui,
   c.str as name,
+  (select i.rxcui
+   from rxnrel r
+   join "in" i on i.rxcui = r.rxcui1
+   where r.sab = 'RXNORM' and r.rela = 'form_of'
+     and r.rxcui2 = c.rxcui) in_rxcui,
   c.suppress
 from rxnconso c
 where sab='RXNORM'
 and tty = 'PIN'
-;
-
-insert into ingr_pin (ingr_rxcui, pin_rxcui)
-select
-  i.rxcui,
-  p.rxcui
-from rxnrel r
-join ingr i on i.rxcui = r.rxcui1
-join pin p on p.rxcui = r.rxcui2
-where r.sab = 'RXNORM'
-and r.rela = 'form_of'
 ;
 
 insert into min (rxcui, rxaui, name, suppress)
@@ -261,11 +223,9 @@ where sab='RXNORM'
 and tty = 'MIN'
 ;
 
-insert into ingr_unii(ingr_rxcui, unii)
-select distinct
-  i.rxcui,
-  s.unii
-from ingr i
+insert into in_unii(in_rxcui, unii)
+select distinct i.rxcui, s.unii
+from "in" i
 join mthspl_sub s on s.rxcui = i.rxcui
 where s.unii is not null
 ;
@@ -279,9 +239,8 @@ join mthspl_sub s on s.rxcui = pi.rxcui
 where s.unii is not null
 ;
 
---temp table
-insert into temp_ingrset (drug_rxcui, ingr_rxcui, ingr_rxaui, ingr_name, ingr_suppress, ingr_tty)
-with scd_nomin as ( -- SCDs with no MIN
+insert into temp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
+with scd_nomin as ( -- SCDs with no multi-ingredient
   select scd.rxcui
   from rxnconso scd
   where scd.sab = 'RXNORM' and scd.tty = 'SCD' and scd.rxcui not in (
@@ -294,7 +253,7 @@ with scd_nomin as ( -- SCDs with no MIN
    and min.sab = 'RXNORM' and min.tty = 'MIN'
   )
 ),
-scd_scdc as ( -- SCDCs that have no MIN
+scd_scdc as ( -- SCDCs that have no multi-ingredient
   select scdc.rxcui scdc_rxcui, scdc.str scdc_str, r.rela, scd.rxcui scd_rxcui, scd.str scd_str
   from rxnrel r
   join rxnconso scd on scd.rxcui = r.rxcui1
@@ -319,7 +278,7 @@ lateral (
 ) i
 ;
 
-insert into temp_ingrset (drug_rxcui, ingr_rxcui, ingr_rxaui, ingr_name, ingr_suppress, ingr_tty)
+insert into temp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
 select scd.rxcui, m.rxcui, m.rxaui, m.name, m.suppress, 'MIN'
 from rxnrel r
 join min m on m.rxcui = r.rxcui2
@@ -329,14 +288,14 @@ and scd.tty = 'SCD' and scd.sab = 'RXNORM'
 ;
 
 insert into ingrset (rxcui, rxaui, name, suppress, tty)
-select distinct ingr_rxcui, ingr_rxaui, ingr_name, ingr_suppress, ingr_tty from temp_ingrset
+select distinct ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty
+from temp_scd_ingrset
 ;
 
-insert into scd (rxcui, rxaui, tty, name, prescribable_name, rxterm_form, df_rxcui, ingrset_rxcui, avail_strengths, qual_distinct, suppress, quantity, human_drug, vet_drug, unquantified_form_rxcui)
+insert into scd (rxcui, rxaui, name, prescribable_name, rxterm_form, df_rxcui, ingrset_rxcui, avail_strengths, qual_distinct, suppress, quantity, human_drug, vet_drug, unquantified_form_rxcui)
 select
   c.rxcui,
   c.rxaui,
-  c.tty,
   c.str,
   (select psn.str from rxnconso psn where psn.tty = 'PSN' and psn.rxcui = c.rxcui) psn,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXTERM_FORM'),
@@ -346,20 +305,14 @@ select
    where r.sab = 'RXNORM' and r.rela = 'dose_form_of'
    and r.rxcui1 = c.rxcui
   ),
-  (select ingr_rxcui from temp_ingrset where drug_rxcui = c.rxcui) ingr_rxcui,
+  (select ingrset_rxcui from temp_scd_ingrset where drug_rxcui = c.rxcui) ingrset_rxcui,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_AVAILABLE_STRENGTH'),
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUALITATIVE_DISTINCTION'),
   c.suppress,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUANTITY'),
-   case when
-     exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
-    then 1
-   else 0 end,
-   case when
-    exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_VET_DRUG')
-    then 1
-   else 0 end,
-   (select scd2.rxcui
+  exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG'),
+  exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_VET_DRUG'),
+  (select scd2.rxcui
    from rxnrel r
    join rxnconso scd2 on scd2.rxcui = r.rxcui1
     where r.sab = 'RXNORM' and r.rela = 'quantified_form_of'
@@ -371,11 +324,10 @@ where c.sab='RXNORM'
 and c.tty = 'SCD'
 ;
 
-insert into sbd (rxcui, rxaui, tty, name, prescribable_name, rxterm_form, df_rxcui, avail_strengths, qual_distinct, suppress, quantity, human_drug, vet_drug, unquantified_form_rxcui)
+insert into sbd (rxcui, rxaui, name, prescribable_name, rxterm_form, df_rxcui, avail_strengths, qual_distinct, suppress, quantity, human_drug, vet_drug, unquantified_form_rxcui)
 select
   c.rxcui,
   c.rxaui,
-  c.tty,
   c.str,
   (select psn.str from rxnconso psn where psn.tty = 'PSN' and psn.rxcui = c.rxcui) psn,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXTERM_FORM'),
@@ -389,16 +341,8 @@ select
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUALITATIVE_DISTINCTION'),
   c.suppress,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUANTITY'),
-  case when exists (
-    select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG'
-  )
-  then 1
-  else 0 end,
-  case when exists (
-    select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_VET_DRUG'
-  )
-  then 1
-  else 0 end,
+  exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG'),
+  exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_VET_DRUG'),
   (select sbd2.rxcui
    from rxnrel r
    join rxnconso sbd2 on sbd2.rxcui = r.rxcui1
@@ -407,16 +351,13 @@ select
    and c.rxcui = r.rxcui2
   )
 from rxnconso c
-where
-  c.sab='RXNORM' and
-  c.tty = 'SBD'
+where c.sab='RXNORM' and c.tty = 'SBD'
 ;
 
-insert into gpck (rxcui, rxaui, tty, name, prescribable_name, df_rxcui, suppress, human_drug)
+insert into gpck (rxcui, rxaui, name, prescribable_name, df_rxcui, suppress, human_drug)
 select
   c.rxcui,
   c.rxaui,
-  c.tty,
   c.str,
   (select psn.str from rxnconso psn where psn.tty = 'PSN' and psn.rxcui = c.rxcui) psn,
   (select df.rxcui
@@ -426,22 +367,15 @@ select
    and c.rxcui = r.rxcui1
   ),
   c.suppress,
-  case when exists (
-    select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG'
-  )
-  then 1
-  else 0 end
+  exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
 from rxnconso c
-where
-  c.sab='RXNORM' and
-  c.tty = 'GPCK'
+where c.sab='RXNORM' and c.tty = 'GPCK'
 ;
 
-insert into bpck (rxcui, rxaui, tty, name, prescribable_name, df_rxcui, suppress, human_drug)
+insert into bpck (rxcui, rxaui, name, prescribable_name, df_rxcui, suppress, human_drug)
 select
   c.rxcui,
   c.rxaui,
-  c.tty,
   c.str,
   (select psn.str from rxnconso psn where psn.tty = 'PSN' and psn.rxcui = c.rxcui) psn,
   (select df.rxcui
@@ -451,15 +385,9 @@ select
    and c.rxcui = r.rxcui1
   ),
   c.suppress,
-  case when exists (
-    select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG'
-  )
-  then 1
-  else 0 end
+  exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
 from rxnconso c
-where
-  c.sab='RXNORM' and
-  c.tty = 'BPCK'
+where c.sab='RXNORM' and c.tty = 'BPCK'
 ;
 
 insert into bn (rxcui, rxaui, name, rxn_cardinality, reformulated_to_rxcui)
@@ -473,14 +401,13 @@ select
    join rxnconso c2 on c2.rxcui = r.rxcui2
    where r.sab = 'RXNORM' and r.rela = 'reformulated_to'
    and c2.sab = 'RXNORM' and c2.tty = 'BN'
-   and c.rxcui = r.rxcui1
-  )
+   and c.rxcui = r.rxcui1)
 from rxnconso c
 where c.tty = 'BN'
 and sab = 'RXNORM'
 ;
 
-insert into scdc (rxcui, rxaui, name, boss_active_ingr_name, boss_active_moi_name, boss_source, rxn_in_expressed_flag, strength, boss_str_num_unit, boss_str_num_val, boss_str_denom_unit, boss_str_denom_val, ingr_rxcui, pin_rxcui)
+insert into scdc (rxcui, rxaui, name, boss_active_ingr_name, boss_active_moi_name, boss_source, rxn_in_expressed_flag, strength, boss_str_num_unit, boss_str_num_val, boss_str_denom_unit, boss_str_denom_val, in_rxcui, pin_rxcui)
 select
   c.rxcui,
   c.rxaui,
@@ -496,16 +423,14 @@ select
   (select s.atv from rxnsat s where s.atn = 'RXN_BOSS_STRENGTH_DENOM_VALUE' and s.rxcui = c.rxcui),
   (select i.rxcui
    from rxnrel r
-   join ingr i on i.rxcui = r.rxcui2
+   join "in" i on i.rxcui = r.rxcui2
    where r.rela = 'ingredient_of' and r.sab = 'RXNORM'
-   and r.rxcui1 = c.rxcui
-   ),
-   (select pin.rxcui
+   and r.rxcui1 = c.rxcui) in_rxcui,
+  (select pin.rxcui
    from rxnrel r
    join pin on pin.rxcui = r.rxcui2
    where r.rela = 'precise_ingredient_of' and r.sab = 'RXNORM'
-   and r.rxcui1 = c.rxcui
-   )
+   and r.rxcui1 = c.rxcui) pin_rxcui
 from rxnconso c
 where c.tty = 'SCDC' and c.sab = 'RXNORM'
 ;
@@ -567,18 +492,17 @@ select
   c.rxcui,
   c.rxaui,
   c.str,
-   (select df.rxcui
+  (select df.rxcui
    from rxnrel r
    join df on df.rxcui = r.rxcui2
    where r.sab = 'RXNORM' and r.rela = 'dose_form_of'
-   and c.rxcui = r.rxcui1
-  )
+   and c.rxcui = r.rxcui1) df_rxcui
 from rxnconso c
 where c.sab = 'RXNORM'
 and c.tty = 'SBDF'
 ;
 
-insert into sbdg (rxcui, rxaui, name, dfg_rxcui)
+insert into sbdg (rxcui, rxaui, name, dfg_rxcui, bn_rxcui)
 select
   c.rxcui,
   c.rxaui,
@@ -587,27 +511,26 @@ select
    from rxnrel r
    join dfg on dfg.rxcui = r.rxcui2
    where r.sab = 'RXNORM' and r.rela = 'doseformgroup_of'
-   and c.rxcui = r.rxcui1
-  )
+   and c.rxcui = r.rxcui1) dfg_rxcui,
+  (select r.rxcui2
+   from rxnrel r
+   where r.rxcui1 = c.rxcui and r.sab = 'RXNORM' and r.rela = 'ingredient_of')
 from rxnconso c
 where c.sab = 'RXNORM'
 and c.tty = 'SBDG'
 ;
 
 insert into sbdg_astr (sbdg_rxcui, RXN_AVAILABLE_STRENGTH)
-select
-  sbdg.rxcui,
-  s.atv
+select sbdg.rxcui, s.atv
 from rxnsat s
 join sbdg on sbdg.rxcui = s.rxcui
 where s.sab = 'RXNORM'
 and s.atn = 'RXN_AVAILABLE_STRENGTH'
 ;
 
-insert into scd_sy (drug_rxcui, drug_rxaui, synonym, sy_rxaui)
+insert into scd_sy (scd_rxcui, synonym, sy_rxaui)
 select
   cd.rxcui,
-  cd.rxaui,
   c1.str,
   c1.rxaui
 from rxnrel r
@@ -618,10 +541,9 @@ and r.sab = 'RXNORM' and c1.sab = 'RXNORM'
 and c1.tty = 'SY'
 ;
 
-insert into sbd_sy (drug_rxcui, drug_rxaui, synonym, sy_rxaui)
+insert into sbd_sy (sbd_rxcui, synonym, sy_rxaui)
 select
   bd.rxcui,
-  bd.rxaui,
   c1.str,
   c1.rxaui
 from rxnrel r
@@ -632,30 +554,12 @@ and r.sab = 'RXNORM' and c1.sab = 'RXNORM'
 and c1.tty = 'SY'
 ;
 
-insert into sbd_scd (rxcui1, rxcui2)
-select
-  rel.rxcui1,
-  rel.rxcui2
+insert into sbd_scd (sbd_rxcui, scd_rxcui)
+select rel.rxcui1, rel.rxcui2
 from rxnrel rel
 join sbd bd on bd.rxcui = rel.rxcui1
 join scd cd on cd.rxcui = rel.rxcui2
 where rel.rela = 'has_tradename'
-;
-
-insert into mthspl_prod_scd (prod_rxaui, scd_rxcui)
-select
-  p.rxaui,
-  cd.rxcui
-from mthspl_prod p
-join scd cd on cd.rxcui = p.rxcui
-;
-
-insert into mthspl_prod_sbd (prod_rxaui, sbd_rxcui)
-select
-  p.rxaui,
-  bd.rxcui
-from mthspl_prod p
-join sbd bd on bd.rxcui = p.rxcui
 ;
 
 insert into scdc_sbd (scdc_rxcui, sbd_rxcui)
@@ -691,14 +595,11 @@ where r.sab = 'RXNORM'
 and r.rela = 'tradename_of'
 ;
 
-
-insert into scdf_ingr (scdf_rxcui, ingr_rxcui)
-select
- scdf.rxcui,
- i.rxcui
+insert into scdf_in (scdf_rxcui, in_rxcui)
+select scdf.rxcui, i.rxcui
 from rxnrel r
 join scdf on scdf.rxcui = r.rxcui1
-join ingr i on i.rxcui = r.rxcui2
+join "in" i on i.rxcui = r.rxcui2
 where r.rela = 'ingredient_of'
 and r.sab = 'RXNORM'
 ;
@@ -736,21 +637,17 @@ where r.sab = 'RXNORM'
 and r.rela = 'tradename_of'
 ;
 
-insert into scdg_ingr (scdg_rxcui, ingr_rxcui)
-select
-  scdg.rxcui,
-  ingr.rxcui
+insert into scdg_in (scdg_rxcui, in_rxcui)
+select scdg.rxcui, i.rxcui
 from rxnrel r
 join scdg on scdg.rxcui = r.rxcui1
-join ingr on ingr.rxcui = r.rxcui2
+join "in" i on i.rxcui = r.rxcui2
 where r.rela = 'ingredient_of'
 and r.sab = 'RXNORM'
 ;
 
 insert into scdg_scd (scdg_rxcui, scd_rxcui)
-select
-  scdg.rxcui,
-  scd.rxcui
+select scdg.rxcui, scd.rxcui
 from rxnrel r
 join scdg on scdg.rxcui = r.rxcui1
 join scd on scd.rxcui = r.rxcui2
@@ -759,9 +656,7 @@ and r.rela = 'isa'
 ;
 
 insert into scdg_sbdg (scdg_rxcui, sbdg_rxcui)
-select
-  scdg.rxcui,
-  sbdg.rxcui
+select scdg.rxcui, sbdg.rxcui
 from rxnrel r
 join scdg on scdg.rxcui = r.rxcui1
 join sbdg on sbdg.rxcui = r.rxcui2
@@ -769,11 +664,8 @@ where r.sab = 'RXNORM'
 and r.rela = 'tradename_of'
 ;
 
-
 insert into gpck_bpck (gpck_rxcui, bpck_rxcui)
-select
-  g.rxcui,
-  b.rxcui
+select g.rxcui, b.rxcui
 from rxnrel r
 join gpck g on g.rxcui = r.rxcui1
 join bpck b on b.rxcui = r.rxcui2
@@ -782,9 +674,7 @@ and r.rela = 'tradename_of'
 ;
 
 insert into gpck_scd (gpck_rxcui, scd_rxcui)
-select
-  g.rxcui,
-  s.rxcui
+select g.rxcui, s.rxcui
 from rxnrel r
 join gpck g on g.rxcui = r.rxcui1
 join scd s on s.rxcui = r.rxcui2
@@ -793,9 +683,7 @@ and r.rela = 'contained_in'
 ;
 
 insert into bpck_scd (bpck_rxcui, scd_rxcui)
-select
-  b.rxcui,
-  s.rxcui
+select b.rxcui, s.rxcui
 from rxnrel r
 join bpck b on b.rxcui = r.rxcui1
 join scd s on s.rxcui = r.rxcui2
@@ -804,9 +692,7 @@ and r.rela = 'contained_in'
 ;
 
 insert into bpck_sbd (bpck_rxcui, sbd_rxcui)
-select
-  b.rxcui,
-  s.rxcui
+select b.rxcui, s.rxcui
 from rxnrel r
 join bpck b on b.rxcui = r.rxcui1
 join sbd s on s.rxcui = r.rxcui2
@@ -814,10 +700,8 @@ where r.sab = 'RXNORM'
 and r.rela = 'contained_in'
 ;
 
-insert into sbd_bn (sbd_rxcui, brand_rxcui)
-select
-  s.rxcui,
-  b.rxcui
+insert into sbd_bn (sbd_rxcui, bn_rxcui)
+select s.rxcui, b.rxcui
 from rxnrel r
 join sbd s on s.rxcui = r.rxcui1
 join bn b on b.rxcui = r.rxcui2
@@ -825,10 +709,8 @@ where r.sab = 'RXNORM'
 and r.rela = 'ingredient_of'
 ;
 
-insert into sbdc_bn (sbdc_rxcui, brand_rxcui)
-select
-  s.rxcui,
-  b.rxcui
+insert into sbdc_bn (sbdc_rxcui, bn_rxcui)
+select s.rxcui, b.rxcui
 from rxnrel r
 join sbdc s on s.rxcui = r.rxcui1
 join bn b on b.rxcui = r.rxcui2
@@ -837,9 +719,7 @@ and r.rela = 'ingredient_of'
 ;
 
 insert into sbdc_sbd (sbdc_rxcui, sbd_rxcui)
-select
-  s.rxcui,
-  b.rxcui
+select s.rxcui, b.rxcui
 from rxnrel r
 join sbdc s on s.rxcui = r.rxcui1
 join sbd b on b.rxcui = r.rxcui2
@@ -847,10 +727,8 @@ where r.sab = 'RXNORM'
 and r.rela = 'consists_of'
 ;
 
-insert into sbdf_bn (sbdf_rxcui, brand_rxcui)
-select
-  f.rxcui,
-  b.rxcui
+insert into sbdf_bn (sbdf_rxcui, bn_rxcui)
+select f.rxcui, b.rxcui
 from rxnrel r
 join sbdf f on f.rxcui = r.rxcui1
 join bn b on b.rxcui = r.rxcui2
@@ -859,9 +737,7 @@ and r.rela = 'ingredient_of'
 ;
 
 insert into sbdf_sbdg (sbdf_rxcui, sbdg_rxcui)
-select
-  f.rxcui,
-  g.rxcui
+select f.rxcui, g.rxcui
 from rxnrel r
 join sbdf f on f.rxcui = r.rxcui1
 join sbdg g on g.rxcui = r.rxcui2
@@ -870,9 +746,7 @@ and r.rela = 'inverse_isa'
 ;
 
 insert into sbdf_sbd (sbdf_rxcui, sbd_rxcui)
-select
-  f.rxcui,
-  d.rxcui
+select f.rxcui, d.rxcui
 from rxnrel r
 join sbdf f on f.rxcui = r.rxcui1
 join sbd d on d.rxcui = r.rxcui2
@@ -880,21 +754,8 @@ where r.sab = 'RXNORM'
 and r.rela = 'isa'
 ;
 
-insert into sbdg_bn (sbdg_rxcui, brand_rxcui)
-select
-  g.rxcui,
-  b.rxcui
-from rxnrel r
-join sbdg g on g.rxcui = r.rxcui1
-join bn b on b.rxcui = r.rxcui2
-where r.sab = 'RXNORM'
-and r.rela = 'ingredient_of'
-;
-
 insert into sbdg_sbd (sbdg_rxcui, sbd_rxcui)
-select
-  g.rxcui,
-  d.rxcui
+select g.rxcui, d.rxcui
 from rxnrel r
 join sbdg g on g.rxcui = r.rxcui1
 join sbd d on d.rxcui = r.rxcui2
@@ -902,28 +763,24 @@ where r.sab = 'RXNORM'
 and r.rela = 'isa'
 ;
 
-insert into bn_ingr (brand_rxcui, ingr_rxcui)
-select
-  b.rxcui,
-  i.rxcui
+insert into bn_in (bn_rxcui, in_rxcui)
+select b.rxcui, i.rxcui
 from rxnrel r
 join bn b on b.rxcui = r.rxcui1
-join ingr i on i.rxcui = r.rxcui2
+join "in" i on i.rxcui = r.rxcui2
 where r.sab = 'RXNORM'
 and r.rela = 'has_tradename'
 ;
 
-insert into bn_pin (brand_rxcui, pin_rxcui)
-select
-  b.rxcui,
-  p.rxcui
+insert into bn_pin (bn_rxcui, pin_rxcui)
+select b.rxcui, p.rxcui
 from rxnrel r
 join bn b on b.rxcui = r.rxcui1
 join pin p on p.rxcui = r.rxcui2
 where r.sab = 'RXNORM'
 and r.rela = 'precise_ingredient_of'
 ;
---------------------------------------ATC SECTION------------------------------------------------
+
 insert into atc_drug_class(rxcui, rxaui, atc_code, drug_class, drug_class_level)
 select distinct
   c.rxcui,
@@ -936,3 +793,34 @@ join rxnsat s on s.rxaui = c.rxaui
 where s.sab = 'ATC'
 and s.atn = 'IS_DRUG_CLASS'
 ;
+
+-- Add some linkages between sab=RXNORM and sab=MTHSPL.
+
+insert into mthspl_prod_scd (prod_rxaui, scd_rxcui)
+select p.rxaui, cd.rxcui
+from mthspl_prod p
+join scd cd on cd.rxcui = p.rxcui
+;
+
+insert into mthspl_prod_sbd (prod_rxaui, sbd_rxcui)
+select p.rxaui, bd.rxcui
+from mthspl_prod p
+join sbd bd on bd.rxcui = p.rxcui
+;
+
+insert into mthspl_sub_in (sub_rxaui, in_rxcui)
+select s.rxaui, i.rxcui
+from mthspl_sub s
+join "in" i on i.rxcui = s.rxcui
+;
+
+insert into mthspl_sub_pin (sub_rxaui, pin_rxcui)
+select s.rxaui, i.rxcui
+from mthspl_sub s
+join pin i on i.rxcui = s.rxcui
+;
+
+-- materialized views
+refresh materialized view drug_generalized_mv;
+refresh materialized view ndc_scd_mv;
+
