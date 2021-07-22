@@ -1,158 +1,33 @@
-insert into mthspl_sub (rxaui, rxcui, unii, biologic_code, name, suppress)
+-- Temporary-use tables to assist with staged loading.
+
+create table tmp_mthspl_sub as
 select
   c.rxaui,
   c.rxcui,
-  case when length(c.code) = 10 then c.code end,
-  case when length(c.code) >= 17 then c.code end,
+  case when length(c.code) = 10 then c.code end unii,
+  case when length(c.code) >= 17 then c.code end biologic_code,
   c.str as name,
   c.suppress
 from rxnconso c
 where c.sab = 'MTHSPL' and c.tty = 'SU'
 ;
+create index ix_tmpmthsplsub_aui on tmp_mthspl_sub (rxaui);
+create index ix_tmpmthsplsub_cui on tmp_mthspl_sub (rxcui);
+create index ix_tmpmthsplsub_unii on tmp_mthspl_sub (unii);
 
-insert into mthspl_prod (rxaui, rxcui, code, rxnorm_created, name, suppress, ambiguity_flag)
-select
-  c.rxaui,
-  c.rxcui,
-  case when c.code <> 'NOCODE' then c.code end,
-  c.tty = 'MTH_RXN_DP',
-  c.str as name,
-  c.suppress,
-  (select a.atv from rxnsat a where a.rxaui = c.rxaui and a.atn = 'AMBIGUITY_FLAG') ambiguity_flag
-from rxnconso c
-where c.sab='MTHSPL' and c.tty in ('DP','MTH_RXN_DP')
-;
-
-insert into mthspl_sub_setid (sub_rxaui, set_id, suppress)
-select a.rxaui, a.atv, a.suppress
-from mthspl_sub s
-join rxnsat a on a.rxaui = s.rxaui and a.atn = 'SPL_SET_ID'
-;
-
-insert into mthspl_ingr_type (ingr_type, description) values
-  ('I', 'inactive ingredient'),
-  ('A', 'active ingredient'),
-  ('M', 'active moiety')
-;
-
-insert into mthspl_prod_sub (prod_rxaui, ingr_type, sub_rxaui)
-select
-  r.rxaui2 prod_rxaui,
-  case when r.rela='has_active_ingredient' then 'A'
-       when r.rela='has_active_moiety' then 'M'
-       else 'I' end ingr_type,
-  r.rxaui1 sub_rxaui
-from rxnrel r
-where
-  r.sab='MTHSPL' and
-  r.rela IN ('has_active_ingredient','has_inactive_ingredient','has_active_moiety')
-;
-
-insert into mthspl_prod_dmspl
-select distinct p.rxaui, a.atv dm_spl_id
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'DM_SPL_ID'
-;
-
-insert into mthspl_prod_setid
-select distinct p.rxaui, a.atv dm_spl_id
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'SPL_SET_ID'
-;
-
-insert into mthspl_prod_ndc
-select p.rxaui, a.atv full_ndc, regexp_replace(a.atv , '-[0-9]+$', '') two_part_ndc
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'NDC'
-;
-
-insert into mthspl_prod_labeler
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'LABELER'
-;
-
-insert into mthspl_prod_labeltype
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'LABEL_TYPE'
-;
-
-insert into mthspl_mktcat (name)
-select distinct a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_CATEGORY'
-;
-
-insert into mthspl_prod_mktcat (prod_rxaui, mkt_cat)
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_CATEGORY'
-;
-
-insert into mthspl_prod_mktcat_code(prod_rxaui, mkt_cat, code, num)
-select pa.rxaui, mc.name, pa.atv, regexp_replace(pa.atv, '^[A-Za-z]+', '')
-from (
-  select p.rxaui, a.atn, a.atv
-  from mthspl_prod p
-  join rxnsat a on a.rxaui = p.rxaui
-) pa
-join mthspl_mktcat mc on mc.name = pa.atn
-;
+create table tmp_scd_ingrset (
+  drug_rxcui varchar(12) not null,
+  ingrset_rxcui varchar(12) not null,
+  ingrset_rxaui varchar(12) not null,
+  ingrset_name varchar(2000) not null,
+  ingrset_suppress varchar(1) not null,
+  ingrset_tty varchar(100) not null,
+  constraint pk_tmpscdingrset primary key (drug_rxcui, ingrset_rxcui)
+);
+create index ix_tmpsingletoningrset on tmp_scd_ingrset (ingrset_rxcui);
 
 
-insert into mthspl_prod_mktstat
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_STATUS'
-;
-
-insert into mthspl_prod_mkteffth
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_EFFECTIVE_TIME_HIGH'
-;
-
-insert into mthspl_prod_mktefftl
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_EFFECTIVE_TIME_LOW'
-;
-
-insert into mthspl_prod_dcsa
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'DCSA'
-;
-
-insert into mthspl_prod_nhric
-select p.rxaui, a.atv
-from mthspl_prod p
-join rxnsat a on a.rxaui = p.rxaui and a.atn = 'NHRIC'
-;
-
-insert into mthspl_pillattr (attr) values
-  ('IMPRINT_CODE'),
-  ('COATING'),
-  ('COLOR'),
-  ('COLORTEXT'),
-  ('SCORE'),
-  ('SHAPE'),
-  ('SHAPETEXT'),
-  ('SIZE'),
-  ('SYMBOL')
-;
-
-insert into mthspl_prod_pillattr(prod_rxaui, attr, attr_val)
-select pa.rxaui, a.attr, pa.atv
-from (
-  select p.rxaui, a.atn, a.atv
-  from mthspl_prod p
-  join rxnsat a on a.rxaui = p.rxaui
-) pa
-join mthspl_pillattr a on a.attr = pa.atn
-;
-
+-- Load tables derived from sab=RXNORM subset of RxNorm.
 
 insert into df (rxcui, rxaui, name, origin, code)
 select
@@ -226,7 +101,7 @@ and tty = 'MIN'
 insert into in_unii(in_rxcui, unii)
 select distinct i.rxcui, s.unii
 from "in" i
-join mthspl_sub s on s.rxcui = i.rxcui
+join tmp_mthspl_sub s on s.rxcui = i.rxcui
 where s.unii is not null
 ;
 
@@ -235,11 +110,11 @@ select distinct
   pi.rxcui,
   s.unii
 from pin pi
-join mthspl_sub s on s.rxcui = pi.rxcui
+join tmp_mthspl_sub s on s.rxcui = pi.rxcui
 where s.unii is not null
 ;
 
-insert into temp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
+insert into tmp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
 with scd_nomin as ( -- SCDs with no multi-ingredient
   select scd.rxcui
   from rxnconso scd
@@ -278,7 +153,7 @@ lateral (
 ) i
 ;
 
-insert into temp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
+insert into tmp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
 select scd.rxcui, m.rxcui, m.rxaui, m.name, m.suppress, 'MIN'
 from rxnrel r
 join min m on m.rxcui = r.rxcui2
@@ -289,7 +164,7 @@ and scd.tty = 'SCD' and scd.sab = 'RXNORM'
 
 insert into ingrset (rxcui, rxaui, name, suppress, tty)
 select distinct ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty
-from temp_scd_ingrset
+from tmp_scd_ingrset
 ;
 
 insert into scd (rxcui, rxaui, name, prescribable_name, rxterm_form, df_rxcui, ingrset_rxcui, avail_strengths, qual_distinct, suppress, quantity, human_drug, vet_drug, unquantified_form_rxcui)
@@ -305,7 +180,7 @@ select
    where r.sab = 'RXNORM' and r.rela = 'dose_form_of'
    and r.rxcui1 = c.rxcui
   ),
-  (select ingrset_rxcui from temp_scd_ingrset where drug_rxcui = c.rxcui) ingrset_rxcui,
+  (select ingrset_rxcui from tmp_scd_ingrset where drug_rxcui = c.rxcui) ingrset_rxcui,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_AVAILABLE_STRENGTH'),
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUALITATIVE_DISTINCTION'),
   c.suppress,
@@ -794,28 +669,166 @@ where s.sab = 'ATC'
 and s.atn = 'IS_DRUG_CLASS'
 ;
 
--- Add some linkages between sab=RXNORM and sab=MTHSPL.
+-- Load tables derived from sab=MTHSPL subset of RxNorm.
 
-insert into mthspl_prod_scd (prod_rxaui, scd_rxcui)
-select p.rxaui, cd.rxcui
-from mthspl_prod p
-join scd cd on cd.rxcui = p.rxcui
+insert into mthspl_sub (rxaui, rxcui, unii, biologic_code, name, in_rxcui, pin_rxcui, suppress)
+select
+  s.rxaui,
+  s.rxcui,
+  s.unii,
+  s.biologic_code,
+  s.name,
+  (select i.rxcui from "in" i where i.rxcui = s.rxcui) in_rxcui,
+  (select i.rxcui from pin i where i.rxcui = s.rxcui) pin_rxcui,
+  s.suppress
+from tmp_mthspl_sub s
 ;
 
-insert into mthspl_prod_sbd (prod_rxaui, sbd_rxcui)
-select p.rxaui, bd.rxcui
-from mthspl_prod p
-join sbd bd on bd.rxcui = p.rxcui
+insert into mthspl_prod (rxaui, rxcui, code, rxnorm_created, name, scd_rxcui, sbd_rxcui, gpck_rxcui, bpck_rxcui, suppress, ambiguity_flag)
+select
+  c.rxaui,
+  c.rxcui,
+  case when c.code <> 'NOCODE' then c.code end,
+  c.tty = 'MTH_RXN_DP',
+  c.str as name,
+  (select d.rxcui from scd d where d.rxcui = c.rxcui) scd_rxcui,
+  (select d.rxcui from sbd d where d.rxcui = c.rxcui) sbd_rxcui,
+  (select d.rxcui from gpck d where d.rxcui = c.rxcui) gpck_rxcui,
+  (select d.rxcui from bpck d where d.rxcui = c.rxcui) bpck_rxcui,
+  c.suppress,
+  (select a.atv from rxnsat a where a.rxaui = c.rxaui and a.atn = 'AMBIGUITY_FLAG') ambiguity_flag
+from rxnconso c
+where c.sab='MTHSPL' and c.tty in ('DP','MTH_RXN_DP')
 ;
 
-insert into mthspl_sub_in (sub_rxaui, in_rxcui)
-select s.rxaui, i.rxcui
+insert into mthspl_sub_setid (sub_rxaui, set_id, suppress)
+select a.rxaui, a.atv, a.suppress
 from mthspl_sub s
-join "in" i on i.rxcui = s.rxcui
+join rxnsat a on a.rxaui = s.rxaui and a.atn = 'SPL_SET_ID'
 ;
 
-insert into mthspl_sub_pin (sub_rxaui, pin_rxcui)
-select s.rxaui, i.rxcui
-from mthspl_sub s
-join pin i on i.rxcui = s.rxcui
+insert into mthspl_ingr_type (ingr_type, description) values
+  ('I', 'inactive ingredient'),
+  ('A', 'active ingredient'),
+  ('M', 'active moiety')
 ;
+
+insert into mthspl_prod_sub (prod_rxaui, ingr_type, sub_rxaui)
+select
+  r.rxaui2 prod_rxaui,
+  case when r.rela='has_active_ingredient' then 'A'
+       when r.rela='has_active_moiety' then 'M'
+       else 'I' end ingr_type,
+  r.rxaui1 sub_rxaui
+from rxnrel r
+where
+  r.sab='MTHSPL' and
+  r.rela IN ('has_active_ingredient','has_inactive_ingredient','has_active_moiety')
+;
+
+insert into mthspl_prod_dmspl
+select distinct p.rxaui, a.atv dm_spl_id
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'DM_SPL_ID'
+;
+
+insert into mthspl_prod_setid
+select distinct p.rxaui, a.atv dm_spl_id
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'SPL_SET_ID'
+;
+
+insert into mthspl_prod_ndc
+select p.rxaui, a.atv full_ndc, regexp_replace(a.atv , '-[0-9]+$', '') two_part_ndc
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'NDC'
+;
+
+insert into mthspl_prod_labeler
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'LABELER'
+;
+
+insert into mthspl_prod_labeltype
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'LABEL_TYPE'
+;
+
+insert into mthspl_mktcat (name)
+select distinct a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_CATEGORY'
+;
+
+insert into mthspl_prod_mktcat (prod_rxaui, mkt_cat)
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_CATEGORY'
+;
+
+insert into mthspl_prod_mktcat_code(prod_rxaui, mkt_cat, code, num)
+select pa.rxaui, mc.name, pa.atv, regexp_replace(pa.atv, '^[A-Za-z]+', '')
+from (
+  select p.rxaui, a.atn, a.atv
+  from mthspl_prod p
+  join rxnsat a on a.rxaui = p.rxaui
+) pa
+join mthspl_mktcat mc on mc.name = pa.atn
+;
+
+insert into mthspl_prod_mktstat
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_STATUS'
+;
+
+insert into mthspl_prod_mkteffth
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_EFFECTIVE_TIME_HIGH'
+;
+
+insert into mthspl_prod_mktefftl
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'MARKETING_EFFECTIVE_TIME_LOW'
+;
+
+insert into mthspl_prod_dcsa
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'DCSA'
+;
+
+insert into mthspl_prod_nhric
+select p.rxaui, a.atv
+from mthspl_prod p
+join rxnsat a on a.rxaui = p.rxaui and a.atn = 'NHRIC'
+;
+
+insert into mthspl_pillattr (attr) values
+  ('IMPRINT_CODE'),
+  ('COATING'),
+  ('COLOR'),
+  ('COLORTEXT'),
+  ('SCORE'),
+  ('SHAPE'),
+  ('SHAPETEXT'),
+  ('SIZE'),
+  ('SYMBOL')
+;
+
+insert into mthspl_prod_pillattr(prod_rxaui, attr, attr_val)
+select pa.rxaui, a.attr, pa.atv
+from (
+  select p.rxaui, a.atn, a.atv
+  from mthspl_prod p
+  join rxnsat a on a.rxaui = p.rxaui
+) pa
+join mthspl_pillattr a on a.attr = pa.atn
+;
+
+drop table tmp_mthspl_sub;
+drop table tmp_scd_ingrset;
