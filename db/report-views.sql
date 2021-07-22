@@ -7,27 +7,10 @@ where ps.prod_rxaui = p_prod_rxaui and ps.ingr_type <> 'I'
 $$ language sql;
 
 create function drug_name(p_drug_rxcui varchar) returns varchar as $$
-select d.name
+select d.str
 from rxnconso d
 where d.rxcui = p_drug_rxcui and d.tty in ('SBD','SCD') and d.sab='RXNORM';
 $$ language sql;
-
-create or replace view scd_unii_v as
-select scd.rxcui as scd_rxcui, iu.unii as unii
-from scdc_scd
-join scd on scdc_scd.scd_rxcui = scd.rxcui
-join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
-join "in" i on i.rxcui = scdc.in_rxcui
-join in_unii iu on iu.in_rxcui = i.rxcui
-union
-select scd.rxcui as scd_rxcui, piu.unii as unii
-from scdc_scd
-join scd on scdc_scd.scd_rxcui = scd.rxcui
-join scdc on scdc_scd.scdc_rxcui = scdc.rxcui
-join pin i on i.rxcui = scdc.pin_rxcui
-join pin_unii piu on piu.pin_rxcui = i.rxcui
-;
-comment on view scd_unii_v is 'Pairs of SCD/UNII-CUI for both IN and PIN ingredients.';
 
 create or replace view drug_v as
 select
