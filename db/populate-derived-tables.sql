@@ -98,22 +98,6 @@ where sab='RXNORM'
 and tty = 'MIN'
 ;
 
-insert into in_unii(in_rxcui, unii)
-select distinct i.rxcui, s.unii
-from "in" i
-join tmp_mthspl_sub s on s.rxcui = i.rxcui
-where s.unii is not null
-;
-
-insert into pin_unii (pin_rxcui, unii)
-select distinct
-  pi.rxcui,
-  s.unii
-from pin pi
-join tmp_mthspl_sub s on s.rxcui = pi.rxcui
-where s.unii is not null
-;
-
 insert into tmp_scd_ingrset (drug_rxcui, ingrset_rxcui, ingrset_rxaui, ingrset_name, ingrset_suppress, ingrset_tty)
 with scd_nomin as ( -- SCDs with no multi-ingredient
   select scd.rxcui

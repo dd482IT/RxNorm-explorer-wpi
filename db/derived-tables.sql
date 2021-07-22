@@ -5,13 +5,6 @@ create table "in" (
   suppress varchar(1) not null
 );
 
-create table in_unii (
-  in_rxcui varchar(12) not null references "in",
-  unii varchar(10) not null,
-  constraint pk_inunii_cuiunii primary key (in_rxcui, unii)
-);
-create index ix_inunii_unii on in_unii(unii);
-
 create table pin (
   rxcui varchar(12) primary key,
   rxaui varchar(12) not null,
@@ -19,13 +12,6 @@ create table pin (
   in_rxcui varchar(12) not null references "in",
   suppress varchar(1) not null
 );
-
-create table pin_unii (
-  pin_rxcui varchar(12) not null references pin,
-  unii varchar(10) not null,
-  constraint pk_pinunii_cuiunii primary key (pin_rxcui, unii)
-);
-create index ix_pinunii_unii on pin_unii(unii);
 
 create table min (
   rxcui varchar(12) primary key,
