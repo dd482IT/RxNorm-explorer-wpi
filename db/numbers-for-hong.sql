@@ -142,19 +142,19 @@ and pmc.prod_rxaui in (
   )
 ;
 
---12,137
-select *
+--11,693
+select count(distinct application_code)
 from mthspl_mktcode_rxprod_drug_v mrd
 ;
 
---5,473
-select *
+--5,217
+select count(distinct application_code)
 from mthspl_mktcode_rxprod_drug_v mrd
 where jsonb_array_length(mrd.generic_names) > 1
 ;
 
---6,328
-select *
+--6,039
+select count(distinct application_code)
 from mthspl_mktcode_rxprod_drug_v mrd
 where jsonb_array_length(mrd.generic_names) = 1
 and mrd.generic_names <> '[]'::jsonb
@@ -177,20 +177,20 @@ and pn.prod_rxaui in (
   )
 ;
 
---68,816
-select *
-from mthspl_ndc_rxprod_drug_v
+--66,816
+select count(distinct n.short_ndc)
+from mthspl_ndc_rxprod_drug_v n
 ;
 
--- 63,351
-select *
+-- 62,782
+select count(distinct short_ndc)
 from mthspl_ndc_rxprod_drug_v nrd
 where jsonb_array_length(nrd.generic_names) = 1
 and nrd.generic_names <> '[]'::jsonb
 ;
 
---436
-select *
+--408
+select count(distinct short_ndc)
 from mthspl_ndc_rxprod_drug_v nrd
 where jsonb_array_length(nrd.generic_names) > 1
 ;
@@ -213,21 +213,21 @@ and ps.prod_rxaui in (
   )
 ;
 
---30,186
-select *
+--29,984
+select count(distinct set_id)
 from mthspl_rxprod_setid_drug_v rsd
 where jsonb_array_length(rsd.generic_names) = 1
 and rsd.generic_names <> '[]'::jsonb
 ;
 
---11,045
-select *
+--10,953
+select count(distinct set_id)
 from mthspl_rxprod_setid_drug_v rsd
 where jsonb_array_length(rsd.generic_names) > 1
 ;
 
 --43,445
-select *
+select count(distinct set_id)
 from mthspl_rxprod_setid_drug_v rsd
 ;
 ------END OF SET ID SECTION--------
@@ -271,6 +271,118 @@ select * from gpck where name ilike '%azithromycin%';
 --prod
 select * from mthspl_prod_v where name ilike '%abacavir%';
 select * from mthspl_prod_v where name ilike '%azithromycin%';
+
+
+select 'IN' rxnorm_tty, i.name rxnorm_ingr_name, s.name mthspl_ingr_name, s.unii, s.biologic_code
+from "in" i
+join mthspl_sub s on s.rxcui = i.rxcui
+union
+select 'PIN' rxnorm_tty, i.name rxnorm_ingr_name, s.name mthspl_ingr_name, s.unii, s.biologic_code
+from pin i
+join mthspl_sub s on s.rxcui = i.rxcui
+;
+
+--4,339 rows from sub not in "in"
+select *
+from mthspl_sub s
+where s.rxcui not in (
+  select rxcui from "in"
+);
+
+--18,379 rows from sub not in pin
+select *
+from mthspl_sub s
+where s.rxcui not in (
+  select rxcui from pin
+);
+
+--2,708 rows from IN not in sub, 10,678
+select count(distinct name)
+from "in" i
+where i.rxcui in (
+  select rxcui from mthspl_sub
+);
+
+--1,064 rows from pin not in sub, 2,051 in sub
+select count(distinct name)
+from pin i
+where i.rxcui in (
+  select rxcui from mthspl_sub
+);
+
+select distinct unii, array_agg(distinct name)
+from mthspl_sub s
+where s.rxcui in (
+  select rxcui from "in"
+)
+group by unii
+having count(*) > 1;
+
+select distinct s.unii, array_agg(distinct i.name) rxnorm_ingr_name, array_agg(distinct srs."Name") srs_name, array_agg(distinct srs."Display Name") srs_displayname
+from "in" i
+join mthspl_sub s on s.rxcui = i.rxcui
+join "UNII_Names" srs on srs.unii = s.unii
+group by s.unii
+having  array_length(array_agg(distinct i.name), 1) > 1
+;
+
+-- unii and display name one to one
+select srs.unii, array_agg(distinct "Display Name")
+from "UNII_Names" srs
+group by srs.unii
+having array_length(array_agg(distinct "Display Name"), 1) > 1
+;
+
+-- unii and display name one to one
+select srs."Display Name", array_agg(distinct srs.unii)
+from "UNII_Names" srs
+group by srs."Display Name"
+having array_length(array_agg(distinct unii), 1) > 1
+;
+
+--UNII is unique in UNII Records
+select ur.unii, array_agg(distinct ur.pt)
+from "UNII_Records" ur
+group by ur.unii
+having count(*) > 1
+;
+
+select iv.name, iv.tty, ur.*
+from "UNII_Records" ur
+join ingredient_v iv on ur.rxcui = iv.rxcui
+;
+
+--every ingredient in records
+select *
+from ingredient_v
+where rxcui not in (
+  select rxcui from "UNII_Records"
+);
+
+--16 not in ingredient
+select *
+from "UNII_Records"
+where rxcui not in (
+  select rxcui from ingredient_v
+)
+
+select distinct s.unii, array_agg(distinct i.name) rxnorm_ingr_name, array_agg(distinct ur.pt) preferred_term
+from "in" i
+join mthspl_sub s on s.rxcui = i.rxcui
+join "UNII_Records" ur on ur.unii = s.unii
+group by s.unii
+having  array_length(array_agg(distinct i.name), 1) > 1
+;
+
+select distinct i.name rxnorm_ingr_name, array_agg(distinct s.unii) filter ( where s.unii is not null) uniis
+from "in" i
+join mthspl_sub s on s.rxcui = i.rxcui
+group by i.name
+having count(*) > 1 and array_length(array_agg(distinct s.unii) filter ( where s.unii is not null), 1) > 1
+;
+
+
+
 
 
 select count(*) from ingrset where tty in ('PIN', 'IN');
@@ -371,12 +483,18 @@ where exists(
 --azithromycin
 --abacavir
 
-select *
+--453 and 11,336
+select count(distinct application_code)
 from temp_mkstat_v
 where jsonb_array_length(prod_uniis) > 1 and market_catergory ilike '%NDA%'
 and rxnorm_cuis <> '[]'::jsonb
-order by market_catergory desc
 ;
+
+--11,693
+select count( distinct m.application_code)
+from mthspl_mktcode_rxprod_drug_v m
+;
+
 --["HYDROCHLOROTHIAZIDE / LOSARTAN / LOSARTAN POTASSIUM", "TOPIRAMATE"]
 --ANDA078235,ANDA,"[""HYDROCHLOROTHIAZIDE 25 mg / LOSARTAN POTASSIUM 100 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 100 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 200 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 25 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 50 mg ORAL TABLET, FILM COATED"", ""TOPIRAMATE 50 mg ORAL TABLET, FILM COATED [Topamax]""]"
 
@@ -444,8 +562,6 @@ select
     filter (where i.name is not null), '[]'::jsonb)                ingrset_name,
   coalesce(jsonb_agg(distinct d.rxcui)
     filter (where d.rxcui is not null), '[]'::jsonb)                        rxnorm_cuis,
-  coalesce(jsonb_agg(distinct d.tty)
-    filter (where d.tty is not null), '[]'::jsonb)                          rxnorm_term_types,
   coalesce(jsonb_agg(distinct d.name)
     filter (where d.name is not null), '[]'::jsonb)                         rxnorm_drug_names,
   coalesce(jsonb_agg(distinct d.prescribable_name)
@@ -481,7 +597,7 @@ from scd_unii_v
 ;
 
 --3,038
-select unii
+select distinct unii
 from scd_unii_v
 group by unii
 having count(*) > 1
@@ -495,16 +611,20 @@ from scd_unii_v;
 select count(distinct unii)
 from mthspl_sub;
 
-select distinct p.*, s.unii, s.name
+--2,177 total, 1,629 more than one
+select distinct s.unii--, array_agg(distinct scd.rxcui), array_agg(distinct scd.name)
 from mthspl_prod p
 join mthspl_prod_sub mps on p.rxaui = mps.prod_rxaui
 join mthspl_sub s on s.rxaui = mps.sub_rxaui
+-- join scd on scd.rxcui = p.rxcui
 where p.rxaui in (
   select plt.prod_rxaui
   from mthspl_prod_labeltype plt
   where plt.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or plt.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
 )
-order by p.name desc
+and mps.ingr_type in ('A', 'M')
+group by s.unii
+-- having array_length(array_agg(distinct scd.rxcui), 1) > 1
 ;
 
 
@@ -533,4 +653,9 @@ left join rxnconso d on d.rxcui = prod.rxcui1
 left join rxnconso d2 on d.rxcui = prod.rxcui2
 where d2.sab = 'RXNORM'
 and d.sab = 'RXNORM'
+;
+
+select distinct *
+from mthspl_prod_v
+where name ilike '%abacavir%'
 ;
