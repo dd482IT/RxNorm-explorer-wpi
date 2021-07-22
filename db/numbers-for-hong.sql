@@ -474,3 +474,63 @@ where p.rxaui in (
 )
 group by pmcc.code, pmcc.mkt_cat
 ;
+
+--3,666
+select count(distinct unii)
+from scd_unii_v
+;
+
+--3,038
+select unii
+from scd_unii_v
+group by unii
+having count(*) > 1
+;
+
+--3666 distinct unii to scd
+select count(distinct unii)
+from scd_unii_v;
+
+--12,923 unii in sub
+select count(distinct unii)
+from mthspl_sub;
+
+select distinct p.*, s.unii, s.name
+from mthspl_prod p
+join mthspl_prod_sub mps on p.rxaui = mps.prod_rxaui
+join mthspl_sub s on s.rxaui = mps.sub_rxaui
+where p.rxaui in (
+  select plt.prod_rxaui
+  from mthspl_prod_labeltype plt
+  where plt.label_type = 'HUMAN PRESCRIPTION DRUG LABEL' or plt.label_type = 'HUMAN PRESCRIPTION DRUG LABEL WITH HIGHLIGHTS'
+)
+order by p.name desc
+;
+
+
+select *
+from mthspl_prod p
+join rxnconso dv on dv.rxcui = p.rxcui and dv.tty in ('GPCK', 'BPCK') and dv.sab = 'RXNORM';
+
+select distinct d.tty, d2.tty
+from
+(
+  select
+    p.name,
+    p.rxcui as rxcui1,
+    r.rel,
+    r.rela,
+    c.sab,
+    c.rxcui as rxcui2,
+    c.tty,
+    c.str
+  from mthspl_prod p
+  join rxnrel r on r.rxaui1 = p.rxaui
+  join rxnconso c on c.rxaui = r.rxaui2
+  where c.tty = 'DP' and c.sab = 'MTHSPL'
+) prod
+left join rxnconso d on d.rxcui = prod.rxcui1
+left join rxnconso d2 on d.rxcui = prod.rxcui2
+where d2.sab = 'RXNORM'
+and d.sab = 'RXNORM'
+;
