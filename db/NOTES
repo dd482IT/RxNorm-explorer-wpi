@@ -58,4 +58,3 @@ and table_name not like '%v'
 
 --In ingrset table, made choice to select PIN over IN when PIN is present in loading process
 
---TODO place function back in derived-schema

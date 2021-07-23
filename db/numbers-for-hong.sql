@@ -591,14 +591,20 @@ where p.rxaui in (
 group by pmcc.code, pmcc.mkt_cat
 ;
 
---3,666
+--1,817
 select count(distinct unii)
 from scd_unii_v
+where scd_rxcui in (
+  select rxcui from mthspl_rxprod_v
+)
 ;
 
 --3,038
 select distinct unii
 from scd_unii_v
+where scd_rxcui in (
+  select rxcui from mthspl_rxprod_v
+)
 group by unii
 having count(*) > 1
 ;
