@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 CAUTION: Do not modify this file unless you know what you are doing.
-         Unexpected results may occur if the code is changed deliberately.
+ Unexpected results may occur if the code is changed deliberately.
 -->
 <metadata>
 	<info object="rxnorm" type="database"
-		 last-position="5112,298" last-zoom="0.9"
+		 last-position="0,0" last-zoom="0.5"
 		 append-at-eod="false" prepend-at-bod="false"
 		 default-schema="public" default-owner="postgres"
-		 layers="Default layer,rxnorm,mthspl,views,oldTables,Atc"
-		 active-layers="1"
-		 layer-name-colors="#000000,#000000,#000000,#000000,#000000,#000000"
-		 layer-rect-colors="#b4b4b4,#b7cfca,#fa59be,#ad65bd,#5702cc,#8c2811"
-		 show-layer-names="true"
-		 show-layer-rects="true"/>
+		 layers="Default layer,Views,Schemas"
+		 active-layers="0"
+		 layer-name-colors="#000000,#000000,#000000"
+		 layer-rect-colors="#b4b4b4,#7d4447,#1b76f1"
+		 show-layer-names="false"
+		 show-layer-rects="false"/>
 	<info object="public" type="schema"
 		 custom-color="#e1e1e1" rect-visible="true"
 		 layers="0">
@@ -24,1496 +24,1244 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		 layers="0">
 	<position x="0" y="0"/>
 	</info>
-	<info object="rxnorm" type="schema"
-		 custom-color="#f78e73" rect-visible="false"
-		 layers="0"/>
-	<info object="rxnorm.rxnatomarchive" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2740" y="5600"/>
-	</info>
-	<info object="rxnorm.rxnconso" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="4">
-	<position x="3680" y="5580"/>
-	</info>
-	<info object="rxnorm.rxnrel" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="4">
-	<position x="3180" y="5580"/>
-	</info>
-	<info object="rxnorm.rxnsab" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2560" y="5620"/>
-	</info>
-	<info object="rxnorm.rxnsat" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2240" y="5620"/>
-	</info>
-	<info object="rxnorm.rxnsty" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2120" y="5600"/>
-	</info>
-	<info object="rxnorm.rxndoc" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2040" y="5620"/>
-	</info>
-	<info object="rxnorm.rxncuichanges" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2980" y="5620"/>
-	</info>
-	<info object="rxnorm.rxncui" type="table"
-		 collapse-mode="2"
-		 z-value="-1"
-		 layers="4">
-	<position x="2420" y="5600"/>
-	</info>
-	<info object="rxnorm.mthspl_sub" type="table"
-		 collapse-mode="2"
-		 z-value="0"
+	<info object="rxnr" type="schema"
+		 custom-color="#f8303d" rect-visible="true"
 		 layers="2">
-	<position x="7120" y="1280"/>
+	<position x="-8" y="160"/>
 	</info>
-	<info object="rxnorm.mthspl_prod" type="table"
-		 collapse-mode="2"
-		 z-value="0"
+	<info object="rxno" type="schema"
+		 custom-color="#2ae4b6" rect-visible="true"
 		 layers="2">
-	<position x="7140" y="2580"/>
+	<position x="2532" y="2920"/>
 	</info>
-	<info object="rxnorm.mthspl_sub_setid" type="table"
+	<info object="rxnr.&quot;in&quot;" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="3340" y="1380"/>
+	</info>
+	<info object="rxnr.pin" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="3060" y="1580"/>
+	</info>
+	<info object="rxnr.ingrset" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="2800" y="440"/>
+	</info>
+	<info object="rxnr.df" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1140" y="540"/>
+	</info>
+	<info object="rxnr.dfg" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1140" y="180"/>
+	</info>
+	<info object="rxnr.df_dfg" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="1220" y="380"/>
+	</info>
+	<info object="rxnr.scdf" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="7100" y="1000"/>
+		 layers="0">
+	<position x="1580" y="620"/>
 	</info>
-	<info object="rxnorm.mthspl_ingrtype" type="table"
+	<info object="rxnr.scd" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1700" y="880"/>
+	</info>
+	<info object="rxnr.bn" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="6680" y="1500"/>
+		 layers="0">
+	<position x="820" y="340"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_sub" type="table"
+	<info object="rxnr.sbdf" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="580" y="620"/>
+	</info>
+	<info object="rxnr.sbdc" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1220" y="1320"/>
+	</info>
+	<info object="rxnr.sbd" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="900" y="880"/>
+	</info>
+	<info object="rxnr.gpck" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1980" y="1680"/>
+	</info>
+	<info object="rxnr.bpck" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1400" y="1680"/>
+	</info>
+	<info object="rxnr.scdc" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="2480" y="1320"/>
+	</info>
+	<info object="rxnr.scdg" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="7120" y="1680"/>
+		 layers="0">
+	<position x="2260" y="440"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_dmspl" type="table"
+	<info object="rxnr.scdf_scdg" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="2080" y="540"/>
+	</info>
+	<info object="rxnr.sbdg" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="20" y="440"/>
+	</info>
+	<info object="rxnr.sbdf_sbdg" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="420" y="600"/>
+	</info>
+	<info object="rxnr.sbdg_sbd" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="300" y="860"/>
+	</info>
+	<info object="rxnr.sbdc_scdc" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="1580" y="1360"/>
+	</info>
+	<info object="rxnr.et" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="8020" y="2820"/>
+		 layers="0">
+	<position x="0" y="2080"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_setid" type="table"
+	<info object="rxnr.scd_sy" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="2120" y="1040"/>
+	</info>
+	<info object="rxnr.sbd_sy" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="500" y="1100"/>
+	</info>
+	<info object="rxnr.scdc_scd" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="2040" y="1260"/>
+	</info>
+	<info object="rxnr.scdg_scd" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="2240" y="680"/>
+	</info>
+	<info object="rxnr.gpck_scd" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="2080" y="1580"/>
+	</info>
+	<info object="rxnr.bpck_scd" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="1660" y="1480"/>
+	</info>
+	<info object="rxnr.bpck_sbd" type="table"
+		 collapse-mode="0"
+		 z-value="0"
+		 layers="0">
+	<position x="1060" y="1740"/>
+	</info>
+	<info object="rxnr.atc_drug_class" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="7860" y="2340"/>
+		 layers="0">
+	<position x="0" y="4200"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_ndc" type="table"
+	<info object="rxnr.mthspl_sub" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="3200" y="2460"/>
+	</info>
+	<info object="rxnr.mthspl_prod" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1460" y="2440"/>
+	</info>
+	<info object="rxnr.mthspl_sub_setid" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="3200" y="3180"/>
+	</info>
+	<info object="rxnr.mthspl_ingr_type" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="6800" y="2000"/>
+		 layers="0">
+	<position x="2740" y="2780"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_labeler" type="table"
+	<info object="rxnr.mthspl_prod_sub" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="2460" y="2580"/>
+	</info>
+	<info object="rxnr.mthspl_prod_dmspl" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1880" y="3280"/>
+	</info>
+	<info object="rxnr.mthspl_prod_setid" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1400" y="3180"/>
+	</info>
+	<info object="rxnr.mthspl_prod_ndc" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1700" y="3180"/>
+	</info>
+	<info object="rxnr.mthspl_prod_labeler" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="900" y="3280"/>
+	</info>
+	<info object="rxnr.mthspl_prod_labeltype" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1560" y="3280"/>
+	</info>
+	<info object="rxnr.mthspl_prod_mktstat" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1080" y="3180"/>
+	</info>
+	<info object="rxnr.mthspl_prod_mkteffth" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="1220" y="3280"/>
+	</info>
+	<info object="rxnr.mthspl_prod_mktefftl" type="table"
+		 collapse-mode="1"
+		 z-value="0"
+		 layers="0">
+	<position x="740" y="3180"/>
+	</info>
+	<info object="rxnr.mthspl_mktcat" type="table"
 		 collapse-mode="2"
 		 z-value="0"
-		 layers="2">
-	<position x="7840" y="2620"/>
+		 layers="0">
+	<position x="2160" y="3040"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_labeltype" type="table"
-		 collapse-mode="2"
+	<info object="rxnr.mthspl_prod_mktcat" type="table"
+		 collapse-mode="1"
 		 z-value="0"
-		 layers="2">
-	<position x="6260" y="2340"/>
+		 layers="0">
+	<position x="2060" y="3180"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_mktstat" type="table"
-		 collapse-mode="2"
+	<info object="rxnr.mthspl_prod_mktcat_code" type="table"
+		 collapse-mode="1"
 		 z-value="0"
-		 layers="2">
-	<position x="7460" y="2020"/>
+		 layers="0">
+	<position x="2400" y="3180"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_mkteffth" type="table"
-		 collapse-mode="2"
+	<info object="rxnr.mthspl_pillattr" type="table"
+		 collapse-mode="1"
 		 z-value="0"
-		 layers="2">
-	<position x="6200" y="2600"/>
+		 layers="0">
+	<position x="2820" y="3000"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_mktefftl" type="table"
-		 collapse-mode="2"
+	<info object="rxnr.mthspl_prod_pillattr" type="table"
+		 collapse-mode="1"
 		 z-value="0"
-		 layers="2">
-	<position x="6500" y="2180"/>
+		 layers="0">
+	<position x="2740" y="3180"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_mktcat" type="table"
-		 collapse-mode="2"
+	<info object="rxnr.mthspl_prod_dcsa" type="table"
+		 collapse-mode="1"
 		 z-value="0"
-		 layers="2">
-	<position x="6220" y="2800"/>
+		 layers="0">
+	<position x="420" y="3180"/>
 	</info>
-	<info object="rxnorm.mthspl_mktcat" type="table"
-		 collapse-mode="2"
+	<info object="rxnr.mthspl_prod_nhric" type="table"
+		 collapse-mode="1"
 		 z-value="0"
-		 layers="2">
-	<position x="6280" y="3280"/>
+		 layers="0">
+	<position x="540" y="3280"/>
 	</info>
-	<info object="rxnorm.mthspl_prod_mktcat_code" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="6560" y="2960"/>
-	</info>
-	<info object="rxnorm.mthspl_pillattr" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="8020" y="3240"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_pillattr" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="7680" y="2960"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_dcsa" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="7140" y="3080"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_nhric" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="7780" y="2100"/>
-	</info>
-	<info object="rxnorm.ingr" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="2940" y="720"/>
-	</info>
-	<info object="rxnorm.ingr_unii" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="2800" y="1300"/>
-	</info>
-	<info object="rxnorm.pin" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="60" y="1860"/>
-	</info>
-	<info object="rxnorm.pin_unii" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="360" y="1860"/>
-	</info>
-	<info object="rxnorm.ingr_pin" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="960" y="1560"/>
-	</info>
-	<info object="rxnorm.min" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="640" y="1860"/>
-	</info>
-	<info object="rxnorm.ingrset" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="2900" y="480"/>
-	</info>
-	<info object="rxnorm.temp_ingrset" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="380" y="1420"/>
-	</info>
-	<info object="rxnorm.df" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="1480" y="2020"/>
-	</info>
-	<info object="rxnorm.dfg" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="1960" y="2100"/>
-	</info>
-	<info object="rxnorm.df_dfg" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="2300" y="2300"/>
-	</info>
-	<info object="rxnorm.scd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="2200" y="720"/>
-	</info>
-	<info object="rxnorm.sbd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="7240" y="300"/>
-	</info>
-	<info object="rxnorm.gpck" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="1980" y="40"/>
-	</info>
-	<info object="rxnorm.bpck" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="1340" y="40"/>
-	</info>
-	<info object="rxnorm.bn" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="820" y="720"/>
-	</info>
-	<info object="rxnorm.scdc" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="3380" y="880"/>
-	</info>
-	<info object="rxnorm.scdf" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="3540" y="1980"/>
-	</info>
-	<info object="rxnorm.scdg" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="3960" y="960"/>
-	</info>
-	<info object="rxnorm.scdg_astr" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="4500" y="1120"/>
-	</info>
-	<info object="rxnorm.sbdc" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="9460" y="2120"/>
-	</info>
-	<info object="rxnorm.sbdf" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="8940" y="1980"/>
-	</info>
-	<info object="rxnorm.sbdg" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="8200" y="1480"/>
-	</info>
-	<info object="rxnorm.sbdg_astr" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="8200" y="1880"/>
-	</info>
-	<info object="rxnorm.et" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="1900" y="2840"/>
-	</info>
-	<info object="rxnorm.scd_sy" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="2140" y="460"/>
-	</info>
-	<info object="rxnorm.sbd_sy" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="7420" y="40"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_scd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="6160" y="1920"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_sbd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="2">
-	<position x="6420" y="1660"/>
-	</info>
-	<info object="rxnorm.sbd_scd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="7400" y="2600"/>
-	</info>
-	<info object="rxnorm.scdc_sbd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="6500" y="700"/>
-	</info>
-	<info object="rxnorm.scdc_scd" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="3660" y="1520"/>
-	</info>
-	<info object="rxnorm.scdc_sbdc" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="1">
-	<position x="8800" y="760"/>
-	</info>
-	<info object="rxnorm.scdf_ingr" type="table"
+	<info object="rxno.rxnconso" type="table"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="4060" y="2320"/>
+	<position x="2540" y="3440"/>
 	</info>
-	<info object="rxnorm.scdf_df" type="table"
+	<info object="rxno.rxnrel" type="table"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="2840" y="2480"/>
+	<position x="2540" y="2940"/>
 	</info>
-	<info object="rxnorm.scdf_scd" type="table"
+	<info object="rxnr.in_unii_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="3140" y="2480"/>
+	<position x="1560" y="3160"/>
 	</info>
-	<info object="rxnorm.scdf_scdg" type="table"
+	<info object="rxnr.pin_unii_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="3440" y="2480"/>
+	<position x="1820" y="3160"/>
 	</info>
-	<info object="rxnorm.scdf_sbdf" type="table"
+	<info object="rxnr.scd_unii_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="8760" y="1480"/>
+	<position x="2100" y="3160"/>
 	</info>
-	<info object="rxnorm.scdg_ingr" type="table"
+	<info object="rxnr.scdg_in_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="4900" y="1140"/>
+	<position x="1080" y="3360"/>
 	</info>
-	<info object="rxnorm.scdg_dfg" type="table"
+	<info object="rxnr.ent_scd_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="3020" y="1520"/>
+	<position x="1360" y="3360"/>
 	</info>
-	<info object="rxnorm.scdg_scd" type="table"
+	<info object="rxnr.ent_sbd_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="2620" y="1160"/>
+	<position x="1720" y="3360"/>
 	</info>
-	<info object="rxnorm.scdg_sbdg" type="table"
+	<info object="rxnr.ndc_scd_mv" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="9060" y="600"/>
+	<position x="1240" y="3380"/>
 	</info>
-	<info object="rxnorm.gpck_bpck" type="table"
+	<info object="rxnr.ndc_sbd_mv" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="920" y="2260"/>
+	<position x="0" y="3660"/>
 	</info>
-	<info object="rxnorm.gpck_scd" type="table"
+	<info object="rxnr.relents_ndc_mv" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="1220" y="2260"/>
+	<position x="280" y="3660"/>
 	</info>
-	<info object="rxnorm.bpck_scd" type="table"
+	<info object="rxnr.drug_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="1520" y="2260"/>
+	<position x="1380" y="3640"/>
 	</info>
-	<info object="rxnorm.bpck_sbd" type="table"
+	<info object="rxnr.mthspl_prod_sub_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="7700" y="1840"/>
+	<position x="1680" y="3640"/>
 	</info>
-	<info object="rxnorm.sbd_bn" type="table"
+	<info object="rxnr.drug_generalized_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="6480" y="2000"/>
+	<position x="2040" y="3640"/>
 	</info>
-	<info object="rxnorm.sbdc_sbd" type="table"
+	<info object="rxnr.drug_generalized_mv" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="6780" y="2000"/>
+	<position x="0" y="3980"/>
 	</info>
-	<info object="rxnorm.sbdc_bn" type="table"
+	<info object="rxnr.mthspl_prod_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="7080" y="2000"/>
+	<position x="1160" y="3960"/>
 	</info>
-	<info object="rxnorm.sbdf_sbdg" type="table"
+	<info object="rxnr.mthspl_rxprod_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="7400" y="2000"/>
+	<position x="1480" y="3960"/>
 	</info>
-	<info object="rxnorm.sbdf_bn" type="table"
+	<info object="rxnr.mthspl_mktcode_prod_drug_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="7700" y="2000"/>
+	<position x="1820" y="3960"/>
 	</info>
-	<info object="rxnorm.sbdf_sbd" type="table"
+	<info object="rxnr.mthspl_mktcode_rxprod_drug_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="6480" y="2160"/>
+	<position x="2220" y="3960"/>
 	</info>
-	<info object="rxnorm.sbdg_bn" type="table"
+	<info object="rxnr.mthspl_prod_setid_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="6780" y="2160"/>
+	<position x="820" y="4340"/>
 	</info>
-	<info object="rxnorm.sbdg_sbd" type="table"
+	<info object="rxnr.mthspl_rxprod_setid_drug_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="7080" y="2160"/>
+	<position x="1200" y="4340"/>
 	</info>
-	<info object="rxnorm.bn_ingr" type="table"
+	<info object="rxnr.mthspl_ndc_prod_drug_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="1520" y="2580"/>
+	<position x="1600" y="4340"/>
 	</info>
-	<info object="rxnorm.bn_pin" type="table"
+	<info object="rxnr.mthspl_ndc_rxprod_drug_v" type="view"
 		 collapse-mode="2"
 		 z-value="0"
 		 layers="1">
-	<position x="1840" y="2580"/>
+	<position x="2000" y="4340"/>
 	</info>
-	<info object="rxnorm.atc_drug_class" type="table"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="5">
-	<position x="1620" y="5540"/>
-	</info>
-	<info object="rxnorm.drug_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10260" y="2940"/>
-	</info>
-	<info object="rxnorm.ingredient_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10560" y="2940"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_sub_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10560" y="0"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10600" y="40"/>
-	</info>
-	<info object="rxnorm.mthspl_rxprod_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10980" y="2920"/>
-	</info>
-	<info object="rxnorm.drug_generalized_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10920" y="3400"/>
-	</info>
-	<info object="rxnorm.drug_generalized_mv" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10500" y="3800"/>
-	</info>
-	<info object="rxnorm.mthspl_mktcode_prod_drug_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10660" y="340"/>
-	</info>
-	<info object="rxnorm.mthspl_mktcode_rxprod_drug_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10720" y="740"/>
-	</info>
-	<info object="rxnorm.mthspl_prod_setid_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10760" y="1120"/>
-	</info>
-	<info object="rxnorm.mthspl_rxprod_setid_drug_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10820" y="1500"/>
-	</info>
-	<info object="rxnorm.mthspl_ndc_prod_drug_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10860" y="1900"/>
-	</info>
-	<info object="rxnorm.mthspl_ndc_rxprod_drug_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="10920" y="2300"/>
-	</info>
-	<info object="rxnorm.scd_unii_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="2020" y="640"/>
-	</info>
-	<info object="rxnorm.scd_prod_v" type="view"
-		 collapse-mode="2"
-		 z-value="0"
-		 layers="3">
-	<position x="740" y="200"/>
-	</info>
-	<info object="rel_drug_v_rxnconso" type="relationship"
-		 src-table="rxnorm.drug_v" src-type="view"
-		 dst-table="rxnorm.rxnconso" dst-type="table"
-		 custom-color="#cbe5b9"
-		 layers="3"/>
-	<info object="rel_drug_v_rxnrel" type="relationship"
-		 src-table="rxnorm.drug_v" src-type="view"
-		 dst-table="rxnorm.rxnrel" dst-type="table"
-		 custom-color="#f80922"
-		 layers="3"/>
-	<info object="rel_ingredient_v_rxnconso" type="relationship"
-		 src-table="rxnorm.ingredient_v" src-type="view"
-		 dst-table="rxnorm.rxnconso" dst-type="table"
-		 custom-color="#5d2db7"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_sub_v_mthspl_sub" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sub_v" src-type="view"
-		 dst-table="rxnorm.mthspl_sub" dst-type="table"
-		 custom-color="#90f960"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="157.739" y="-154.639"/>
-	</label>
-	</info>
-	<info object="rel_mthspl_prod_sub_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sub_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#32d07c"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="0" y="0"/>
-	</label>
-	</info>
-	<info object="rel_mthspl_prod_sub_v_mthspl_prod_sub" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sub_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_sub" dst-type="table"
-		 custom-color="#261a9c"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="120.239" y="9.36683"/>
-	</label>
-	</info>
-	<info object="rel_mthspl_prod_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#3f7d1f"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#7ea883"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_v_mthspl_prod_ndc" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_ndc" dst-type="table"
-		 custom-color="#534fc1"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#c15741"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#70f768"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_v_mthspl_prod_mktcat" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat" dst-type="table"
-		 custom-color="#251cdb"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#2328b0"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#7c57d0"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="125.036" y="4.92332"/>
-	</label>
-	</info>
-	<info object="rel_drug_generalized_v_rxnrel" type="relationship"
-		 src-table="rxnorm.drug_generalized_v" src-type="view"
-		 dst-table="rxnorm.rxnrel" dst-type="table"
-		 custom-color="#cc6c95"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="-6.90364" y="-0.276676"/>
-	</label>
-	</info>
-	<info object="rel_drug_generalized_v_sbd_scd" type="relationship"
-		 src-table="rxnorm.drug_generalized_v" src-type="view"
-		 dst-table="rxnorm.sbd_scd" dst-type="table"
-		 custom-color="#747a7e"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="55.4181" y="8.93478"/>
-	</label>
-	</info>
-	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#b8247e"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#85d5ef"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_ndc" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_ndc" dst-type="table"
-		 custom-color="#47ea99"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#50be81"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="12.7236" y="179.741"/>
-	</label>
-	</info>
-	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#92fe7b"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#124184"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#848ce6"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#a58987"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_ndc" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_ndc" dst-type="table"
-		 custom-color="#cf3be2"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#efd671"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#0df4fd"
-		 layers="3"/>
-	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_mktcode_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#314cf1"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_setid_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#eed48e"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_setid_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#de4326"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_setid_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#9b339d"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_setid_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#9d156f"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_setid_v_mthspl_prod_mktcat" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat" dst-type="table"
-		 custom-color="#e85d93"
-		 layers="3"/>
-	<info object="rel_mthspl_prod_setid_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#787eaa"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_setid_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#d8351c"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_setid_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#7041a8"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_setid_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#ea314d"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_setid_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#56a6f3"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_mktcat" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_setid_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat" dst-type="table"
-		 custom-color="#eeccc3"
-		 layers="3"/>
-	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_rxprod_setid_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#983f1c"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#68807a"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#1d8cef"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_ndc" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_ndc" dst-type="table"
-		 custom-color="#6f7cef"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#06cd7a"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#3e4828"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_mktcat" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat" dst-type="table"
-		 custom-color="#653f79"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_prod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#8efe31"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#37a4cd"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#41ec3a"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_ndc" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_ndc" dst-type="table"
-		 custom-color="#b9b87c"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_labeler" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeler" dst-type="table"
-		 custom-color="#99b89e"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_labeltype" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_labeltype" dst-type="table"
-		 custom-color="#a64b50"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_mktcat" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat" dst-type="table"
-		 custom-color="#38cf1c"
-		 layers="3"/>
-	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.mthspl_ndc_rxprod_drug_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#99d4fb"
-		 layers="3"/>
-	<info object="rel_scd_unii_v_ingr" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#37646e"
-		 layers="3"/>
-	<info object="rel_scd_unii_v_ingr_unii" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.ingr_unii" dst-type="table"
-		 custom-color="#3fc7e3"
-		 layers="3"/>
+	<info object="rel_in_unii_v_in" type="relationship"
+		 src-table="rxnr.in_unii_v" src-type="view"
+		 dst-table="rxnr.&quot;in&quot;" dst-type="table"
+		 custom-color="#615659"
+		 layers="1"/>
+	<info object="rel_in_unii_v_mthspl_sub" type="relationship"
+		 src-table="rxnr.in_unii_v" src-type="view"
+		 dst-table="rxnr.mthspl_sub" dst-type="table"
+		 custom-color="#1549c4"
+		 layers="1"/>
+	<info object="rel_pin_unii_v_pin" type="relationship"
+		 src-table="rxnr.pin_unii_v" src-type="view"
+		 dst-table="rxnr.pin" dst-type="table"
+		 custom-color="#cac1e5"
+		 layers="1"/>
+	<info object="rel_pin_unii_v_mthspl_sub" type="relationship"
+		 src-table="rxnr.pin_unii_v" src-type="view"
+		 dst-table="rxnr.mthspl_sub" dst-type="table"
+		 custom-color="#9972f8"
+		 layers="1"/>
+	<info object="rel_scd_unii_v_in" type="relationship"
+		 src-table="rxnr.scd_unii_v" src-type="view"
+		 dst-table="rxnr.&quot;in&quot;" dst-type="table"
+		 custom-color="#209b83"
+		 layers="1"/>
 	<info object="rel_scd_unii_v_pin" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.pin" dst-type="table"
-		 custom-color="#4bf8fd"
-		 layers="3"/>
-	<info object="rel_scd_unii_v_pin_unii" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.pin_unii" dst-type="table"
-		 custom-color="#97dcbf"
-		 layers="3"/>
+		 src-table="rxnr.scd_unii_v" src-type="view"
+		 dst-table="rxnr.pin" dst-type="table"
+		 custom-color="#14eb71"
+		 layers="1"/>
 	<info object="rel_scd_unii_v_scd" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#f3af51"
-		 layers="3"/>
+		 src-table="rxnr.scd_unii_v" src-type="view"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#7b5108"
+		 layers="1"/>
 	<info object="rel_scd_unii_v_scdc" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.scdc" dst-type="table"
-		 custom-color="#430f13"
-		 layers="3"/>
+		 src-table="rxnr.scd_unii_v" src-type="view"
+		 dst-table="rxnr.scdc" dst-type="table"
+		 custom-color="#6393fa"
+		 layers="1"/>
 	<info object="rel_scd_unii_v_scdc_scd" type="relationship"
-		 src-table="rxnorm.scd_unii_v" src-type="view"
-		 dst-table="rxnorm.scdc_scd" dst-type="table"
-		 custom-color="#b8c1bb"
-		 layers="3"/>
-	<info object="rel_scd_prod_v_mthspl_prod_setid" type="relationship"
-		 src-table="rxnorm.scd_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_setid" dst-type="table"
-		 custom-color="#d5f0aa"
-		 layers="2"/>
-	<info object="rel_scd_prod_v_mthspl_prod_ndc" type="relationship"
-		 src-table="rxnorm.scd_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_ndc" dst-type="table"
-		 custom-color="#e56154"
-		 layers="2"/>
-	<info object="rel_scd_prod_v_mthspl_prod_mktcat_code" type="relationship"
-		 src-table="rxnorm.scd_prod_v" src-type="view"
-		 dst-table="rxnorm.mthspl_prod_mktcat_code" dst-type="table"
-		 custom-color="#662e43"
-		 layers="2"/>
-	<info object="rel_scd_prod_v_df" type="relationship"
-		 src-table="rxnorm.scd_prod_v" src-type="view"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#a2df89"
-		 layers="3"/>
-	<info object="rel_scd_prod_v_scd" type="relationship"
-		 src-table="rxnorm.scd_prod_v" src-type="view"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#53bf0b"
-		 layers="3">
-	<label ref-type="name-label">
-		<position x="36.3801" y="6.4933"/>
-	</label>
-	</info>
-	<info object="rel_mthspl_sub_setid_mthspl_sub" type="relationship"
-		 src-table="rxnorm.mthspl_sub_setid" src-type="table"
-		 dst-table="rxnorm.mthspl_sub" dst-type="table"
-		 custom-color="#5721db"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_sub_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sub" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#f43e07"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_sub_mthspl_ingrtype" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sub" src-type="table"
-		 dst-table="rxnorm.mthspl_ingrtype" dst-type="table"
-		 custom-color="#ce0837"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_sub_mthspl_sub" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sub" src-type="table"
-		 dst-table="rxnorm.mthspl_sub" dst-type="table"
-		 custom-color="#86f3c9"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_dmspl_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_dmspl" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#9a18a7"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_setid_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_setid" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#402447"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_ndc_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_ndc" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#8435cf"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_labeler_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_labeler" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#b6e302"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_labeltype_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_labeltype" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#62e66e"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_mktstat_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_mktstat" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#433809"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_mkteffth_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_mkteffth" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#b035cf"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_mktefftl_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_mktefftl" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#f8e49a"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_mktcat_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_mktcat" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#d07233"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_mktcat_code_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_mktcat_code" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#75d482"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_mktcat_code_mthspl_mktcat" type="relationship"
-		 src-table="rxnorm.mthspl_prod_mktcat_code" src-type="table"
-		 dst-table="rxnorm.mthspl_mktcat" dst-type="table"
-		 custom-color="#6c2994"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_pillattr_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_pillattr" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#fedb11"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_pillattr_mthspl_pillattr" type="relationship"
-		 src-table="rxnorm.mthspl_prod_pillattr" src-type="table"
-		 dst-table="rxnorm.mthspl_pillattr" dst-type="table"
-		 custom-color="#b77c7f"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_dcsa_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_dcsa" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#e2002d"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_nhric_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_nhric" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#e3662a"
-		 layers="2"/>
-	<info object="rel_ingr_unii_ingr" type="relationship"
-		 src-table="rxnorm.ingr_unii" src-type="table"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#4e565f"
-		 layers="1">
+		 src-table="rxnr.scd_unii_v" src-type="view"
+		 dst-table="rxnr.scdc_scd" dst-type="table"
+		 custom-color="#3fdaf5"
+		 layers="1"/>
+	<info object="rel_scdg_in_v_in" type="relationship"
+		 src-table="rxnr.scdg_in_v" src-type="view"
+		 dst-table="rxnr.&quot;in&quot;" dst-type="table"
+		 custom-color="#a96d2e"
+		 layers="1"/>
+	<info object="rel_scdg_in_v_scdc" type="relationship"
+		 src-table="rxnr.scdg_in_v" src-type="view"
+		 dst-table="rxnr.scdc" dst-type="table"
+		 custom-color="#2f516e"
+		 layers="1"/>
+	<info object="rel_scdg_in_v_scdg" type="relationship"
+		 src-table="rxnr.scdg_in_v" src-type="view"
+		 dst-table="rxnr.scdg" dst-type="table"
+		 custom-color="#5017e9"
+		 layers="1"/>
+	<info object="rel_scdg_in_v_scdc_scd" type="relationship"
+		 src-table="rxnr.scdg_in_v" src-type="view"
+		 dst-table="rxnr.scdc_scd" dst-type="table"
+		 custom-color="#71607d"
+		 layers="1"/>
+	<info object="rel_scdg_in_v_scdg_scd" type="relationship"
+		 src-table="rxnr.scdg_in_v" src-type="view"
+		 dst-table="rxnr.scdg_scd" dst-type="table"
+		 custom-color="#5a3e3a"
+		 layers="1"/>
+	<info object="rel_ent_scd_v_df" type="relationship"
+		 src-table="rxnr.ent_scd_v" src-type="view"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#a7cbbf"
+		 layers="1"/>
+	<info object="rel_ent_scd_v_scd" type="relationship"
+		 src-table="rxnr.ent_scd_v" src-type="view"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#fee084"
+		 layers="1"/>
+	<info object="rel_ent_sbd_v_df" type="relationship"
+		 src-table="rxnr.ent_sbd_v" src-type="view"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#a3aa95"
+		 layers="1"/>
+	<info object="rel_ent_sbd_v_sbd" type="relationship"
+		 src-table="rxnr.ent_sbd_v" src-type="view"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#545c66"
+		 layers="1"/>
+	<info object="rel_ndc_scd_mv_scd" type="relationship"
+		 src-table="rxnr.ndc_scd_mv" src-type="view"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#351371"
+		 layers="1"/>
+	<info object="rel_ndc_scd_mv_mthspl_prod" type="relationship"
+		 src-table="rxnr.ndc_scd_mv" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#d066dc"
+		 layers="1"/>
+	<info object="rel_ndc_scd_mv_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.ndc_scd_mv" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#a31816"
+		 layers="1"/>
+	<info object="rel_ndc_sbd_mv_sbd" type="relationship"
+		 src-table="rxnr.ndc_sbd_mv" src-type="view"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#5d11d3"
+		 layers="1"/>
+	<info object="rel_ndc_sbd_mv_mthspl_prod" type="relationship"
+		 src-table="rxnr.ndc_sbd_mv" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#77d71a"
+		 layers="1"/>
+	<info object="rel_ndc_sbd_mv_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.ndc_sbd_mv" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#900f03"
+		 layers="1"/>
+	<info object="rel_relents_ndc_mv_mthspl_prod" type="relationship"
+		 src-table="rxnr.relents_ndc_mv" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#5d985e"
+		 layers="1"/>
+	<info object="rel_relents_ndc_mv_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.relents_ndc_mv" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#ee5122"
+		 layers="1"/>
+	<info object="rel_drug_v_rxnconso" type="relationship"
+		 src-table="rxnr.drug_v" src-type="view"
+		 dst-table="rxno.rxnconso" dst-type="table"
+		 custom-color="#ab8cbb"
+		 layers="1"/>
+	<info object="rel_drug_v_rxnrel" type="relationship"
+		 src-table="rxnr.drug_v" src-type="view"
+		 dst-table="rxno.rxnrel" dst-type="table"
+		 custom-color="#5f4700"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_sub_v_mthspl_sub" type="relationship"
+		 src-table="rxnr.mthspl_prod_sub_v" src-type="view"
+		 dst-table="rxnr.mthspl_sub" dst-type="table"
+		 custom-color="#27b616"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_sub_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_sub_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#96f2ca"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_sub_v_mthspl_prod_sub" type="relationship"
+		 src-table="rxnr.mthspl_prod_sub_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_sub" dst-type="table"
+		 custom-color="#e3ef9c"
+		 layers="1"/>
+	<info object="rel_drug_generalized_v_rxnrel" type="relationship"
+		 src-table="rxnr.drug_generalized_v" src-type="view"
+		 dst-table="rxno.rxnrel" dst-type="table"
+		 custom-color="#ff806f"
+		 layers="1"/>
+	<info object="rel_drug_generalized_v_sbd" type="relationship"
+		 src-table="rxnr.drug_generalized_v" src-type="view"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#a32fff"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#118939"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#9a5dd8"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#69b72a"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#1985dc"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#081048"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat" dst-type="table"
+		 custom-color="#2fbbe5"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_prod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#291519"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#b7e504"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#255cc2"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#1a6247"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#27ad8b"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#ad52e1"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#c28244"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_prod_drug_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#6ac332"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#b0cf5c"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#ea0664"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#35fce8"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#2621ef"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#fe6d70"
+		 layers="1"/>
+	<info object="rel_mthspl_mktcode_rxprod_drug_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_mktcode_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#073495"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_setid_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#a8a969"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_setid_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#c64f6c"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_setid_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#dc3df2"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_setid_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#9ffc44"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_setid_v_mthspl_prod_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat" dst-type="table"
+		 custom-color="#24c3aa"
+		 layers="1"/>
+	<info object="rel_mthspl_prod_setid_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#6d6b2c"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_setid_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#0e9a5b"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_setid_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#4482d1"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_setid_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#c8fb68"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_setid_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#cfa6d5"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_setid_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat" dst-type="table"
+		 custom-color="#1a7ecf"
+		 layers="1"/>
+	<info object="rel_mthspl_rxprod_setid_drug_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_rxprod_setid_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#ec1584"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#36e603"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#d00b00"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#c00026"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#4a0f6a"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#3e6eac"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat" dst-type="table"
+		 custom-color="#951374"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_prod_drug_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_ndc_prod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#d0e4f5"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#1f1530"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_setid" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_setid" dst-type="table"
+		 custom-color="#b8145c"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_ndc" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_ndc" dst-type="table"
+		 custom-color="#18527d"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_labeler" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeler" dst-type="table"
+		 custom-color="#e952b1"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_labeltype" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_labeltype" dst-type="table"
+		 custom-color="#c675dc"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat" dst-type="table"
+		 custom-color="#0fdcdb"
+		 layers="1"/>
+	<info object="rel_mthspl_ndc_rxprod_drug_v_mthspl_prod_mktcat_code" type="relationship"
+		 src-table="rxnr.mthspl_ndc_rxprod_drug_v" src-type="view"
+		 dst-table="rxnr.mthspl_prod_mktcat_code" dst-type="table"
+		 custom-color="#aca340"
+		 layers="1"/>
+	<info object="rel_pin_in" type="relationship"
+		 src-table="rxnr.pin" src-type="table"
+		 dst-table="rxnr.&quot;in&quot;" dst-type="table"
+		 custom-color="#e11231"
+		 layers="0">
 	<label ref-type="name-label">
 		<position x="0" y="0"/>
 	</label>
 	</info>
-	<info object="rel_pin_unii_pin" type="relationship"
-		 src-table="rxnorm.pin_unii" src-type="table"
-		 dst-table="rxnorm.pin" dst-type="table"
-		 custom-color="#d86f0e"
-		 layers="1"/>
-	<info object="rel_ingr_pin_ingr" type="relationship"
-		 src-table="rxnorm.ingr_pin" src-type="table"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#e59d01"
-		 layers="1"/>
-	<info object="rel_ingr_pin_pin" type="relationship"
-		 src-table="rxnorm.ingr_pin" src-type="table"
-		 dst-table="rxnorm.pin" dst-type="table"
-		 custom-color="#34145c"
-		 layers="1"/>
 	<info object="rel_df_dfg_df" type="relationship"
-		 src-table="rxnorm.df_dfg" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#039439"
-		 layers="1"/>
-	<info object="rel_df_dfg_dfg" type="relationship"
-		 src-table="rxnorm.df_dfg" src-type="table"
-		 dst-table="rxnorm.dfg" dst-type="table"
-		 custom-color="#dfc445"
-		 layers="1"/>
-	<info object="rel_scd_ingrset" type="relationship"
-		 src-table="rxnorm.scd" src-type="table"
-		 dst-table="rxnorm.ingrset" dst-type="table"
-		 custom-color="#eff07f"
-		 layers="1"/>
-	<info object="rel_scd_df" type="relationship"
-		 src-table="rxnorm.scd" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#fb6612"
-		 layers="1"/>
-	<info object="rel_scd_scd" type="relationship"
-		 src-table="rxnorm.scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#a8fb49"
-		 layers="1">
-	<position x="2556.21" y="825.083"/>
-	<position x="2556.21" y="697"/>
-	<position x="2422.14" y="697"/>
+		 src-table="rxnr.df_dfg" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#1b7143"
+		 layers="0">
+	<label ref-type="name-label">
+		<position x="-2.15298" y="2.91774"/>
+	</label>
 	</info>
+	<info object="rel_df_dfg_dfg" type="relationship"
+		 src-table="rxnr.df_dfg" src-type="table"
+		 dst-table="rxnr.dfg" dst-type="table"
+		 custom-color="#56c6e3"
+		 layers="0"/>
+	<info object="rel_scdf_df" type="relationship"
+		 src-table="rxnr.scdf" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#52ab9c"
+		 layers="0"/>
+	<info object="rel_scd_df" type="relationship"
+		 src-table="rxnr.scd" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#298885"
+		 layers="0"/>
+	<info object="rel_scd_scdf" type="relationship"
+		 src-table="rxnr.scd" src-type="table"
+		 dst-table="rxnr.scdf" dst-type="table"
+		 custom-color="#27acd7"
+		 layers="0"/>
+	<info object="rel_scd_ingrset" type="relationship"
+		 src-table="rxnr.scd" src-type="table"
+		 dst-table="rxnr.ingrset" dst-type="table"
+		 custom-color="#8ed0d6"
+		 layers="0"/>
+	<info object="rel_scd_scd" type="relationship"
+		 src-table="rxnr.scd" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#bd53cd"
+		 layers="0">
+	<position x="2044" y="961.133"/>
+	<position x="2044" y="857"/>
+	<position x="1914" y="857"/>
+	</info>
+	<info object="rel_bn_bn" type="relationship"
+		 src-table="rxnr.bn" src-type="table"
+		 dst-table="rxnr.bn" dst-type="table"
+		 custom-color="#d1b099"
+		 layers="0">
+	<position x="1167.13" y="375.8"/>
+	<position x="1167.13" y="317"/>
+	<position x="1036.09" y="317"/>
+	</info>
+	<info object="rel_sbdf_bn" type="relationship"
+		 src-table="rxnr.sbdf" src-type="table"
+		 dst-table="rxnr.bn" dst-type="table"
+		 custom-color="#ae5abb"
+		 layers="0"/>
+	<info object="rel_sbdf_df" type="relationship"
+		 src-table="rxnr.sbdf" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#8b038c"
+		 layers="0">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+	</info>
+	<info object="rel_sbdf_scdf" type="relationship"
+		 src-table="rxnr.sbdf" src-type="table"
+		 dst-table="rxnr.scdf" dst-type="table"
+		 custom-color="#d68411"
+		 layers="0"/>
+	<info object="rel_sbd_scd" type="relationship"
+		 src-table="rxnr.sbd" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#186b33"
+		 layers="0"/>
+	<info object="rel_sbd_bn" type="relationship"
+		 src-table="rxnr.sbd" src-type="table"
+		 dst-table="rxnr.bn" dst-type="table"
+		 custom-color="#8849ca"
+		 layers="0"/>
+	<info object="rel_sbd_sbdf" type="relationship"
+		 src-table="rxnr.sbd" src-type="table"
+		 dst-table="rxnr.sbdf" dst-type="table"
+		 custom-color="#91df5c"
+		 layers="0"/>
+	<info object="rel_sbd_sbdc" type="relationship"
+		 src-table="rxnr.sbd" src-type="table"
+		 dst-table="rxnr.sbdc" dst-type="table"
+		 custom-color="#0966ff"
+		 layers="0"/>
 	<info object="rel_sbd_df" type="relationship"
-		 src-table="rxnorm.sbd" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#e40eab"
-		 layers="1"/>
+		 src-table="rxnr.sbd" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#0f0dfe"
+		 layers="0"/>
 	<info object="rel_sbd_sbd" type="relationship"
-		 src-table="rxnorm.sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#0ee711"
-		 layers="1">
-	<position x="7584" y="396.017"/>
-	<position x="7584" y="277"/>
-	<position x="7454" y="277"/>
+		 src-table="rxnr.sbd" src-type="table"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#571adc"
+		 layers="0">
+	<position x="1244" y="970.2"/>
+	<position x="1244" y="857"/>
+	<position x="1114" y="857"/>
 	</info>
 	<info object="rel_gpck_df" type="relationship"
-		 src-table="rxnorm.gpck" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#1a68f0"
-		 layers="1"/>
+		 src-table="rxnr.gpck" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#2cfcdf"
+		 layers="0"/>
+	<info object="rel_bpck_gpck" type="relationship"
+		 src-table="rxnr.bpck" src-type="table"
+		 dst-table="rxnr.gpck" dst-type="table"
+		 custom-color="#d75af5"
+		 layers="0"/>
 	<info object="rel_bpck_df" type="relationship"
-		 src-table="rxnorm.bpck" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#66827c"
-		 layers="1"/>
-	<info object="rel_bn_bn" type="relationship"
-		 src-table="rxnorm.bn" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#60a8fb"
-		 layers="1">
-	<position x="1167.13" y="770.683"/>
-	<position x="1167.13" y="697"/>
-	<position x="1036.09" y="697"/>
-	</info>
-	<info object="rel_scdc_ingr" type="relationship"
-		 src-table="rxnorm.scdc" src-type="table"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#e58b15"
-		 layers="1"/>
+		 src-table="rxnr.bpck" src-type="table"
+		 dst-table="rxnr.df" dst-type="table"
+		 custom-color="#5805c5"
+		 layers="0"/>
+	<info object="rel_scdc_in" type="relationship"
+		 src-table="rxnr.scdc" src-type="table"
+		 dst-table="rxnr.&quot;in&quot;" dst-type="table"
+		 custom-color="#8e4f69"
+		 layers="0"/>
 	<info object="rel_scdc_pin" type="relationship"
-		 src-table="rxnorm.scdc" src-type="table"
-		 dst-table="rxnorm.pin" dst-type="table"
-		 custom-color="#dd4683"
-		 layers="1"/>
-	<info object="rel_scdf_df" type="relationship"
-		 src-table="rxnorm.scdf" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#f26e4a"
-		 layers="1"/>
+		 src-table="rxnr.scdc" src-type="table"
+		 dst-table="rxnr.pin" dst-type="table"
+		 custom-color="#294990"
+		 layers="0"/>
 	<info object="rel_scdg_dfg" type="relationship"
-		 src-table="rxnorm.scdg" src-type="table"
-		 dst-table="rxnorm.dfg" dst-type="table"
-		 custom-color="#d38595"
-		 layers="1"/>
-	<info object="rel_scdg_astr_scdg" type="relationship"
-		 src-table="rxnorm.scdg_astr" src-type="table"
-		 dst-table="rxnorm.scdg" dst-type="table"
-		 custom-color="#12b0fc"
-		 layers="1"/>
-	<info object="rel_sbdf_df" type="relationship"
-		 src-table="rxnorm.sbdf" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#342d28"
-		 layers="1"/>
-	<info object="rel_sbdg_dfg" type="relationship"
-		 src-table="rxnorm.sbdg" src-type="table"
-		 dst-table="rxnorm.dfg" dst-type="table"
-		 custom-color="#6f317c"
-		 layers="1"/>
-	<info object="rel_sbdg_astr_sbdg" type="relationship"
-		 src-table="rxnorm.sbdg_astr" src-type="table"
-		 dst-table="rxnorm.sbdg" dst-type="table"
-		 custom-color="#a191cb"
-		 layers="1"/>
-	<info object="rel_scd_sy_scd" type="relationship"
-		 src-table="rxnorm.scd_sy" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#f5bf15"
-		 layers="1"/>
-	<info object="rel_sbd_sy_sbd" type="relationship"
-		 src-table="rxnorm.sbd_sy" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#5c07cc"
-		 layers="1"/>
-	<info object="rel_mthspl_prod_scd_scd" type="relationship"
-		 src-table="rxnorm.mthspl_prod_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#1238a0"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_scd_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_scd" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#8158f2"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_sbd_sbd" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#ad6678"
-		 layers="2"/>
-	<info object="rel_mthspl_prod_sbd_mthspl_prod" type="relationship"
-		 src-table="rxnorm.mthspl_prod_sbd" src-type="table"
-		 dst-table="rxnorm.mthspl_prod" dst-type="table"
-		 custom-color="#030a8a"
-		 layers="2"/>
-	<info object="rel_sbd_scd_sbd" type="relationship"
-		 src-table="rxnorm.sbd_scd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#d7da9e"
-		 layers="1"/>
-	<info object="rel_sbd_scd_scd" type="relationship"
-		 src-table="rxnorm.sbd_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#bb0b9d"
-		 layers="1"/>
-	<info object="rel_scdc_sbd_scdc" type="relationship"
-		 src-table="rxnorm.scdc_sbd" src-type="table"
-		 dst-table="rxnorm.scdc" dst-type="table"
-		 custom-color="#012a42"
-		 layers="1"/>
-	<info object="rel_scdc_sbd_sbd" type="relationship"
-		 src-table="rxnorm.scdc_sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#9055a1"
-		 layers="1"/>
-	<info object="rel_scdc_scd_scdc" type="relationship"
-		 src-table="rxnorm.scdc_scd" src-type="table"
-		 dst-table="rxnorm.scdc" dst-type="table"
-		 custom-color="#432e22"
-		 layers="1"/>
-	<info object="rel_scdc_scd_scd" type="relationship"
-		 src-table="rxnorm.scdc_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#1f0b20"
-		 layers="1"/>
-	<info object="rel_scdc_sbdc_scdc" type="relationship"
-		 src-table="rxnorm.scdc_sbdc" src-type="table"
-		 dst-table="rxnorm.scdc" dst-type="table"
-		 custom-color="#9b7ae4"
-		 layers="1"/>
-	<info object="rel_scdc_sbdc_sbdc" type="relationship"
-		 src-table="rxnorm.scdc_sbdc" src-type="table"
-		 dst-table="rxnorm.sbdc" dst-type="table"
-		 custom-color="#08fd39"
-		 layers="1"/>
-	<info object="rel_scdf_ingr_scdf" type="relationship"
-		 src-table="rxnorm.scdf_ingr" src-type="table"
-		 dst-table="rxnorm.scdf" dst-type="table"
-		 custom-color="#0e9c57"
-		 layers="1"/>
-	<info object="rel_scdf_ingr_ingr" type="relationship"
-		 src-table="rxnorm.scdf_ingr" src-type="table"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#17a7d2"
-		 layers="1"/>
-	<info object="rel_scdf_df_df" type="relationship"
-		 src-table="rxnorm.scdf_df" src-type="table"
-		 dst-table="rxnorm.df" dst-type="table"
-		 custom-color="#21f046"
-		 layers="1"/>
-	<info object="rel_scdf_df_scdf" type="relationship"
-		 src-table="rxnorm.scdf_df" src-type="table"
-		 dst-table="rxnorm.scdf" dst-type="table"
-		 custom-color="#a0e790"
-		 layers="1"/>
-	<info object="rel_scdf_scd_scdf" type="relationship"
-		 src-table="rxnorm.scdf_scd" src-type="table"
-		 dst-table="rxnorm.scdf" dst-type="table"
-		 custom-color="#ebe784"
-		 layers="1"/>
-	<info object="rel_scdf_scd_scd" type="relationship"
-		 src-table="rxnorm.scdf_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#659442"
-		 layers="1"/>
+		 src-table="rxnr.scdg" src-type="table"
+		 dst-table="rxnr.dfg" dst-type="table"
+		 custom-color="#7312c2"
+		 layers="0"/>
 	<info object="rel_scdf_scdg_scdf" type="relationship"
-		 src-table="rxnorm.scdf_scdg" src-type="table"
-		 dst-table="rxnorm.scdf" dst-type="table"
-		 custom-color="#6da819"
-		 layers="1"/>
+		 src-table="rxnr.scdf_scdg" src-type="table"
+		 dst-table="rxnr.scdf" dst-type="table"
+		 custom-color="#66d75c"
+		 layers="0"/>
 	<info object="rel_scdf_scdg_scdg" type="relationship"
-		 src-table="rxnorm.scdf_scdg" src-type="table"
-		 dst-table="rxnorm.scdg" dst-type="table"
-		 custom-color="#983e71"
-		 layers="1"/>
-	<info object="rel_scdf_sbdf_scdf" type="relationship"
-		 src-table="rxnorm.scdf_sbdf" src-type="table"
-		 dst-table="rxnorm.scdf" dst-type="table"
-		 custom-color="#811d19"
-		 layers="1"/>
-	<info object="rel_scdf_sbdf_sbdf" type="relationship"
-		 src-table="rxnorm.scdf_sbdf" src-type="table"
-		 dst-table="rxnorm.sbdf" dst-type="table"
-		 custom-color="#0a47b2"
-		 layers="1"/>
-	<info object="rel_scdg_ingr_scdg" type="relationship"
-		 src-table="rxnorm.scdg_ingr" src-type="table"
-		 dst-table="rxnorm.scdg" dst-type="table"
-		 custom-color="#254ab8"
-		 layers="1"/>
-	<info object="rel_scdg_ingr_ingr" type="relationship"
-		 src-table="rxnorm.scdg_ingr" src-type="table"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#1dde84"
-		 layers="1"/>
-	<info object="rel_scdg_dfg_scdg" type="relationship"
-		 src-table="rxnorm.scdg_dfg" src-type="table"
-		 dst-table="rxnorm.scdg" dst-type="table"
-		 custom-color="#7f869b"
-		 layers="1"/>
-	<info object="rel_scdg_dfg_dfg" type="relationship"
-		 src-table="rxnorm.scdg_dfg" src-type="table"
-		 dst-table="rxnorm.dfg" dst-type="table"
-		 custom-color="#006354"
-		 layers="1"/>
-	<info object="rel_scdg_scd_scdg" type="relationship"
-		 src-table="rxnorm.scdg_scd" src-type="table"
-		 dst-table="rxnorm.scdg" dst-type="table"
-		 custom-color="#64b862"
-		 layers="1"/>
-	<info object="rel_scdg_scd_scd" type="relationship"
-		 src-table="rxnorm.scdg_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#485ca6"
-		 layers="1"/>
-	<info object="rel_scdg_sbdg_scdg" type="relationship"
-		 src-table="rxnorm.scdg_sbdg" src-type="table"
-		 dst-table="rxnorm.scdg" dst-type="table"
-		 custom-color="#3c7061"
-		 layers="1"/>
-	<info object="rel_scdg_sbdg_sbdg" type="relationship"
-		 src-table="rxnorm.scdg_sbdg" src-type="table"
-		 dst-table="rxnorm.sbdg" dst-type="table"
-		 custom-color="#f00237"
-		 layers="1"/>
-	<info object="rel_gpck_bpck_gpck" type="relationship"
-		 src-table="rxnorm.gpck_bpck" src-type="table"
-		 dst-table="rxnorm.gpck" dst-type="table"
-		 custom-color="#c7c609"
-		 layers="1"/>
-	<info object="rel_gpck_bpck_bpck" type="relationship"
-		 src-table="rxnorm.gpck_bpck" src-type="table"
-		 dst-table="rxnorm.bpck" dst-type="table"
-		 custom-color="#23c23f"
-		 layers="1"/>
-	<info object="rel_gpck_scd_gpck" type="relationship"
-		 src-table="rxnorm.gpck_scd" src-type="table"
-		 dst-table="rxnorm.gpck" dst-type="table"
-		 custom-color="#d1c7fb"
-		 layers="1"/>
-	<info object="rel_gpck_scd_scd" type="relationship"
-		 src-table="rxnorm.gpck_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#617dee"
-		 layers="1"/>
-	<info object="rel_bpck_scd_bpck" type="relationship"
-		 src-table="rxnorm.bpck_scd" src-type="table"
-		 dst-table="rxnorm.bpck" dst-type="table"
-		 custom-color="#d25d91"
-		 layers="1"/>
-	<info object="rel_bpck_scd_scd" type="relationship"
-		 src-table="rxnorm.bpck_scd" src-type="table"
-		 dst-table="rxnorm.scd" dst-type="table"
-		 custom-color="#1b58ee"
-		 layers="1"/>
-	<info object="rel_bpck_sbd_bpck" type="relationship"
-		 src-table="rxnorm.bpck_sbd" src-type="table"
-		 dst-table="rxnorm.bpck" dst-type="table"
-		 custom-color="#7f9e2d"
-		 layers="1"/>
-	<info object="rel_bpck_sbd_sbd" type="relationship"
-		 src-table="rxnorm.bpck_sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#7513c7"
-		 layers="1"/>
-	<info object="rel_sbd_bn_sbd" type="relationship"
-		 src-table="rxnorm.sbd_bn" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#e24f96"
-		 layers="1"/>
-	<info object="rel_sbd_bn_bn" type="relationship"
-		 src-table="rxnorm.sbd_bn" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#8c4439"
-		 layers="1"/>
-	<info object="rel_sbdc_sbd_sbdc" type="relationship"
-		 src-table="rxnorm.sbdc_sbd" src-type="table"
-		 dst-table="rxnorm.sbdc" dst-type="table"
-		 custom-color="#11a29c"
-		 layers="1"/>
-	<info object="rel_sbdc_sbd_sbd" type="relationship"
-		 src-table="rxnorm.sbdc_sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#ebec04"
-		 layers="1"/>
-	<info object="rel_sbdc_bn_sbdc" type="relationship"
-		 src-table="rxnorm.sbdc_bn" src-type="table"
-		 dst-table="rxnorm.sbdc" dst-type="table"
-		 custom-color="#e6614d"
-		 layers="1"/>
-	<info object="rel_sbdc_bn_bn" type="relationship"
-		 src-table="rxnorm.sbdc_bn" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#7f70c9"
-		 layers="1"/>
+		 src-table="rxnr.scdf_scdg" src-type="table"
+		 dst-table="rxnr.scdg" dst-type="table"
+		 custom-color="#c2d909"
+		 layers="0"/>
+	<info object="rel_sbdg_bn" type="relationship"
+		 src-table="rxnr.sbdg" src-type="table"
+		 dst-table="rxnr.bn" dst-type="table"
+		 custom-color="#ed46ad"
+		 layers="0"/>
+	<info object="rel_sbdg_dfg" type="relationship"
+		 src-table="rxnr.sbdg" src-type="table"
+		 dst-table="rxnr.dfg" dst-type="table"
+		 custom-color="#9b077a"
+		 layers="0"/>
+	<info object="rel_sbdg_scdg" type="relationship"
+		 src-table="rxnr.sbdg" src-type="table"
+		 dst-table="rxnr.scdg" dst-type="table"
+		 custom-color="#64f035"
+		 layers="0">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+	</info>
 	<info object="rel_sbdf_sbdg_sbdf" type="relationship"
-		 src-table="rxnorm.sbdf_sbdg" src-type="table"
-		 dst-table="rxnorm.sbdf" dst-type="table"
-		 custom-color="#284a91"
-		 layers="1"/>
+		 src-table="rxnr.sbdf_sbdg" src-type="table"
+		 dst-table="rxnr.sbdf" dst-type="table"
+		 custom-color="#c163bf"
+		 layers="0"/>
 	<info object="rel_sbdf_sbdg_sbdg" type="relationship"
-		 src-table="rxnorm.sbdf_sbdg" src-type="table"
-		 dst-table="rxnorm.sbdg" dst-type="table"
-		 custom-color="#3eba68"
-		 layers="1"/>
-	<info object="rel_sbdf_bn_sbdf" type="relationship"
-		 src-table="rxnorm.sbdf_bn" src-type="table"
-		 dst-table="rxnorm.sbdf" dst-type="table"
-		 custom-color="#4d6e04"
-		 layers="1"/>
-	<info object="rel_sbdf_bn_bn" type="relationship"
-		 src-table="rxnorm.sbdf_bn" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#9c8dfb"
-		 layers="1"/>
-	<info object="rel_sbdf_sbd_sbdf" type="relationship"
-		 src-table="rxnorm.sbdf_sbd" src-type="table"
-		 dst-table="rxnorm.sbdf" dst-type="table"
-		 custom-color="#df5752"
-		 layers="1"/>
-	<info object="rel_sbdf_sbd_sbd" type="relationship"
-		 src-table="rxnorm.sbdf_sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#099c61"
-		 layers="1"/>
-	<info object="rel_sbdg_bn_sbdg" type="relationship"
-		 src-table="rxnorm.sbdg_bn" src-type="table"
-		 dst-table="rxnorm.sbdg" dst-type="table"
-		 custom-color="#e6e6bc"
-		 layers="1"/>
-	<info object="rel_sbdg_bn_bn" type="relationship"
-		 src-table="rxnorm.sbdg_bn" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#71ccf3"
-		 layers="1"/>
+		 src-table="rxnr.sbdf_sbdg" src-type="table"
+		 dst-table="rxnr.sbdg" dst-type="table"
+		 custom-color="#36ccdf"
+		 layers="0"/>
 	<info object="rel_sbdg_sbd_sbdg" type="relationship"
-		 src-table="rxnorm.sbdg_sbd" src-type="table"
-		 dst-table="rxnorm.sbdg" dst-type="table"
-		 custom-color="#77a220"
-		 layers="1"/>
+		 src-table="rxnr.sbdg_sbd" src-type="table"
+		 dst-table="rxnr.sbdg" dst-type="table"
+		 custom-color="#da3c56"
+		 layers="0"/>
 	<info object="rel_sbdg_sbd_sbd" type="relationship"
-		 src-table="rxnorm.sbdg_sbd" src-type="table"
-		 dst-table="rxnorm.sbd" dst-type="table"
-		 custom-color="#bea0cb"
-		 layers="1"/>
-	<info object="rel_bn_ingr_bn" type="relationship"
-		 src-table="rxnorm.bn_ingr" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#9dbb68"
-		 layers="1"/>
-	<info object="rel_bn_ingr_ingr" type="relationship"
-		 src-table="rxnorm.bn_ingr" src-type="table"
-		 dst-table="rxnorm.ingr" dst-type="table"
-		 custom-color="#e2b063"
-		 layers="1"/>
-	<info object="rel_bn_pin_bn" type="relationship"
-		 src-table="rxnorm.bn_pin" src-type="table"
-		 dst-table="rxnorm.bn" dst-type="table"
-		 custom-color="#26a44b"
-		 layers="1"/>
-	<info object="rel_bn_pin_pin" type="relationship"
-		 src-table="rxnorm.bn_pin" src-type="table"
-		 dst-table="rxnorm.pin" dst-type="table"
-		 custom-color="#ac2484"
-		 layers="1"/>
+		 src-table="rxnr.sbdg_sbd" src-type="table"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#ed6687"
+		 layers="0"/>
+	<info object="rel_sbdc_scdc_sbdc" type="relationship"
+		 src-table="rxnr.sbdc_scdc" src-type="table"
+		 dst-table="rxnr.sbdc" dst-type="table"
+		 custom-color="#fa028a"
+		 layers="0"/>
+	<info object="rel_sbdc_scdc_scdc" type="relationship"
+		 src-table="rxnr.sbdc_scdc" src-type="table"
+		 dst-table="rxnr.scdc" dst-type="table"
+		 custom-color="#781309"
+		 layers="0"/>
+	<info object="rel_scd_sy_scd" type="relationship"
+		 src-table="rxnr.scd_sy" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#48143c"
+		 layers="0"/>
+	<info object="rel_sbd_sy_sbd" type="relationship"
+		 src-table="rxnr.sbd_sy" src-type="table"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#b3ce82"
+		 layers="0"/>
+	<info object="rel_scdc_scd_scdc" type="relationship"
+		 src-table="rxnr.scdc_scd" src-type="table"
+		 dst-table="rxnr.scdc" dst-type="table"
+		 custom-color="#052116"
+		 layers="0"/>
+	<info object="rel_scdc_scd_scd" type="relationship"
+		 src-table="rxnr.scdc_scd" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#6c3b2f"
+		 layers="0"/>
+	<info object="rel_scdg_scd_scdg" type="relationship"
+		 src-table="rxnr.scdg_scd" src-type="table"
+		 dst-table="rxnr.scdg" dst-type="table"
+		 custom-color="#3e12e3"
+		 layers="0"/>
+	<info object="rel_scdg_scd_scd" type="relationship"
+		 src-table="rxnr.scdg_scd" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#c34036"
+		 layers="0"/>
+	<info object="rel_gpck_scd_gpck" type="relationship"
+		 src-table="rxnr.gpck_scd" src-type="table"
+		 dst-table="rxnr.gpck" dst-type="table"
+		 custom-color="#706e3e"
+		 layers="0"/>
+	<info object="rel_gpck_scd_scd" type="relationship"
+		 src-table="rxnr.gpck_scd" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#f059e2"
+		 layers="0"/>
+	<info object="rel_bpck_scd_bpck" type="relationship"
+		 src-table="rxnr.bpck_scd" src-type="table"
+		 dst-table="rxnr.bpck" dst-type="table"
+		 custom-color="#53c99d"
+		 layers="0"/>
+	<info object="rel_bpck_scd_scd" type="relationship"
+		 src-table="rxnr.bpck_scd" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#fcafd7"
+		 layers="0"/>
+	<info object="rel_bpck_sbd_bpck" type="relationship"
+		 src-table="rxnr.bpck_sbd" src-type="table"
+		 dst-table="rxnr.bpck" dst-type="table"
+		 custom-color="#020ae6"
+		 layers="0"/>
+	<info object="rel_bpck_sbd_sbd" type="relationship"
+		 src-table="rxnr.bpck_sbd" src-type="table"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#caa3f2"
+		 layers="0"/>
+	<info object="rel_mthspl_sub_in" type="relationship"
+		 src-table="rxnr.mthspl_sub" src-type="table"
+		 dst-table="rxnr.&quot;in&quot;" dst-type="table"
+		 custom-color="#36e34f"
+		 layers="0"/>
+	<info object="rel_mthspl_sub_pin" type="relationship"
+		 src-table="rxnr.mthspl_sub" src-type="table"
+		 dst-table="rxnr.pin" dst-type="table"
+		 custom-color="#fb83af"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_scd" type="relationship"
+		 src-table="rxnr.mthspl_prod" src-type="table"
+		 dst-table="rxnr.scd" dst-type="table"
+		 custom-color="#158c89"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_sbd" type="relationship"
+		 src-table="rxnr.mthspl_prod" src-type="table"
+		 dst-table="rxnr.sbd" dst-type="table"
+		 custom-color="#5d6b84"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_gpck" type="relationship"
+		 src-table="rxnr.mthspl_prod" src-type="table"
+		 dst-table="rxnr.gpck" dst-type="table"
+		 custom-color="#624cc4"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_bpck" type="relationship"
+		 src-table="rxnr.mthspl_prod" src-type="table"
+		 dst-table="rxnr.bpck" dst-type="table"
+		 custom-color="#02059d"
+		 layers="0"/>
+	<info object="rel_mthspl_sub_setid_mthspl_sub" type="relationship"
+		 src-table="rxnr.mthspl_sub_setid" src-type="table"
+		 dst-table="rxnr.mthspl_sub" dst-type="table"
+		 custom-color="#5dee51"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_sub_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_sub" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#ad0bc7"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_sub_mthspl_ingr_type" type="relationship"
+		 src-table="rxnr.mthspl_prod_sub" src-type="table"
+		 dst-table="rxnr.mthspl_ingr_type" dst-type="table"
+		 custom-color="#ac7bab"
+		 layers="0">
+	<label ref-type="name-label">
+		<position x="94.9178" y="-9.40726"/>
+	</label>
+	</info>
+	<info object="rel_mthspl_prod_sub_mthspl_sub" type="relationship"
+		 src-table="rxnr.mthspl_prod_sub" src-type="table"
+		 dst-table="rxnr.mthspl_sub" dst-type="table"
+		 custom-color="#cc1864"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_dmspl_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_dmspl" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#591e7a"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_setid_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_setid" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#297767"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_ndc_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_ndc" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#860e65"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_labeler_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_labeler" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#f8bba2"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_labeltype_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_labeltype" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#a28139"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mktstat_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_mktstat" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#3de7ed"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mkteffth_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_mkteffth" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#4eae75"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mktefftl_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_mktefftl" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#c3de86"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mktcat_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_mktcat" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#07e49a"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mktcat_mthspl_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_prod_mktcat" src-type="table"
+		 dst-table="rxnr.mthspl_mktcat" dst-type="table"
+		 custom-color="#2bd881"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mktcat_code_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_mktcat_code" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#40e902"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_mktcat_code_mthspl_mktcat" type="relationship"
+		 src-table="rxnr.mthspl_prod_mktcat_code" src-type="table"
+		 dst-table="rxnr.mthspl_mktcat" dst-type="table"
+		 custom-color="#73044b"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_pillattr_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_pillattr" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#502871"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_pillattr_mthspl_pillattr" type="relationship"
+		 src-table="rxnr.mthspl_prod_pillattr" src-type="table"
+		 dst-table="rxnr.mthspl_pillattr" dst-type="table"
+		 custom-color="#47726a"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_dcsa_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_dcsa" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#bd7256"
+		 layers="0"/>
+	<info object="rel_mthspl_prod_nhric_mthspl_prod" type="relationship"
+		 src-table="rxnr.mthspl_prod_nhric" src-type="table"
+		 dst-table="rxnr.mthspl_prod" dst-type="table"
+		 custom-color="#239bb1"
+		 layers="0"/>
 </metadata>
