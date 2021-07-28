@@ -8,7 +8,7 @@ $$ language sql;
 
 create function drug_name(p_drug_rxcui varchar) returns varchar as $$
 select d.str
-from rxnorig.rxnconso d
+from rxno.rxnconso d
 where d.rxcui = p_drug_rxcui and d.tty in ('SBD','SCD') and d.sab='RXNORM';
 $$ language sql;
 
@@ -18,13 +18,13 @@ select
   d.rxaui,
   d.tty,
   d.str as name,
-  (select psn.str from rxnorig.rxnconso psn where psn.tty = 'PSN' and psn.rxcui = d.rxcui) prescribable_name,
+  (select psn.str from rxno.rxnconso psn where psn.tty = 'PSN' and psn.rxcui = d.rxcui) prescribable_name,
   d.suppress,
   case
-    when exists(select 1 from rxnorig.rxnrel where rela = 'has_quantified_form' and rxcui1 = d.rxcui) then 'Q'
-    when exists(select 1 from rxnorig.rxnrel where rela = 'quantified_form_of' and rxcui1 = d.rxcui) then 'UQ'
+    when exists(select 1 from rxno.rxnrel where rela = 'has_quantified_form' and rxcui1 = d.rxcui) then 'Q'
+    when exists(select 1 from rxno.rxnrel where rela = 'quantified_form_of' and rxcui1 = d.rxcui) then 'UQ'
   end quantification
-from rxnorig.rxnconso d
+from rxno.rxnconso d
 where d.sab='RXNORM' and d.tty in ('SBD','SCD')
 ;
 
@@ -54,7 +54,7 @@ select
   d.rxcui,
   (
     select rxcui1
-    from rxnorig.rxnrel rel
+    from rxno.rxnrel rel
     where rel.rela = 'quantified_form_of'
     and rel.rxcui2 = d.rxcui
   ) non_quantified_rxcui,
@@ -65,13 +65,13 @@ select
   case when d.tty = 'SCD'
     then (
       select rxcui1
-      from rxnorig.rxnrel rel
+      from rxno.rxnrel rel
       where rel.rela = 'quantified_form_of'
       and rel.rxcui2 = d.rxcui
     )
     else (
       select rxcui1
-      from rxnorig.rxnrel rel
+      from rxno.rxnrel rel
       where rel.rela = 'quantified_form_of'
       and rel.rxcui2 in (select sbd.scd_rxcui from sbd where sbd.rxcui = d.rxcui)
     )

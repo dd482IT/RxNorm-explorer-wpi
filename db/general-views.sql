@@ -37,7 +37,7 @@ join scdc on scdc.rxcui = scdc_scd.scdc_rxcui
 select count(*) from scdf_in_v; -- 23059
 select count(*) from (
 select scdf.rxcui, i.rxcui
-from rxnorig.rxnrel r
+from rxno.rxnrel r
 join scdf on scdf.rxcui = r.rxcui1
 join "in" i on i.rxcui = r.rxcui2
 where r.rela = 'ingredient_of' and r.sab = 'RXNORM'
@@ -56,7 +56,7 @@ join "in" i on scdc.in_rxcui = i.rxcui
 select count(*) from scdg_in_v; -- 27000
 select count(*) from (
 select scdg.rxcui, i.rxcui
-from rxnorig.rxnrel r
+from rxno.rxnrel r
 join scdg on scdg.rxcui = r.rxcui1
 join "in" i on i.rxcui = r.rxcui2
 where r.rela = 'ingredient_of' and r.sab = 'RXNORM'
@@ -77,7 +77,7 @@ join sbdg on sbdg.bn_rxcui = sbdf.bn_rxcui and sbdg.dfg_rxcui = fg.dfg_rxcui
 select count(*) from sbdf_sbdg_v;  -- 21541
 select count(*) from (
 select f.rxcui, g.rxcui
-from rxnorig.rxnrel r
+from rxno.rxnrel r
 join sbdf f on f.rxcui = r.rxcui1
 join sbdg g on g.rxcui = r.rxcui2
 where r.sab = 'RXNORM' and r.rela = 'inverse_isa'
@@ -97,7 +97,7 @@ join scdc_scd on scdc_scd.scd_rxcui = sbd.scd_rxcui
 select count(*) from sbdc_scdc_v; -- 26051
 select count(*) from (
 select scdc.rxcui, sbdc.rxcui
-from rxnorig.rxnrel r
+from rxno.rxnrel r
 join scdc on scdc.rxcui = r.rxcui1
 join sbdc on sbdc.rxcui = r.rxcui2
 where r.sab = 'RXNORM' and r.rela = 'tradename_of'
@@ -115,7 +115,7 @@ join sbd on sbd.bn_rxcui = sbdg.bn_rxcui and sbd.df_rxcui = df_dfg.df_rxcui
 select count(*) from sbdg_sbd_v; --35068
 select count(*) from (
 select g.rxcui, d.rxcui
-from rxnorig.rxnrel r
+from rxno.rxnrel r
 join sbdg g on g.rxcui = r.rxcui1
 join sbd d on d.rxcui = r.rxcui2
 where r.sab = 'RXNORM' and r.rela = 'isa'
