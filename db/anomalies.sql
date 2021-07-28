@@ -198,3 +198,24 @@ create table ingrset_pin (
 );
 */
 
+-- Why single scdf's involve drugs with multiple different ingredient sets?
+select scdf.rxcui, array_agg(distinct ingrset.tty) ingrset_ttys, array_agg(scd.ingrset_rxcui), array_agg(scd.name) scd_names
+from scd
+join scdf on scdf.rxcui = scd.scdf_rxcui
+join ingrset on ingrset.rxcui = scd.ingrset_rxcui
+group by scdf.rxcui
+having count(distinct scd.ingrset_rxcui) > 1
+;
+
+/* Ignored scdg/sbdg attribute: RXN_AVAILABLE_STRENGTH
+select scdg.rxcui, s.atv
+from rxnsat s
+join scdg on scdg.rxcui = s.rxcui
+where s.sab = 'RXNORM' and s.atn = 'RXN_AVAILABLE_STRENGTH';
+
+Ignoring this attribute because it's not clear/defined what the ingredients are that
+have the listed strengths that are /-separated. This information is better found by
+navigating from the scdg to the scd to the scdc's.
+*/
+
+
