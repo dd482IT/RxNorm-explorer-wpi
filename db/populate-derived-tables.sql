@@ -376,9 +376,7 @@ where r.sab = 'RXNORM' and r.rela = 'consists_of'
 ;
 
 insert into scdf_scdg (scdf_rxcui, scdg_rxcui)
-select
- scdf.rxcui,
- scdg.rxcui
+select scdf.rxcui, scdg.rxcui
 from rxno.rxnrel r
 join scdf on scdf.rxcui = r.rxcui1
 join scdg on scdg.rxcui = r.rxcui2

@@ -250,26 +250,12 @@ create table scdc_scd (
 );
 create index ix_scdscdc_scd on scdc_scd(scd_rxcui);
 
-create table scdf_scd (
-  scdf_rxcui varchar(12) not null references scdf,
-  scd_rxcui varchar(12) not null references scd,
-  constraint pk_scdfscd_cui primary key (scdf_rxcui, scd_rxcui)
-);
-create index ix_scdfscd_scd on scdf_scd(scd_rxcui);
-
 create table scdg_scd (
   scdg_rxcui varchar(12) not null references scdg,
   scd_rxcui varchar(12) not null references scd,
   constraint pk_scdgscd_cui primary key (scdg_rxcui, scd_rxcui)
 );
 create index ix_scdgscd_scd on scdg_scd(scd_rxcui);
-
-create table gpck_bpck (
-  gpck_rxcui varchar(12) not null references gpck,
-  bpck_rxcui varchar(12) not null references bpck,
-  constraint pk_gpckbpck_cui primary key (gpck_rxcui, bpck_rxcui)
-);
-create index ix_gpckbpck_bpck on gpck_bpck(bpck_rxcui);
 
 create table gpck_scd (
   gpck_rxcui varchar(12) not null references gpck,
