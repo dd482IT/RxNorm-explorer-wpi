@@ -90,8 +90,12 @@ where exists(
         select 1 from mthspl_rxprod_v rxp where rxp.rxcui = d.rxcui
       )
 and d.tty = 'SCD'
-and (d.quantified = 'Y' or d.quantified is null)
 ;
+
+select distinct s.name, mp.name, mp.prod_uniis, mp.set_ids, mp.label_types, mp.labelers, mp.mkt_cat_codes, mp.full_ndc_codes
+from sbd s
+join mthspl_rxprod_v mp on s.rxcui = mp.rxcui
+where mp.name ilike '%abacavir%';
 
 --human rx rxncuis from mthspl not in drug: 2,682
 select
