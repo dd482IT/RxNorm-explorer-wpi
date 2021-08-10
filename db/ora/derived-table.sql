@@ -65,8 +65,8 @@ create table scd (
   qual_distinct varchar(500),
   suppress varchar(1) not null,
   quantity varchar(100),
-  human_drug int,
-  vet_drug int,
+  human_drug varchar(1),
+  vet_drug varchar(1),
   unquantified_form_rxcui varchar(12) references scd
 );
 create index ix_scd_df on scd(df_rxcui);
@@ -119,8 +119,8 @@ create table sbd (
   qual_distinct varchar(500),
   suppress varchar(1) not null,
   quantity varchar(100),
-  human_drug int,
-  vet_drug int,
+  human_drug varchar(1),
+  vet_drug varchar(1),
   unquantified_form_rxcui varchar(12) references sbd
 );
 create index ix_sbd_scd on sbd(scd_rxcui);
@@ -137,7 +137,7 @@ create table gpck (
   prescribable_name varchar(2000),
   df_rxcui varchar(12) not null references df,
   suppress varchar(1) not null,
-  human_drug int
+  human_drug varchar(1)
 );
 create index ix_gpck_df on gpck(df_rxcui);
 --TODO CHANGE
@@ -149,7 +149,7 @@ create table bpck (
   prescribable_name varchar(2000),
   df_rxcui varchar(12) not null references df,
   suppress varchar(1) not null,
-  human_drug int
+  human_drug varchar(1)
 );
 create index ix_bpck_gpck on bpck(gpck_rxcui);
 create index ix_bpck_df on bpck(df_rxcui);
@@ -311,7 +311,7 @@ create table mthspl_prod (
   rxaui varchar(12) not null primary key,
   rxcui varchar(12) not null,
   code varchar(13), -- Most of these are NDCs without packaging (3rd part), some are not NDCs at all.
-  rxnorm_created int not null,
+  rxnorm_created varchar(1) not null,
   name varchar(4000) not null,
   scd_rxcui varchar(12) references scd,   -- | mutually exclusive
   sbd_rxcui varchar(12) references sbd,   -- |

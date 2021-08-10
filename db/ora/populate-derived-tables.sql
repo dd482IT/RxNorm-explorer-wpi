@@ -169,9 +169,9 @@ select
   c.suppress,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUANTITY'),
   case when exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
-      then 1 else 0 end,
+      then '1' else '0' end,
   case when exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_VET_DRUG')
-      then 1 else 0 end,
+      then '1' else '0' end,
   (select scd2.rxcui from rxnrel r join rxnconso scd2 on scd2.rxcui = r.rxcui1
    where r.sab = 'RXNORM' and r.rela = 'quantified_form_of' and r.rxcui2 = c.rxcui
      and scd2.sab = 'RXNORM' and scd2.tty = 'SCD') uqform
@@ -238,9 +238,9 @@ select
   c.suppress,
   (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_QUANTITY') quantity,
   case when exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
-      then 1 else 0 end human,
+      then '1' else '0' end human,
   case when exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_VET_DRUG')
-  then 1 else 0 end vet,
+  then '1' else '0' end vet,
   (select sbd2.rxcui
    from rxnrel r
    join rxnconso sbd2 on sbd2.rxcui = r.rxcui1
@@ -261,7 +261,7 @@ select
    where r.sab = 'RXNORM' and r.rela = 'dose_form_of' and c.rxcui = r.rxcui1) df_rxcui,
   c.suppress,
   case when exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
-    then 1 else 0 end
+    then '1' else '0' end
 from rxnconso c
 where c.sab='RXNORM' and c.tty = 'GPCK'
 ;
@@ -278,7 +278,7 @@ select
    where r.sab = 'RXNORM' and r.rela = 'dose_form_of' and c.rxcui = r.rxcui1) df_rxcui,
   c.suppress,
   case when exists (select s.atv from rxnsat s where s.sab = 'RXNORM' and s.rxcui = c.rxcui and s.atn = 'RXN_HUMAN_DRUG')
-    then 1 else 0 end
+    then '1' else '0' end
 from rxnconso c
 where c.sab='RXNORM' and c.tty = 'BPCK'
 ;
@@ -453,7 +453,7 @@ select
   c.rxaui,
   c.rxcui,
   case when c.code <> 'NOCODE' then c.code end,
-  case when c.tty = 'MTH_RXN_DP' then 1 else 0 end,
+  case when c.tty = 'MTH_RXN_DP' then '1' else '0' end,
   c.str as name,
   (select d.rxcui from scd d where d.rxcui = c.rxcui) scd_rxcui,
   (select d.rxcui from sbd d where d.rxcui = c.rxcui) sbd_rxcui,
