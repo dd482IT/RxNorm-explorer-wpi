@@ -35,8 +35,6 @@ from sbd
 join df on df.rxcui = sbd.df_rxcui
 ;
 
-
---No oracle privileges to create materialized views
 create materialized view ndc_scd_mv as
 select distinct pc.two_part_ndc, d.rxcui scd_rxcui
 from mthspl_prod_ndc pc
