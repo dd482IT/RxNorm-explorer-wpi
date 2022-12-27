@@ -13,8 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@SpringBootApplication
-@EnableScheduling
 public class WebServicesApp
 {
   public static void main(String[] args)
@@ -28,7 +26,6 @@ public class WebServicesApp
   // either because the app isn't running yet (from the use of a stashed url for example) or the browser page is being
   // force refreshed. So we send index.html for resources that aren't found, to start the client app and let it try to
   // interpret the link once it's started.
-  @Bean
   @SuppressWarnings("nullness") // Null returns are allowed from ErrorViewResolver.resolveErrorView().
   @Nullable ErrorViewResolver serveAppHtmlMissingResources()
   {

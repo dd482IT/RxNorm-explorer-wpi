@@ -14,22 +14,17 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
-@Configuration
 public class DatabaseConfig
 {
   protected final Logger log = LoggerFactory.getLogger(DatabaseConfig.class);
 
-  @Value("${jdbc.driverClassName}")
-  private @NotEmpty String driverClassName;
+  private String driverClassName;
 
-  @Value("${jdbc.url}")
-  private @NotEmpty String url;
+  private String url;
 
-  @Value("${jdbc.username}")
-  private @NotEmpty String username;
+  private String username;
 
-  @Value("${jdbc.password}")
-  private @NotEmpty String password;
+  private String password;
 
   @SuppressWarnings("initialization.fields.uninitialized")
   // Spring Framework should enforce the field initialization constraints.
@@ -44,7 +39,6 @@ public class DatabaseConfig
 
   public enum DatabaseType { POSTGRESQL, ORACLE }
 
-  @Bean
   public DataSource getDataSource()
   {
     return
@@ -79,14 +73,14 @@ public class DatabaseConfig
     }
   }
 
-  public @Nullable Object optionalJsonParamValue(@Nullable String maybeContent)
+  public Object optionalJsonParamValue(String maybeContent)
   {
     return makeJsonParamValueImpl(maybeContent);
   }
 
   public Object jsonParamValue(String content)
   {
-    @Nullable Object paramVal = makeJsonParamValueImpl(content);
+    Object paramVal = makeJsonParamValueImpl(content);
     if (paramVal == null)
       throw new RuntimeException("Expected content, got null.");
     else
@@ -95,14 +89,14 @@ public class DatabaseConfig
 
   public Object jsonParamValue(ObjectNode content)
   {
-    @Nullable Object paramVal = makeJsonParamValueImpl(content.toString());
+    Object paramVal = makeJsonParamValueImpl(content.toString());
     if (paramVal == null)
       throw new RuntimeException("Expected content, got null.");
     else
       return paramVal;
   }
 
-  private @Nullable Object makeJsonParamValueImpl(@Nullable String content)
+  private Object makeJsonParamValueImpl(String content)
   {
     try
     {

@@ -24,7 +24,7 @@ public final class Json
       .build();
   }
 
-  public static <T> @Nullable T readJsonn(ObjectMapper objMapper, @Nullable String s, Class<T> c)
+  public static <T> T readJsonn(ObjectMapper objMapper, String s, Class<T> c)
   {
     if (s == null)
       return null;
@@ -88,20 +88,20 @@ public final class Json
     return curr;
   }
 
-  public static @Nullable ObjectNode getJsonObjectPart(ObjectNode sourceNode, List<String> partPath)
+  public static ObjectNode getJsonObjectPart(ObjectNode sourceNode, List<String> partPath)
   {
     JsonNode partNode = getJsonPart(sourceNode, partPath);
     return (partNode != null) ? (ObjectNode) partNode : null;
   }
 
 
-  public static @Nullable Long getJsonLongPart(ObjectNode sourceNode, List<String> partPath)
+  public static Long getJsonLongPart(ObjectNode sourceNode, List<String> partPath)
   {
     JsonNode partNode = getJsonPart(sourceNode, partPath);
     return (partNode != null) ? partNode.longValue() : null;
   }
 
-  public static @Nullable String getJsonStringPart(ObjectNode sourceNode, List<String> partPath)
+  public static String getJsonStringPart(ObjectNode sourceNode, List<String> partPath)
   {
     JsonNode partNode = getJsonPart(sourceNode, partPath);
     return (partNode != null) ? partNode.textValue() : null;

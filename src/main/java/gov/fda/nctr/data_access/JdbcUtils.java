@@ -17,7 +17,7 @@ import gov.fda.nctr.util.Nullables;
 
 public final class JdbcUtils
 {
-  public static <T> SqlParameterValue optionalSqlParamVal(JDBCType jdbcType, @Nullable T val)
+  public static <T> SqlParameterValue optionalSqlParamVal(JDBCType jdbcType, T val)
   {
     return new SqlParameterValue(jdbcType.getVendorTypeNumber(), val);
   }
@@ -78,13 +78,13 @@ public final class JdbcUtils
       return key.longValue();
   }
 
-  public static void setNullableParam(PreparedStatement ps, int paramNum, @Nullable String val) throws SQLException
+  public static void setNullableParam(PreparedStatement ps, int paramNum, String val) throws SQLException
   {
     if (val != null) ps.setString(paramNum, val);
     else ps.setNull(paramNum, Types.VARCHAR);
   }
 
-  public static void setNullableParam(PreparedStatement ps, int paramNum, @Nullable Long val) throws SQLException
+  public static void setNullableParam(PreparedStatement ps, int paramNum, Long val) throws SQLException
   {
     if (val != null) ps.setLong(paramNum, val);
     else ps.setNull(paramNum, Types.BIGINT);

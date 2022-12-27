@@ -16,10 +16,9 @@ import gov.fda.nctr.models.dto.AppVersion;
 import gov.fda.nctr.util.Nullables;
 
 
-@Service
 public class JarAppVersionService implements AppVersionService
 {
-  private @Nullable AppVersion appVersion;
+  private AppVersion appVersion;
 
   private final Logger log = LoggerFactory.getLogger(JarAppVersionService.class);
 
@@ -54,7 +53,7 @@ public class JarAppVersionService implements AppVersionService
   }
 
   @Override
-  public @Nullable AppVersion getAppVersion()
+  public AppVersion getAppVersion()
   {
     return appVersion;
   }

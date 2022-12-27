@@ -6,5 +6,5 @@ import gov.fda.nctr.models.dto.AppVersion;
 
 public interface AppVersionService
 {
-  @Nullable AppVersion getAppVersion();
+  AppVersion getAppVersion();
 }

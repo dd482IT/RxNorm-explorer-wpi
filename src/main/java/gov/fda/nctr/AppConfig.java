@@ -8,17 +8,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 
-@Configuration
 public class AppConfig
 {
   public AppConfig() { }
 
   protected final Logger log = LoggerFactory.getLogger(AppConfig.class);
 
-  @Value("${app.example-prop}")
-  private @Nullable String exampleProp;
+  private String exampleProp;
 
-  public @Nullable String getExampleProp()
+  public String getExampleProp()
   {
     return exampleProp;
   }

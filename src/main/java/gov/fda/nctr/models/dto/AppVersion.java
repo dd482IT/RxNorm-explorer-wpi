@@ -6,46 +6,41 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 
 public class AppVersion
 {
-  @JsonAlias("git.build.time")
-  private @Nullable String buildTimestamp;
+  private String buildTimestamp;
 
-  @JsonAlias("git.build.user.email")
-  private @Nullable String buildUserEmail;
+  private String buildUserEmail;
 
-  @JsonAlias("git.build.user.name")
-  private @Nullable String buildUserName;
+  private String buildUserName;
 
-  @JsonAlias("git.commit.id.abbrev")
-  private @Nullable String commitId;
+  private String commitId;
 
-  @JsonAlias("git.commit.time")
-  private @Nullable String commitTimestamp;
+  private String commitTimestamp;
 
   public AppVersion()
   {
   }
 
-  public @Nullable String getBuildTimestamp()
+  public String getBuildTimestamp()
   {
     return buildTimestamp;
   }
 
-  public @Nullable String getBuildUserEmail()
+  public String getBuildUserEmail()
   {
     return buildUserEmail;
   }
 
-  public @Nullable String getBuildUserName()
+  public String getBuildUserName()
   {
     return buildUserName;
   }
 
-  public @Nullable String getCommitId()
+  public String getCommitId()
   {
     return commitId;
   }
 
-  public @Nullable String getCommitTimestamp()
+  public String getCommitTimestamp()
   {
     return commitTimestamp;
   }

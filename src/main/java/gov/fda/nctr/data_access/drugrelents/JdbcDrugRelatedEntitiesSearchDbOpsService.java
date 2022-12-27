@@ -13,7 +13,6 @@ import static gov.fda.nctr.data_access.JdbcUtils.Params.params;
 import static gov.fda.nctr.data_access.JdbcUtils.jsonObjectRowMapper;
 import static gov.fda.nctr.util.Json.makeJsonObjectMapper;
 
-@Service
 public class JdbcDrugRelatedEntitiesSearchDbOpsService implements DrugRelatedEntitiesSearchDbOpsService
 {
   private final NamedParameterJdbcTemplate jdbc;

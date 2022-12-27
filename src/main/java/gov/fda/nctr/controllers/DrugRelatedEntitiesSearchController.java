@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import gov.fda.nctr.models.dto.NdcRelatedEntities;
 import gov.fda.nctr.data_access.drugrelents.DrugRelatedEntitiesSearchService;
 
-@RestController
-@RequestMapping("/api/drug-rel-ents")
 public class DrugRelatedEntitiesSearchController
 {
   private final DrugRelatedEntitiesSearchService searchSvc;
@@ -26,10 +24,9 @@ public class DrugRelatedEntitiesSearchController
     this.searchSvc = searchSvc;
   }
 
-  @PostMapping("for-ndcs")
   public List<NdcRelatedEntities> getNdcRelatedEntities
     (
-      @RequestBody Set<String> ndcs
+      Set<String> ndcs
     )
   {
     return searchSvc.getNdcRelatedEntities(ndcs);

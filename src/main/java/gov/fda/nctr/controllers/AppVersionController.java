@@ -8,8 +8,6 @@ import gov.fda.nctr.models.dto.AppVersion;
 import gov.fda.nctr.util.Nullables;
 
 
-@RestController
-@RequestMapping("/api/app-version")
 public class AppVersionController
 {
   private AppVersionService appVersionService;
@@ -19,7 +17,6 @@ public class AppVersionController
     this.appVersionService = appVersionService;
   }
 
-  @GetMapping("/")
   public AppVersion getApplicationVersion()
   {
     AppVersion ver = appVersionService.getAppVersion();

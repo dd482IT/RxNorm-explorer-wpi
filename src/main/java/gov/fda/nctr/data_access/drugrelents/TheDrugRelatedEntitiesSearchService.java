@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import gov.fda.nctr.models.dto.NdcRelatedEntities;
 
-@Service
 public class TheDrugRelatedEntitiesSearchService implements DrugRelatedEntitiesSearchService
 {
   private final DrugRelatedEntitiesSearchDbOpsService dbOps;
