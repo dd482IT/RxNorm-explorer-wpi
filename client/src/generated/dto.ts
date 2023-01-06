@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.19.577 on 2021-07-19 15:50:40.
+// Generated using typescript-generator version 2.19.577 on 2022-12-27 17:26:13.
 
 export interface AppVersion {
     buildTimestamp?: Nullable<string>;
@@ -13,6 +13,22 @@ export interface AppVersion {
 export interface NdcRelatedEntities {
     ndc: string;
     scds: Scd[];
+    sbds: Sbd[];
+}
+
+export interface Sbd {
+    rxcui: string;
+    name: string;
+    prescribableName: string;
+    rxtermForm: string;
+    dosageForm: string;
+    availableStrengths: string;
+    qualDistinct: string;
+    quantity: string;
+    humanDrug: boolean;
+    vetDrug: boolean;
+    unquantifiedFormRxcui: string;
+    suppress: string;
 }
 
 export interface Scd {
