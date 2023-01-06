@@ -17,7 +17,7 @@
   <properties>
     <java.release>11</java.release>
     <nodejs.version>v14.16.1</nodejs.version>
-    <checkerFrameworkVersion>3.1.1</checkerFrameworkVersion>
+    <checkerFrameworkVersion>3.29.1-SNAPSHOT</checkerFrameworkVersion>
     <pg.driver.version>42.2.20</pg.driver.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -97,7 +97,7 @@
     <dependency>
       <groupId>org.checkerframework</groupId>
       <artifactId>checker-qual</artifactId>
-      <version>3.13.0</version>
+      <version>3.29.1-SNAPSHOT</version>
     </dependency>
     <dependency> <!-- Included to silence missing enum warning related to nullable annotation. -->
       <groupId>com.google.code.findbugs</groupId>
@@ -141,14 +141,15 @@
           <!--
             <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
           -->
-          <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
+          <annotationProcessor>org.checkerframework.common.util.count.AnnotationStatistics</annotationProcessor>
           </annotationProcessors>
           <compilerArgs>
             <arg>-parameters</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
             <arg>-Alint</arg>
             <arg>-Aannotations</arg>
-            <arg>-Anolocations</arg>
+				    <arg>-Anolocations</arg>
+            <arg>-Aannotationserror</arg> 
           </compilerArgs>
           <showWarnings>true</showWarnings>
         </configuration>
