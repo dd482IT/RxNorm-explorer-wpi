@@ -138,13 +138,19 @@
             </path>
           </annotationProcessorPaths>
           <annotationProcessors>
+          <!--
             <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
+          -->
+          <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
           </annotationProcessors>
           <compilerArgs>
             <arg>-parameters</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
             <arg>-Alint</arg>
+            <arg>-Aannotations</arg>
+            <arg>-Anolocations</arg>
           </compilerArgs>
+          <showWarnings>true</showWarnings>
         </configuration>
       </plugin>
       <!-- Generate client-side type definitions (Typescript) from web services dto classes (Java).
