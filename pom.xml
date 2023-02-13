@@ -97,7 +97,7 @@
     <dependency>
       <groupId>org.checkerframework</groupId>
       <artifactId>checker-qual</artifactId>
-      <version>3.29.1-SNAPSHOT</version>
+      <version>3.30.1-SNAPSHOT</version>
     </dependency>
     <dependency> <!-- Included to silence missing enum warning related to nullable annotation. -->
       <groupId>com.google.code.findbugs</groupId>
