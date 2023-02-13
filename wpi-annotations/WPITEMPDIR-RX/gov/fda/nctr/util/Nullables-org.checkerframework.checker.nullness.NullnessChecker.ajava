@@ -65,7 +65,7 @@ public final class Nullables {
     }
 
     @org.checkerframework.dataflow.qual.Pure
-    public static <T> T or(T t, T defaultVal) {
+    public static <T> @org.checkerframework.checker.nullness.qual.NonNull T or(T t, T defaultVal) {
         if (t != null)
             return t;
         else
