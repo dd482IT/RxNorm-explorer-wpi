@@ -1,161 +1,243 @@
-dan@dan-ubuntu:~/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi$ ./wpi-copy.sh 
-entering a new iteration
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------< gov.fda.nctr:rxnorm-explorer >--------------------
-[INFO] Building rxnorm-explorer 0.1.0-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- git-commit-id-plugin:4.0.0:revision (default) @ rxnorm-explorer ---
-[INFO] 
-[INFO] --- git-commit-id-plugin:4.0.0:revision (get-git-info) @ rxnorm-explorer ---
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ rxnorm-explorer ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 1 resource
-[INFO] Copying 0 resource
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ rxnorm-explorer ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 25 source files to /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/target/classes
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/DatabaseOps.java:[97,9] [purity.deterministic.void.method] a method without return value cannot be deterministic
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[46,23] [argument] incompatible argument for parameter driverClassName of driverClassName.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[47,11] [argument] incompatible argument for parameter url of url.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[48,16] [argument] incompatible argument for parameter username of username.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[49,16] [argument] incompatible argument for parameter password of password.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[55,8] [dereference.of.nullable] dereference of possibly-null reference driverClassName
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
-  found   : T extends @Initialized @Nullable Object
-  required: @Initialized @NonNull Object
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
-  found   : T extends @Initialized @Nullable Object
-  required: @Initialized @NonNull Object
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
   type of expression: null (NullType)
   method return type: T extends @Initialized @Nullable Object
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[94,30] [return] incompatible types in return.
+  type of expression: @Initialized @Nullable ObjectNode
+  method return type: @Initialized @NonNull ObjectNode
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[101,30] [return] incompatible types in return.
+  type of expression: @Initialized @Nullable Long
+  method return type: @Initialized @NonNull Long
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[107,30] [return] incompatible types in return.
+  type of expression: @Initialized @Nullable String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[31,42] [argument] incompatible argument for parameter content of readValue.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/AppConfig.java:[13,9] [initialization.fields.uninitialized] the constructor does not initialize fields: exampleProp
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[19,9] [initialization.fields.uninitialized] the constructor does not initialize fields: buildTimestamp, buildUserEmail, buildUserName, commitId, commitTimestamp
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[40,84] [dereference.of.nullable] dereference of possibly-null reference Nullables.requireNonNull(JdbcUtils.class.getClassLoader())
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[42,66] [argument] incompatible argument for parameter in of InputStreamReader.
+  found   : @Initialized @Nullable InputStream
+  required: @Initialized @NonNull InputStream
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[14,21] [return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[19,21] [return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[32,56] [dereference.of.nullable] dereference of possibly-null reference classLoader
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
   found   : null (NullType)
-  required: @Initialized @MonotonicNonNull AppVersion
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
+  required: @Initialized @NonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
   found   : @Initialized @Nullable AppVersion
-  required: @Initialized @MonotonicNonNull AppVersion
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
+  required: @Initialized @NonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
   found   : null (NullType)
-  required: @Initialized @MonotonicNonNull AppVersion
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[34,21] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jdbc.query not allowed in deterministic side-effect-free method
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[36,12] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting params not allowed in deterministic side-effect-free method
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[37,25] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jsonObjectRowMapper not allowed in deterministic side-effect-free method
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.578 s
-[INFO] Finished at: 2023-01-10T23:06:34-05:00
-[INFO] ------------------------------------------------------------------------
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------< gov.fda.nctr:rxnorm-explorer >--------------------
-[INFO] Building rxnorm-explorer 0.1.0-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ rxnorm-explorer ---
-[INFO] Deleting /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/target
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.286 s
-[INFO] Finished at: 2023-01-10T23:06:35-05:00
-[INFO] ------------------------------------------------------------------------
-entering a new iteration
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------< gov.fda.nctr:rxnorm-explorer >--------------------
-[INFO] Building rxnorm-explorer 0.1.0-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- git-commit-id-plugin:4.0.0:revision (default) @ rxnorm-explorer ---
-[INFO] 
-[INFO] --- git-commit-id-plugin:4.0.0:revision (get-git-info) @ rxnorm-explorer ---
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ rxnorm-explorer ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 1 resource
-[INFO] Copying 0 resource
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ rxnorm-explorer ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 25 source files to /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/target/classes
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/DatabaseOps.java:[97,9] [purity.deterministic.void.method] a method without return value cannot be deterministic
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[46,23] [argument] incompatible argument for parameter driverClassName of driverClassName.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[47,11] [argument] incompatible argument for parameter url of url.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[48,16] [argument] incompatible argument for parameter username of username.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[49,16] [argument] incompatible argument for parameter password of password.
-  found   : @FBCBottom @MonotonicNonNull String
-  required: @Initialized @NonNull String
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[55,8] [dereference.of.nullable] dereference of possibly-null reference driverClassName
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
-  found   : T extends @Initialized @Nullable Object
-  required: @Initialized @NonNull Object
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
-  found   : T extends @Initialized @Nullable Object
-  required: @Initialized @NonNull Object
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
+  required: @Initialized @NonNull AppVersion
+  ----
+  [WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
   type of expression: null (NullType)
   method return type: T extends @Initialized @Nullable Object
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/AppConfig.java:[21,11] [return] incompatible types in return.
+  type of expression: @FBCBottom @MonotonicNonNull String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[46,23] [argument] incompatible argument for parameter driverClassName of driverClassName.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[47,11] [argument] incompatible argument for parameter url of url.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[48,16] [argument] incompatible argument for parameter username of username.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[49,16] [argument] incompatible argument for parameter password of password.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[55,8] [dereference.of.nullable] dereference of possibly-null reference driverClassName
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/DatabaseOps.java:[97,9] [purity.deterministic.void.method] a method without return value cannot be deterministic
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[34,21] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jdbc.query not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[36,12] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting params not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[37,25] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jsonObjectRowMapper not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[25,11] [return] incompatible types in return.
+  type of expression: @FBCBottom @MonotonicNonNull String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[30,11] [return] incompatible types in return.
+  type of expression: @FBCBottom @MonotonicNonNull String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[35,11] [return] incompatible types in return.
+  type of expression: @FBCBottom @MonotonicNonNull String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[40,11] [return] incompatible types in return.
+  type of expression: @FBCBottom @MonotonicNonNull String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[45,11] [return] incompatible types in return.
+  type of expression: @FBCBottom @MonotonicNonNull String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[77,16] [return] incompatible types in return.
+  type of expression: T extends @Initialized @Nullable Object
+  method return type: T extends @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
   found   : null (NullType)
   required: @Initialized @MonotonicNonNull AppVersion
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
   found   : @Initialized @Nullable AppVersion
   required: @Initialized @MonotonicNonNull AppVersion
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
   found   : null (NullType)
   required: @Initialized @MonotonicNonNull AppVersion
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[34,21] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jdbc.query not allowed in deterministic side-effect-free method
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[36,12] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting params not allowed in deterministic side-effect-free method
-[WARNING] /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[37,25] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jsonObjectRowMapper not allowed in deterministic side-effect-free method
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  5.234 s
-[INFO] Finished at: 2023-01-10T23:06:41-05:00
-[INFO] ------------------------------------------------------------------------
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------< gov.fda.nctr:rxnorm-explorer >--------------------
-[INFO] Building rxnorm-explorer 0.1.0-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ rxnorm-explorer ---
-[INFO] Deleting /home/dan/Documents/CFResearch/experiments-live/RxNorm-explorer-wpi/target
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.262 s
-[INFO] Finished at: 2023-01-10T23:06:42-05:00
-[INFO] ------------------------------------------------------------------------
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[58,11] [return] incompatible types in return.
+  type of expression: @Initialized @MonotonicNonNull AppVersion
+  method return type: @Initialized @NonNull AppVersion
+  ----
+  [WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
+  type of expression: null (NullType)
+  method return type: T extends @Initialized @Nullable Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[46,23] [argument] incompatible argument for parameter driverClassName of driverClassName.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[47,11] [argument] incompatible argument for parameter url of url.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[48,16] [argument] incompatible argument for parameter username of username.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[49,16] [argument] incompatible argument for parameter password of password.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[55,8] [dereference.of.nullable] dereference of possibly-null reference driverClassName
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/DatabaseOps.java:[97,9] [purity.deterministic.void.method] a method without return value cannot be deterministic
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[34,21] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jdbc.query not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[36,12] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting params not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[37,25] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jsonObjectRowMapper not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[77,16] [return] incompatible types in return.
+  type of expression: T extends @Initialized @Nullable Object
+  method return type: T extends @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
+  found   : @Initialized @Nullable AppVersion
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
+  type of expression: null (NullType)
+  method return type: T extends @Initialized @Nullable Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[46,23] [argument] incompatible argument for parameter driverClassName of driverClassName.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[47,11] [argument] incompatible argument for parameter url of url.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[48,16] [argument] incompatible argument for parameter username of username.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[49,16] [argument] incompatible argument for parameter password of password.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[55,8] [dereference.of.nullable] dereference of possibly-null reference driverClassName
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/DatabaseOps.java:[97,9] [purity.deterministic.void.method] a method without return value cannot be deterministic
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[34,21] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jdbc.query not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[36,12] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting params not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[37,25] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jsonObjectRowMapper not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[77,16] [return] incompatible types in return.
+  type of expression: T extends @Initialized @Nullable Object
+  method return type: T extends @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
+  found   : @Initialized @Nullable AppVersion
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @MonotonicNonNull AppVersion
+  [WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
+  type of expression: null (NullType)
+  method return type: T extends @Initialized @Nullable Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[46,23] [argument] incompatible argument for parameter driverClassName of driverClassName.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[47,11] [argument] incompatible argument for parameter url of url.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[48,16] [argument] incompatible argument for parameter username of username.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[49,16] [argument] incompatible argument for parameter password of password.
+  found   : @FBCBottom @MonotonicNonNull String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[55,8] [dereference.of.nullable] dereference of possibly-null reference driverClassName
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/DatabaseOps.java:[97,9] [purity.deterministic.void.method] a method without return value cannot be deterministic
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[34,21] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jdbc.query not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[36,12] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting params not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/drugrelents/JdbcDrugRelatedEntitiesSearchDbOpsService.java:[37,25] [purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting jsonObjectRowMapper not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[77,16] [return] incompatible types in return.
+  type of expression: T extends @Initialized @Nullable Object
+  method return type: T extends @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
+  found   : @Initialized @Nullable AppVersion
+  required: @Initialized @MonotonicNonNull AppVersion
+[WARNING] /Users/daniel/Documents/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @MonotonicNonNull AppVersion
