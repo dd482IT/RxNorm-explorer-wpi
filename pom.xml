@@ -143,10 +143,9 @@
           <compilerArgs>
             <arg>-parameters</arg>
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
-            <arg>-Alint</arg>
             <arg>-Ainfer=ajava</arg> 
             <arg>-Awarns</arg> 
-            <arg>-Aajava=/tmp/WPITEMPDIR-RX</arg>
+            <arg>-Aajava=/tmp/WPITEMP-RxNorm/</arg>
           </compilerArgs>
         </configuration>
       </plugin>
