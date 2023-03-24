@@ -1,0 +1,99 @@
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[84,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/DatabaseConfig.java:[93,17] [nulltest.redundant] redundant test against null; "paramVal" is non-null
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[29,10] [nulltest.redundant] redundant test against null; "s" is non-null
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[83,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[89,12] [nulltest.redundant] redundant test against null; "val" is non-null
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/AppConfig.java:[13,9] error: [initialization.fields.uninitialized] the constructor does not initialize fields: exampleProp
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[14,21] error: [return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[19,21] error: [return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] error: [return] incompatible types in return.
+  type of expression: null (NullType)
+  method return type: T extends @Initialized @Nullable Object
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[94,30] error: [return] incompatible types in return.
+  type of expression: @Initialized @Nullable ObjectNode
+  method return type: @Initialized @NonNull ObjectNode
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[101,30] error: [return] incompatible types in return.
+  type of expression: @Initialized @Nullable Long
+  method return type: @Initialized @NonNull Long
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[107,30] error: [return] incompatible types in return.
+  type of expression: @Initialized @Nullable String
+  method return type: @Initialized @NonNull String
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[40,84] error: [dereference.of.nullable] dereference of possibly-null reference Nullables.requireNonNull(JdbcUtils.class.getClassLoader())
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[42,66] error: [argument] incompatible argument for parameter in of InputStreamReader.
+  found   : @Initialized @Nullable InputStream
+  required: @Initialized @NonNull InputStream
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[19,9] error: [initialization.fields.uninitialized] the constructor does not initialize fields: buildTimestamp, buildUserEmail, buildUserName, commitId, commitTimestamp
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[31,42] error: [argument] incompatible argument for parameter content of readValue.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] error: [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] error: [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[32,56] error: [dereference.of.nullable] dereference of possibly-null reference classLoader
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] error: [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @NonNull AppVersion
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] error: [assignment] incompatible types in assignment.
+  found   : @Initialized @Nullable AppVersion
+  required: @Initialized @NonNull AppVersion
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] error: [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @NonNull AppVersion
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project rxnorm-explorer: Compilation failure: Compilation failure: 
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/AppConfig.java:[13,9] error: [initialization.fields.uninitialized] the constructor does not initialize fields: exampleProp
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[14,21] error: [return] incompatible types in return.
+[ERROR]   type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+[ERROR]   method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[19,21] error: [return] incompatible types in return.
+[ERROR]   type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+[ERROR]   method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] error: [return] incompatible types in return.
+[ERROR]   type of expression: null (NullType)
+[ERROR]   method return type: T extends @Initialized @Nullable Object
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[94,30] error: [return] incompatible types in return.
+[ERROR]   type of expression: @Initialized @Nullable ObjectNode
+[ERROR]   method return type: @Initialized @NonNull ObjectNode
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[101,30] error: [return] incompatible types in return.
+[ERROR]   type of expression: @Initialized @Nullable Long
+[ERROR]   method return type: @Initialized @NonNull Long
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[107,30] error: [return] incompatible types in return.
+[ERROR]   type of expression: @Initialized @Nullable String
+[ERROR]   method return type: @Initialized @NonNull String
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[40,84] error: [dereference.of.nullable] dereference of possibly-null reference Nullables.requireNonNull(JdbcUtils.class.getClassLoader())
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[42,66] error: [argument] incompatible argument for parameter in of InputStreamReader.
+[ERROR]   found   : @Initialized @Nullable InputStream
+[ERROR]   required: @Initialized @NonNull InputStream
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[19,9] error: [initialization.fields.uninitialized] the constructor does not initialize fields: buildTimestamp, buildUserEmail, buildUserName, commitId, commitTimestamp
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[31,42] error: [argument] incompatible argument for parameter content of readValue.
+[ERROR]   found   : @Initialized @Nullable String
+[ERROR]   required: @Initialized @NonNull String
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] error: [argument] incompatible argument for parameter arg0 of contains.
+[ERROR]   found   : T extends @Initialized @Nullable Object
+[ERROR]   required: @Initialized @NonNull Object
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] error: [argument] incompatible argument for parameter arg0 of contains.
+[ERROR]   found   : T extends @Initialized @Nullable Object
+[ERROR]   required: @Initialized @NonNull Object
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[32,56] error: [dereference.of.nullable] dereference of possibly-null reference classLoader
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : null (NullType)
+[ERROR]   required: @Initialized @NonNull AppVersion
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : @Initialized @Nullable AppVersion
+[ERROR]   required: @Initialized @NonNull AppVersion
+[ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] error: [assignment] incompatible types in assignment.
+[ERROR]   found   : null (NullType)
+[ERROR]   required: @Initialized @NonNull AppVersion
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
