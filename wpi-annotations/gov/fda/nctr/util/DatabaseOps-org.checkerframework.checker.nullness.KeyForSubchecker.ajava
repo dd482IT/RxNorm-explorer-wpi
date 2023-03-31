@@ -74,7 +74,7 @@ public class DatabaseOps {
 
     public interface DatabaseOp {
 
-        @org.checkerframework.dataflow.qual.Pure
+        @org.checkerframework.dataflow.qual.SideEffectFree
         void execute( DatabaseOp this,  Connection conn) throws SQLException;
     }
 }

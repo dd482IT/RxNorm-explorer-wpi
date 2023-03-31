@@ -15,7 +15,7 @@ public class AppVersionController {
         this.appVersionService = appVersionService;
     }
 
-    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull AppVersion getApplicationVersion() {
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.Nullable AppVersion getApplicationVersion() {
         AppVersion ver = appVersionService.getAppVersion();
         return Nullables.valueOrThrow(ver, () -> new ResourceNotFoundException("Version information is not available."));
     }

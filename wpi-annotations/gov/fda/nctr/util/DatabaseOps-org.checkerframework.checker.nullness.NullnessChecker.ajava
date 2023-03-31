@@ -74,7 +74,7 @@ public class DatabaseOps {
 
     public interface DatabaseOp {
 
-        @org.checkerframework.dataflow.qual.Pure
+        @org.checkerframework.dataflow.qual.SideEffectFree
         void execute(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Connection conn) throws SQLException;
     }
 }
