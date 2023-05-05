@@ -1,0 +1,46 @@
+[WARNING] Parameter 'compilerArguments' is deprecated: use {@link #compilerArgs} instead.
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 25 source files to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/target/classes
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/AppConfig.java:[13,9] [initialization.fields.uninitialized] the constructor does not initialize fields: exampleProp
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/models/dto/AppVersion.java:[19,9] [initialization.fields.uninitialized] the constructor does not initialize fields: buildTimestamp, buildUserEmail, buildUserName, commitId, commitTimestamp
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[14,21] [return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Nullables.java:[19,21] [return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[15,25] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/CollectionUtils.java:[24,24] [argument] incompatible argument for parameter arg0 of contains.
+  found   : T extends @Initialized @Nullable Object
+  required: @Initialized @NonNull Object
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/JdbcUtils.java:[31,42] [argument] incompatible argument for parameter content of readValue.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[30,13] [return] incompatible types in return.
+  type of expression: null (NullType)
+  method return type: T extends @Initialized @Nullable Object
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[94,30] [return] incompatible types in return.
+  type of expression: @Initialized @Nullable ObjectNode
+  method return type: @Initialized @NonNull ObjectNode
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[101,30] [return] incompatible types in return.
+  type of expression: @Initialized @Nullable Long
+  method return type: @Initialized @NonNull Long
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Json.java:[107,30] [return] incompatible types in return.
+  type of expression: @Initialized @Nullable String
+  method return type: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[40,84] [dereference.of.nullable] dereference of possibly-null reference Nullables.requireNonNull(JdbcUtils.class.getClassLoader())
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/util/Strings.java:[42,66] [argument] incompatible argument for parameter in of InputStreamReader.
+  found   : @Initialized @Nullable InputStream
+  required: @Initialized @NonNull InputStream
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[32,56] [dereference.of.nullable] dereference of possibly-null reference classLoader
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[37,26] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @NonNull AppVersion
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[45,26] [assignment] incompatible types in assignment.
+  found   : @Initialized @Nullable AppVersion
+  required: @Initialized @NonNull AppVersion
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/RxNorm-explorer-wpi/src/main/java/gov/fda/nctr/data_access/version_info/JarAppVersionService.java:[51,24] [assignment] incompatible types in assignment.
+  found   : null (NullType)
+  required: @Initialized @NonNull AppVersion
